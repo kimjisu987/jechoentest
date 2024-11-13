@@ -1,8 +1,63 @@
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
-<head></head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/actionGroup.css}">
+    <script th:src="@{/js/jquery/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/actionGroup.js}"></script>
+</head>
 <body>
     <section layout:fragment="content">
-        <h1>커뮤니티 > 액션그룹</h1>
+
+        <!--분류, 검색-->
+        <div class="actionGroup_top">
+            <div class="actionGroup_top_class">
+                <!--대분류-->
+                <div class="actionGroup_top_major">
+                    <button class="select_main">전체</button>
+                    <ul class="select_sub">
+                        <li><button>전체</button></li>
+                        <li><button>유형</button></li>
+                        <li><button>단계</button></li>
+                        <li><button>진행</button></li>
+                    </ul>
+                </div>
+
+                <!--소분류-->
+                <div class="actionGroup_top_minor">
+                    <button class="select_main"></button>
+                    <ul class="select_sub">
+                    </ul>
+                </div>
+
+            </div>
+            <!--검색-->
+            <div class="list_search">
+                <input id="searchString" type="search" placeholder="검색어를 입력해주세요.">
+                <button onclick="getActionList(0)">검색</button>
+            </div>
+        </div>
+
+        <!--리스트 4*3 모바일에선 4개만-->
+        <div class="actionGroup_mid">
+        </div>
+
+        <!--페이지내이션, 추가버튼-->
+        <div class="actionGroup_bttm">
+            <div class="list_number">
+                <button class="prevFirst" onclick="nextPage('first')"></button>
+                <button class="prev" onclick="nextPage('prev')"></button>
+                <ul id="pageable">
+                </ul>
+                <button class="next" onclick="nextPage('next')"></button>
+                <button class="nextLast" onclick="nextPage('last')"></button>
+            </div>
+
+            <!--선택 시 액션그룹 등록 페이지로 이동, 추진단만 확인 가능-->
+            <div class="actionGroup_btn_wrap">
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/action/registration}" class="actionGroup_btn" title="액션그룹 추가">액션그룹 추가</a>
+            </div>
+        </div>
     </section>
 </body>
 </html>
