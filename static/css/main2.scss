@@ -1,0 +1,973 @@
+@charset "utf-8";
+@import "mixin";
+
+@mixin media($size) {
+	@if $size =='mobile' {
+		@media screen and (max-width: 767px) {
+			@content;
+		}
+	}
+
+	@else if $size =='pc' {
+		@media screen and (max-width: 768px) {
+			@content;
+		}
+	}
+
+	@else if $size =='bigtablet' {
+		@media screen and (max-width: 1200px) {
+			@content;
+		}
+	}
+
+	@else if $size =='bigpc' {
+		@media screen and (max-width: 1920px) {
+			@content;
+		}
+	}
+}
+
+header .sub_title_bg {display: none;}
+.main {
+    margin-top: 141px;
+    @include media("mobile") {margin-top: 60px;}
+    // 비주얼 영역 컨텐츠
+    .visual {
+        width: calc(100% - 10vw); box-sizing: border-box;
+        height: 500px;
+        display: flex;
+        justify-content: space-between;
+        background: $color_sub_g4;
+        border-radius: 0 0 $radius_l 0;
+        @include media("bigpc") {width: calc(100% - 5vw);}
+        @include media("bigtablet") {
+            width: calc(100%);
+            border-radius: 0 0 $radius_m 0;
+        }
+        @include media("mobile") {
+            flex-direction: column;
+            height: calc(100vh);
+            padding-bottom: 6rem;
+            box-sizing: border-box;
+            border-radius: 0;
+        }
+        // 비주얼 스와이퍼
+        .visual_swiper {
+            width: 100%;
+            height: 100%; flex: 1;
+            .swiper-slide {
+                font-size: 18px;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                // 메인 텍스트
+                .slide_txt {
+                    position: absolute;
+                    top: 50%; left: 26%;
+                    transform: translateY(-50%);
+                    text-align: left;
+                    font-size: $font_48;
+                    font-weight: bold;
+                    color: $color_font_wh;
+                    line-height: 120%;
+                    text-shadow: $shadow_box_s;
+                    span {font-size: $font_16; font-weight: normal;}
+                    @include media("bigtablet") {
+                        font-size: $padding_36;
+                    }
+                    @include media("mobile") {
+                        font-size: $padding_32;
+                        width: 100%;
+                        text-align: center;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        span {line-height: 200%;}
+                    }
+                }
+            }
+            // 페이지네이션 위치 조정
+            .swiper-pagination {
+                margin-bottom: 2rem;
+            }
+            // 페이지네이션 리스트
+            .swiper-pagination-bullet {
+                width: $font_16; height: $font_16;
+                border-radius: $font_16;
+                background: $color_font_wh;
+                opacity: 1;
+                transition: 0.3s;
+                box-shadow: $shadow_box_s;
+            }
+            // 페이지네이션 액티브
+            .swiper-pagination-bullet-active {
+                width: $padding_36;
+            }
+        }
+        // 퀵메뉴 - 바로가기
+        .quick_menu {
+            width: 40%;
+            padding: 2rem 4rem; box-sizing: border-box;
+            align-self: center;
+            z-index: 0;
+            @include media("bigtablet") {
+                width: 48%;
+                padding: 1rem 2rem;
+            }
+            // 퀵메뉴 아이콘 리스트
+            .quick_list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: $padding_32;
+                text-align: center;
+                margin-top: 1rem;
+                li {
+                    width: calc(30% - $font_24);
+                    margin-top: $font_24;
+                    text-align: -webkit-center;
+                }
+                a {
+                    display: block;
+                    width: 100%;
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+                // 아이콘
+                img {
+                    position: relative;
+                    display: block;
+                    width: $font_48;
+                    margin: 0 auto;
+                }
+                // 아이콘
+                .icon_img {
+                    position: relative;
+                    display: inline-block;
+                    width: max-content;
+                }
+                // 아이콘 설명
+                .icon_txt {
+                    position: relative;
+                    display: inline-block;
+                    padding-top: 1rem; font-weight: bold;
+                    font-size: $font_20;
+                    text-wrap-mode: nowrap;
+                    width: max-content;
+                }
+                // 텍스트 밑줄 hover 이벤트
+                .icon_txt::before {
+                    content: "";
+                    position: absolute; z-index: -1;
+                    left: 0; bottom: 0;
+                    display: block;
+                    width: 0%; height: 30%;
+                    background: $color_tran_bl;
+                    transition: 0.3s;
+                }
+                // 아이콘 동그라미 hover 이벤트
+                .icon_img::before {
+                    content: "";
+                    position: absolute;
+                    top: -15%; left: -30%;
+                    display: block;
+                    width: $padding_36; height: $padding_36;
+                    background: $color_main_bl;
+                    border-radius: 50%;
+                    scale: 0;
+                    transition: 0.3s;
+                }
+                a:hover .icon_img::before {scale: 1;}
+                a:hover .icon_txt::before {width: 100%;}
+            }
+            @include media("mobile") {
+                width: 100%;
+                padding: 1rem;
+                padding-top: $font_20;
+                a {
+                    background: $color_font_wh;
+                    padding: 1rem;
+                    border-radius: 0 $padding_36 0 $padding_36;
+                    box-shadow: $shadow_box_s;
+                    aspect-ratio: 1;
+                    align-content: center;
+                    box-sizing: border-box;
+                }
+                .quick_list {
+                    margin-top: $font_20;
+                    gap: $font_24;
+                    li {
+                        margin-top: 0;
+                        flex: 1 1 calc(30% - $font_24);
+                    }
+                }
+            }
+        }
+    }
+    // 사업 소개 영역 컨텐츠
+    .business {
+        @include center_1400;
+        display: flex; gap: $font_48;
+        margin-block: 6rem;
+        align-items: center;
+        // 좌측 텍스트 박스
+        .busi_text_box {
+            width: calc(60% - $font_48 / 2);
+            .busi_detail {
+                margin-block: $font_48;
+            }
+        }
+        // 우측 이미지 박스
+        .busi_img_box {
+            width: calc(40% - $font_48 / 2);
+            height: 500px;
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(2, auto);
+            grid-template-rows: repeat(2, 70% 30%);
+            grid-template-areas:
+            "img1 img2"
+            "img1 img3";
+            img {
+                width: 100%; height: 100%; object-fit: cover;
+            }
+            img:first-child{
+                grid-area: img1;
+                height: 60%;
+                margin-top: 50%;
+            }
+            img:nth-child(2){
+                grid-area: img2;
+            }
+            img:nth-child(3){
+                grid-area: img3;
+            }
+        }
+        // 버튼 서식
+        button {
+            @include btn_a($color_main_bl, $color_main_bl, $color_font_wh);
+        }
+        button.mobile_btn {display: none;}
+        @include media("mobile") {
+            flex-direction: column;
+            gap: $font_16;
+            box-shadow: 0px -6px 16px -6px rgba(51, 51, 51, 0.25);
+            margin-block: 6rem;
+            align-items: center;
+            width: 100%;
+            padding-inline: 1rem;
+            margin-top: -4rem;
+            border-radius: 0 5rem 0 0;
+            background: #fff;
+            padding-top: 3rem;
+            .busi_text_box {
+                width: 100%;
+                .busi_detail {
+                    margin-block: $font_16;
+                }
+            }            
+            .busi_img_box {
+                display: block;
+                width: 100%; height: 200px;
+                img:first-child{
+                    width: 100%; height: 100%; margin-top: 0;
+                }
+                img:nth-child(2), img:nth-child(3){
+                    display: none;
+                }
+            }
+            button.mobile_btn {
+                display: block;
+                align-self: flex-start;
+                margin-top: $font_16;
+            }
+            button.pc_btn {display: none;}
+        }
+    }
+    // 마을 현황 영역 컨텐츠
+    .village {
+        width: 100%; height: max-content;
+        background: $color_sub_g4;
+        padding-block: $font_48;
+    }
+    .village_wrap {
+        @include center_1400;
+        @include media("mobile") {
+            width: 100%;
+        }
+        // 타이틀
+        .main_title {
+            margin-bottom: $font_24;
+            button {
+                @include btn_a($color_main_bl, $color_main_bl, $color_font_wh);
+                float: right;
+                transform: translateY(-4rem);
+            }
+            @include media("mobile") {
+                padding-inline: 1rem;
+                position: relative;
+                &::before, &::after {
+                    content: "";
+                    display: inline-block;
+                    position: absolute; top: calc(100% + 4.5rem);
+                    width: $font_20; height: $font_20;
+                    border-radius: 50%;
+                    background-color: $color_font_wh;
+                    padding: 0.5rem;
+                    background-size: 60%;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    box-shadow: $shadow_box_s;
+                    opacity: 0.8;
+                }
+                &::before {
+                    left: 1rem;
+                    background-image: url("../icon/icon_arrowleft.svg");
+                }
+                &::after {
+                    right: 1rem;
+                    background-image: url("../icon/icon_arrowright.svg");
+                }
+            }
+        }
+        // 마을 리스트 탭
+        .village_tab {
+            display: flex; flex-wrap: wrap;
+            justify-content: center;
+            gap: $font_24;
+            margin-bottom: $font_24;
+            width: 100%;
+            li > a{
+                display: block;
+                width: 100%;
+                @include btn_a($color_font_wh, transparent, $color_font_bk);
+                box-shadow: $shadow_box_s;
+                text-wrap-mode: nowrap;
+            }
+            // 리스트 액티브
+            .village_act {
+                background: $color_main_bl;
+                box-shadow: none;
+                color: $color_font_wh;
+            }
+            @include media("bigtablet") {
+                width: 100%;
+                gap: $font_16;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-block: 1rem;
+                justify-content: flex-start;
+                &::-webkit-scrollbar {height: 12px;}
+                &::-webkit-scrollbar-thumb {
+                    background: $color_sub_g2;
+                    border-right: 6px solid transparent;
+                }
+                &::-webkit-scrollbar-track {
+                    background: $color_sub_g3;
+                }
+            }
+            @include media("mobile") {
+                width: calc(100% - 4rem);
+                margin: 0 auto;
+            }
+        }
+        // 마을 설명
+        .village_detail {
+            display: flex;
+            align-items: center;
+            @include media("mobile") {
+                padding-inline: 1rem;
+            }
+            // 마을 지도 사진
+            .village_map {
+                width: 400px; height: 500px;
+                background-image: url("../images/main_map_all.png");
+                background-position: 0px 0px;
+                background-repeat: no-repeat;
+                @include media("mobile") {
+                    display: none;
+                }
+            }
+            // 마을 설명 텍스트
+            .village_txt {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: $font_24;
+                img {width: $font_24;}
+                p {
+                    display: inline-block;
+                    span {font-weight: bold;}
+                }
+            }
+            // 마을 설명 제목
+            .village_title {
+                display: flex; gap: 0.5rem;
+                align-items: baseline;
+                margin-top: 2rem;
+                h2 {
+                    position: relative; z-index: 0;
+                    margin-right: 1rem;
+                    line-height: 100%;
+                    text-wrap-mode: nowrap;
+                    &::after {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        bottom: 0; left: 0;
+                        width: 100%; height: 40%;
+                        background: $color_main_yg;
+                        z-index: -1;
+                    }
+                }
+                @include media("mobile") {
+                    flex-wrap: wrap;
+                    .village_address {
+                        width: 100%;
+                        margin-top: $font_24;
+                    }
+                }
+            }
+            // 마을 특산품 등 설명
+            dl {
+                width: 100%; gap: 1rem;
+                display: flex;
+                flex-wrap: wrap;
+                dt {width: calc(8rem - 0.5rem); font-weight: bold;}
+                dd {width: calc(100% - 0.5rem - 8rem);}
+            }
+        }
+    }
+    // 재능활동가 탭 영역 컨텐츠
+    .section_tab {
+        position: relative;
+        padding-block: 6rem 3rem;
+        margin-bottom: 3rem;
+        // 뒷배경
+        &::before {
+            content: "";
+            display: block;
+            position: absolute; bottom: 0; left: 0; z-index: -1;
+            width: 100%; height: 50%;
+            background: $color_tran_yg;
+            border-radius: $radius_xl 0 0 0;
+        }
+        * {box-sizing: border-box;}
+        .sec_tab_inner {
+            @include center_1400;
+            @include media("mobile") {
+                width: 100%;
+            }
+        }
+        // 제목 서식
+        .main_title {
+            .sec_tab_list {
+                display: flex; gap: $font_24;
+                li {position: relative;}
+                a {
+                    position: relative;
+                    font-size: $font_48;
+                    line-height: 140%;
+                    font-weight: bold;
+                    color: $color_sub_g2;
+                    display: block;
+                    &.tab_list_act {
+                        color: $color_font_bk;
+                    }
+                    &::after {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        bottom: 0; left: 0;
+                        width: 0%; height: 40%;
+                        background: $color_main_yg;
+                        z-index: -1;
+                        transition: 0.3s;
+                    }
+                    &.tab_list_act::after {
+                        width: 100%;
+                    }
+                }
+                @include media("mobile") {
+                    width: 100%;
+                    li {
+                        font-size: $padding_32;
+                        text-wrap-mode: nowrap;
+                        margin-block: 0.5rem;
+                    }
+                    a {
+                        font-size: $font_24;
+                    }
+                }
+            }
+            @include media("mobile") {
+                padding-left: 1rem;
+                gap: $font_16;
+            }
+        }
+        // 스와이퍼 서식
+        .tab_swiper {
+            margin-top: $font_48;
+            width: 100%;
+            height: max-content;
+            .swiper-slide {
+                width: 100%;
+                font-size: 18px;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            @include media("mobile") {
+                margin-top: $font_24;
+            }
+        }
+        // 스와이퍼 내부 카드 서식
+        .swiper-slide {
+            width: 100%;
+            border-radius: 0 $radius_m 0 $radius_m;
+            overflow: hidden;
+            position: relative;
+            a {width: 100%;}
+            button {
+                position: absolute;
+                z-index: 2;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                @include btn_a($color_font_wh, $color_font_wh, $color_font_bk);
+                opacity: 0;
+                transition: 0.3s;
+            }
+            a:hover::after {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0; left: 0;
+                content: "";
+                display: block;
+                background: $color_tran_bk;
+                z-index: 1;
+            }
+            a:hover button {
+                opacity: 1;
+            }
+        }
+        // 이미지 서식
+        .list_photo {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            img {width: 100%; object-fit: cover;}
+        }
+        // 상단 태그
+        .item_imgtag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            span {
+                position: absolute;
+                top: 0; left: 0;
+                display: inline-block;
+                width: max-content;
+                padding: 6px 12px;
+                border-radius: 0 0 $font_16 0;
+                font-size: $font_14;
+                font-weight: bold;
+                background: $color_font_bk;
+                color: $color_font_wh;
+            }
+        }
+        // 텍스트 영역
+        .item_text {
+            padding: 1rem;
+            ul {
+                display: flex; gap: 0.5rem;
+                margin-bottom: 0.5rem;
+                .item_hash {
+                    &.hash_yg {background: $color_main_yg;}
+                    &.hash_black {
+                        background: $color_font_bk;
+                        color: $color_font_wh;
+                    }
+                    &.hash_white {
+                        background: $color_font_wh;
+                        border: 1px solid $color_font_bk;
+                    }
+                }
+            }
+            .list_title {
+                font-size: $font_24;
+                font-weight: bold;
+                line-height: 200%;
+            }
+            .list_detail {
+                @include text_short(2);
+                font-size: $font_16;
+            }
+            .list_date {
+                text-align: right;
+                font-size: $font_16;
+                margin-top: 0.5rem;
+            }
+        }
+        // 목록에서 더보기 버튼
+        .tab_list_btn {
+            @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+            margin: 0 auto;
+            margin-top: $font_24;
+        }
+    }
+    // 알림마당 영역 컨텐츠
+    .service {
+        @include center_1400;
+        margin-block: 6rem;
+        .service_inner {
+            display: flex; gap: $font_24;
+            margin-top: $font_48;
+            @include media("mobile") {
+                flex-direction: column; gap: $font_48;
+            }
+            .sub_title {
+                &> p {font-size: $font_24;}
+                &.title_under::after {
+                    background-color: $color_font_bk;
+                }
+            }
+            & > div {
+                flex: 1;
+                button {
+                    @include btn_a($color_main_bl, $color_main_bl, $color_font_wh);
+                    float: right;
+                    transform: translateY(-1rem);
+                }
+                li {margin-block: 1rem; padding-bottom: 1rem; border-bottom: 1px solid $color_sub_g3;}
+                a {
+                    display: block;
+                    width: 100%;
+                    display: flex; gap: 2rem;
+                    justify-content: space-between;
+                    line-height: 200%;
+                }
+                .notice_title, .qna_title {
+                    flex: 1;
+                    @include text_short(1);
+                    font-size: $font_20;
+                }
+                .notice_date, .qna_date {
+                    width: max-content;
+                    text-align: right;
+                    color: $color_sub_g1;
+                }
+            }
+        }
+    }
+    // 일정 영역 컨텐츠
+    .schedule {
+        @include center_1400;
+        // 타이틀
+        .main_title {
+            margin-bottom: $font_24;
+            button {
+                @include btn_a($color_main_bl, $color_main_bl, $color_font_wh);
+                float: right;
+                transform: translateY(-4rem);
+            }
+        }
+        // 박스 서식
+        .schedule_inner {
+            width: 100%;
+            display: flex;
+            gap: $font_24;
+            @include media("bigtablet") {
+                flex-direction: column;
+            }
+        }
+        .schedule_left, .schedule_right {
+            flex: 1;
+            box-shadow: $shadow_box_m;
+            border-radius: 0 $radius_m 0 $radius_m;
+            padding: $padding_32;
+            @include media("bigtablet") {
+                padding: $padding_32 1rem;
+            }
+        }
+        // 우측 스케쥴 리스트
+        .schedule_right {
+            .schedule_title {
+                font-size: $font_24;
+                font-weight: bold;
+                display: flex;
+                align-items: center; justify-content: space-between;
+                .day_add_btn {
+                    @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+                    float: right;
+                }
+            }
+        }
+        .schedule_list_wrap {
+            margin-top: 2rem;
+            max-height: 24rem;
+            overflow-y: auto;
+            @include media("bigtablet") {
+                max-height: 20rem;
+            }
+            & > .schedule_box {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+            .schedule_list {
+                border-left: 4px solid $color_main_bl;
+                padding: 0.5rem 2rem;
+                margin-bottom: 2rem;
+                @include media("bigtablet") {
+                    padding: 0.5rem 1rem;
+                }
+                img {width: $font_20; padding-right: 0.5rem;}
+            }
+            .schedule_name {font-weight: bold;}
+            .schedule_date, .schedule_time {
+                font-size: $font_14;
+                margin-top: 0.5rem;
+            }
+            .none_date {
+                display: block;
+                width: 100%;
+                height: 60%;
+                text-align: center;
+                align-content: center;
+                @include media("bigtablet") {
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+    }
+    // 일정 등록 모달
+    .schedule_modal {
+        display: none;
+        width: 100vw; height: 100vh;
+        position: fixed; top: 0; left: 0; z-index: 100;
+        background: $color_tran_bk;
+        // 모달 이너
+        .schedule_modal_inner {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            @include center_1400(800px);
+            background: $color_font_wh;
+            border-radius: $radius_m;
+            padding: 4rem 2rem; box-sizing: border-box;
+            box-shadow: $shadow_box_m;
+        }
+        // 제목 + 닫기 아이콘
+        .schedule_modal_top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        // 모달 제목
+        .schedule_modal_title {
+            font-size: $font_24; font-weight: bold;
+        }
+        // 모달 닫기
+        .schedule_add_close {
+            background: #333;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            transition: 0.5s;
+            padding: 0.5rem;
+            img {width: 100%;}
+            &:hover {transform: rotate(180deg);}
+        }
+        // 스케쥴 인풋 박스
+        .schedule_input {
+            margin-top: calc(1rem + $font_24);
+            display: flex; flex-direction: column;
+            justify-content: space-between;
+        }
+        .input_date, .input_time {
+            display: flex; justify-content: space-between;
+            gap: 2rem;
+            & > div {flex: 1;}
+        }
+        // 스케쥴 체크박스
+        .schedule_checkbox {
+            width: 100%;
+            display: flex; gap: 2rem;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            & > div {flex: 1;}
+            .checkbox_inner {
+                & label:last-of-type {
+                    padding-left: 0.5rem;
+                    vertical-align: text-top;
+                }
+            }
+        }
+        // 안내문구
+        .caution {
+            color: $color_main_rd;
+            margin-bottom: 2rem;
+        }
+        // 인풋 에러메세지
+        .form_check_box {
+            margin-top: -1.5rem; margin-bottom: 1.5rem;
+            width: calc(100% - $font_24); height: calc(100% - $font_14);
+            display: inline-flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            // 체크 에러시
+            .check_error {
+                position: relative; z-index: 0;
+                color: $color_main_rd;
+                flex: 1;
+            }
+        }
+        // 등록 버튼
+        .schedule_submit {
+            width: 100%;
+            text-align: -webkit-center;
+            .schedule_submit_btn {
+                display: block;
+                @include btn_a($color_main_bl, $color_main_bl, $color_font_wh);
+                font-size: $font_20;
+            }
+        }
+    }
+    // 달력 상단 (월표시)
+    .cal_navi {
+        width: 100%;
+        display: flex; gap: 2rem;
+        justify-content: center;
+        align-items: center;
+        button {
+            width: $padding_32; height: $padding_32;
+            border-radius: 50%;
+            border: 1px solid $color_font_bk;
+            img {width: 100%;}
+        }
+        // 월표시
+        .cal_month {font-size: $font_24; font-weight: bold;}
+    }
+    // 달력
+    #calendar {
+        width: 100%;
+        text-align: center;
+        table {
+            width: 100%;
+            table-layout: fixed;
+            word-break: break-all;
+            border-collapse: collapse;
+            border: none;
+            margin-top: 1rem;
+        }
+        th, td {
+            flex: 1;
+            min-height: max-content;
+            overflow: hidden;
+            border: none;
+        }
+        // 요일
+        th {
+            font-size: $font_20;
+            min-height: max-content;
+            padding-block: 1rem; margin-bottom: 1rem;
+            border-bottom: 1px solid $color_font_bk;
+        }
+        // 일자
+        td {
+            width: 100%;
+            aspect-ratio: 1;
+            text-align: center;
+            align-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        tr {
+            width: 100%; height: 100%;
+            display: flex;
+        }
+        // 동그라미 박스
+        .event_day {
+            display: flex; height: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            padding-block: 0.5rem;
+        }
+        // 이벤트 파란 동그라미 표시
+        .circle {
+            display: none;
+            // 동그라미 3개까지만 표시
+            &:nth-of-type(-n+3) {
+                display: inline-block;
+                width: 0.5rem; height: 0.5rem;
+                border-radius: 50%;
+                background-color: $color_main_bl;
+                margin: 0.1rem;
+            }
+        }
+        // 큰 동그라미 공통표시
+        .today, .day_act {
+            border-radius: 50%;
+            font-weight: bold;
+        }
+        .today {
+            background: $color_sub_g3;
+        }
+        .day_act {
+            background: $color_font_bk;
+            color: $color_font_wh;
+        }
+    }
+    // 달력 설명
+    .cal_desc {
+        display: flex;
+        justify-content: end;
+        align-content: center;
+        margin-top: 1rem;
+        li {position: relative;}
+        li {
+            line-height: 1.2rem;
+            margin-left: 4rem;
+            &::before {
+                position: absolute; top: 50%; left: -1.5rem;
+                transform: translateY(-50%);
+                content: "";
+                display: inline-block;
+                border-radius: 50%;
+            }
+            &:nth-child(1)::before {
+                width: 0.5rem; height: 0.5rem; left: -1rem;
+                background: $color_main_bl;
+            }
+            &:nth-child(2)::before {
+                width: 1.2rem; height: 1.2rem;
+                background: $color_sub_g3;
+            }
+            &:nth-child(3)::before {
+                width: 1.2rem; height: 1.2rem;
+                background: $color_font_bk;
+            }
+        }
+        @include media("bigtablet") {
+            padding-right: 1rem;
+        }
+    }
+}

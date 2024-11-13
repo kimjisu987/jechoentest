@@ -1,0 +1,308 @@
+@charset "utf-8";
+@import "mixin";
+
+// 기관 회원가입
+// 서브 상단 배경
+header {
+	&>.sub_title_bg {
+		&>h2 {
+			text-align: center;
+			transform: translateY(25px);
+		}
+		&>.bread_crumbs {display: none;}
+		@include media("mobile") {height: 24px;}
+	}
+}
+
+// 회원가입 단계 영역
+.join_step {
+	margin-top: 60px;
+	@include media("mobile") {margin-top: 24px;}
+}
+
+// 메인 섹션 공통 서식
+.section_inner1 .content_shadow, .section_inner2 .content_shadow, .section_inner3 .content_shadow {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	// 섹션 내부 좌측 서식
+	.joinUser_left {
+		width: 30%;
+		font-size: $font_24;
+		font-weight: bold;
+		span {font-size: $font_16; font-weight: normal;}
+	}
+
+	// 섹션 내부 우측 영역
+	.joinUser_right {
+		width: 70%;
+		max-width: 700px;
+		.sub_text {margin-bottom: $font_48;}
+	}
+
+	@include media("mobile") {
+		flex-direction: column;
+		.joinUser_left {
+			width: 100%;
+			text-align: center;
+			margin-block: $padding_36;
+		}
+		.joinUser_right {
+			width: 100%;
+			.sub_text {margin-bottom: $font_48;}
+		}
+	}
+}
+
+// .section_inner {display: none;}
+// 메인 버튼 공통 서식
+.section_inner > button, .section_inner > .secon_inner > button {
+	@include btn_a($color_main_bl, $color_main_bl, $color_font_wh, $font_24, 300px);
+	margin: 0 auto;
+	padding-block: $font_20;
+	border-radius: $font_48;
+	margin-top: 60px;
+	font-size: $font_24;
+
+	// 2단계 - 인증 완료시
+	&.verifi_ok {
+		background: $color_font_bk;
+		border-color: $color_font_bk;
+	}
+	// 사업자 인증 전 disabled
+	&:disabled {
+		background: $color_sub_g2;
+		border-color: $color_sub_g2;
+	}
+	@include media("mobile") {width: calc(100% - 2rem);}
+}
+
+.joinUser_main {padding-bottom: $font_48;}
+
+// 1단계 - 약관 동의
+.section_inner1 {
+	.agree_box {
+		margin-top: 1.5rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid $color_sub_g2;
+	}
+	.terms_agree_box, .personal_agree_box {
+		display: flex;
+		align-items: center;
+		a {
+			display: inline-block;
+			flex: 1;
+			&.terms_act>img {
+				transform: rotate(-180deg);
+				transition: 0.3s;
+			}
+		}
+		a>img {
+			width: $font_20;
+			float: right;
+			transition: 0.3s;
+		}
+	}
+	p label:last-child, p a:last-child {
+		font-size: $font_20;
+		margin-left: 1rem;
+	}
+	p label:last-child {
+		font-size: $font_24;
+		font-weight: bold;
+	}
+	.agree_sub_text {
+		display: none;
+		background: $color_sub_g4;
+		border-bottom: 1px solid $color_sub_g2;
+		padding: 1rem;
+		height: 200px;
+		overflow-y: auto;
+		&::-webkit-scrollbar {width: 16px;}
+		&::-webkit-scrollbar-thumb {
+			background: $color_sub_g2;
+			border-right: 8px solid $color_sub_g4;
+		}
+	}
+}
+
+// 2단계 - 본인 인증
+.section_inner2 {
+	display: flex;
+	@include center_1400;
+	.content_shadow {border-radius: 0 $radius_m 0 $radius_m;}
+	.secon_inner {
+		flex: 1;
+		width: 50%;
+		.joinUser_left, .joinUser_right {width: 100%;}
+		.joinUser_left {text-align: center; margin-bottom: 2rem;}
+		.sub_text {text-align: center;}
+	}
+	.joinUser_right {
+		.sub_text {
+			font-size: $font_20;
+			span {
+				color: $color_main_bl;
+				font-weight: bold;
+			}
+			@include media("mobile") {text-align: center;}
+		}
+
+		.secon_text {
+			font-size: $font_16; font-weight: bold; text-align: center;
+			margin-bottom: $font_24;
+		}
+		ul {
+			margin-left: 1rem;
+			&>li {list-style: disc;}
+		}
+	}
+	.step2_btn1, .step2_btn2 {margin-top: $font_24;}
+	.step2_btn1::after {content: "사업자 인증하기";}
+	.step2_btn1.verifi_ok::after {content: "사업자 인증 완료";}
+	.step2_btn2::after {content: "휴대폰 인증하기";}
+	.step2_btn2.verifi_ok::after {content: "휴대폰 인증 완료";}
+	@include media("mobile") {
+		display: block;
+		.secon_inner {width: 100%;}
+		.step2_btn1 {margin-bottom: 5rem;}
+	}
+}
+
+// 3단계 - 회원 정보 입력
+.section_inner3 {
+	.joinUser_right {
+		.input_fields {
+			position: relative;
+			&>.form_check_box {
+				position: absolute;
+				top: 0rem;
+				right: 0;
+				width: max-content;
+				height: 50px;
+				display: inline-flex;
+				gap: 1rem;
+				align-items: center;
+				@include media("mobile") {
+					flex-direction: column;
+					gap: 0.5rem;
+					align-items: flex-end;
+					justify-content: center;
+				}
+				// 아이디 체크
+				&>.id_check {@include btn_a($color_font_bk, $color_font_bk, $color_font_wh);}
+				// 주소 검색
+				&>.address_search {
+					@include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+					cursor: pointer;
+				}
+				// 체크 사용가능시
+				&>.id_check_result {
+					position: relative;
+					&::before {
+						content: "";
+						position: absolute;
+						left: 0;
+						bottom: 0;
+						width: 100%;
+						height: 50%;
+						background: $color_main_yg;
+						z-index: -1;
+					}
+				}
+				// 체크 에러시
+				&>.check_error {
+					display: none;
+					color: $color_main_rd;
+				}
+			}
+			&>.textarea_form_check {
+				align-items: baseline;
+				@include media("mobile") {
+					.check_error {transform: translateY(-1rem);}
+				}
+			}
+			// 참고 메세지
+			&:has(.reference) input {
+				margin-bottom: 0;
+				@include media("mobile") {
+					padding-block: 1.5rem;
+				}
+			}
+			&>.reference {
+				font-size: $font_14;
+				margin-bottom: 1.5rem;
+				color: $color_sub_g1;
+			}
+			// 주소
+			&.address_input_box {
+				.last_address {
+					display: flex;
+					gap: 1rem;
+					.detailAddress, .extraAddress {width: calc(100%);}
+				}
+			}
+		// textarea 추가 서식
+		textarea {margin-bottom: $font_24;}
+		// 파일 첨부 보조 텍스트 삽입
+		label[for="addfiles"] {margin-bottom: 1.5rem;}
+		.file_sub_text {
+			position: absolute; top: 1.5rem;
+			font-size: $font_14;
+			color: $color_sub_g1;
+		}
+		// 첨부파일 추가되는 박스
+		.input_file_add {
+			width: 100%;
+			display: flex; gap: 1rem;
+			& > .addfile {width: 100%;}
+			& > .file_add {
+				white-space: nowrap;
+				@include btn_a($color_main_bl, $color_main_bl, $color_font_wh);
+				height: fit-content;
+			}
+			& > .file_del {
+				@include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+				display: inline-block;
+				margin: 0; height: fit-content;
+			}
+		}
+		}
+	}
+	#postcode, #address, #extraAddress {background: none;}
+}
+
+// 4단계 - 가입 완료
+.section_inner4 {
+	text-align: center;
+	.join_compl {
+		&>.compl_icon {
+			width: 100px;
+			height: 100px;
+			background: $color_sub_g3;
+			border-radius: 50%;
+			margin: 0 auto;
+			align-content: center;
+			&>img {width: $font_48;}
+		}
+		&>.line1, &>.line2 {font-size: $font_20;}
+		&>.line1 {
+			margin-top: 2rem;
+			&>span {
+				color: $color_main_bl;
+				font-weight: bold;
+			}
+		}
+		&>.line3 {margin-top: 2rem;}
+	}
+	button {
+		display: inline-block;
+		margin-inline: 0.5rem;
+		&:first-of-type {
+			background: $color_font_wh;
+			border: 2px solid $color_main_bl;
+			color: $color_main_bl;
+		}
+		@include media("mobile") {margin-top: 24px;}
+	}
+}

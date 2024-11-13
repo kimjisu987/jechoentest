@@ -1,0 +1,188 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/talentApply.css">
+
+    <script src="../../static/js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/header.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header th:fragment="header">
+        <div class="header_black"></div>
+        <!-- Header Top -->
+        <div class="header_top">
+            <div class="header_top_inner">
+                <h1><a href="index.html" title="메인으로 바로가기"></a></h1>
+                <a th:href="@{/login}" title="로그인 회원가입 바로가기" class="header_top_pc">로그인/회원가입</a>
+                <a href="#" title="메뉴 더보기" class="header_top_mo header_toggle"><img src="../../static/icon/icon_hamburger.svg" alt="메뉴 더보기 아이콘"></a>
+                <!--로그인 한 경우-->
+                <!--<a th:href="@{/logout}" title="로그아웃 바로가기">로그아웃</a>-->
+            </div>
+        </div>
+        <!-- Header Nav -->
+        <nav class="header_nav">
+            <div class="toggle_close">
+                <a href="#" class="toggle_close" title="토글 닫기"><img src="../../static/icon/icon_x.svg" alt="닫기 아이콘"></a>
+            </div>                
+            <ul class="gnb">
+                <li>
+                    <a href="#" title="커뮤니티"><span>커뮤니티</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="마을 현황"><span>마을 현황</span></a></li>
+                        <li><a href="#" title="액션그룹"><span>액션그룹</span></a></li>
+                        <li><a href="#" title="활동소식"><span>활동소식</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="공동체 마켓"><span>공동체 마켓</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="판매자 신청"><span>판매자 신청</span></a></li>
+                        <li><a href="#" title="마켓"><span>마켓</span></a></li>
+                        <li><a href="#" title="도뇽교류"><span>도뇽교류</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="공동체 플랫폼"><span>공동체 플랫폼</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="사회적 경제 공동체"><span>사회적 경제 공동체</span></a></li>
+                        <li><a href="#" title="체험마을"><span>공동체 소개</span></a></li>
+                        <li><a href="#" title="재능활동가"><span>재능활동가</span></a></li>
+                        <li><a href="#" title="공간예약"><span>공간예약</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="알림마당"><span>알림마당</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="공지사항"><span>공지사항</span></a></li>
+                        <li><a href="#" title="묻고답하기"><span>묻고답하기</span></a></li>
+                        <li><a href="#" title="일정관리"><span>일정관리</span></a></li>
+                        <li><a href="#" title="설문조사"><span>설문조사</span></a></li>
+                        <li><a href="#" title="팝업관리"><span>팝업관리</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="사업안내"><span>사업안내</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="신활력플러스사업"><span>신활력플러스사업</span></a></li>
+                        <li><a href="#" title="점프업센터"><span>점프업센터</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sub Title -->
+        <div class="sub_title_bg">
+            <h2>수강신청</h2>
+            <div class="bread_crumbs">
+                <div class="inner">
+                    <ul>
+                        <li>
+                            <a href="#">알림마당</a>
+                            <div class="crumbs">
+                                <ul>
+                                    <li><a href="#">커뮤니티</a></li>
+                                    <li><a href="#">공동체 마켓</a></li>
+                                    <li><a href="#">알림마당</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a href="#">공지사항</a>
+                            <div class="crumbs">
+                                <ul>
+                                    <li><a href="#">도농교류</a></li>
+                                    <li><a href="#">사회적 경제 공동체</a></li>
+                                    <li><a href="#">재능활동가</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End of Header -->
+    <!-- ------------------------- -->
+    <!-- Main -->
+    <main>
+        <section layout:fragment="content" class="talentApply">
+            <div class="sub_title title_under">
+                <p>재능활동 수강 신청</p>
+            </div>
+            <div class="apply_inner">
+                <div class="activity_img">
+                    <img src="http://placehold.it/800x600" alt="재능활동 대표이미지">
+                    <p class="item_tag">목공</p>
+                </div>
+                <ul class="activity_info">
+                    <li class="activity_title">
+                        <p class="talent_title">재능활동명 재능활동명 재능활동명 재능활동명 재능활동명</p>
+                        <p class="talent_name">활동가명</p>
+                    </li>
+                    <li class="activity_field"><p class="item_hash">목공</p></li>
+                    <li class="activity_yoil">화, 수, 목</li>
+                    <li class="activity_date">2024-10-15 ~ 2024-11-15</li>
+                    <li class="activity_price">100,000원</li>
+                </ul>
+            </div>
+            <button type="button" class="activity_view">재능활동 자세히 보기 <img th:src="@{/icon/icon_arrowright_w.svg}" alt="우측 화살표 아이콘"></button>
+            <div class="detail_box">
+                <div class="member_info">
+                    <div class="sub_title title_under">
+                        <p>수강신청 고객 정보</p>
+                    </div>
+                    <div class="input_fields">
+                        <label for="name">이름</label>
+                        <input type="text" name="name" id="name" class="name" value="홍길동" readonly>
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="tel" class="required">휴대폰번호</label>
+                        <input type="text" name="tel" id="tel" class="tel" value="010-1234-5678" maxlength="13">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="email" class="required">이메일 주소</label>
+                        <input type="text" name="email" id="email" class="email" value="email@email.com">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <p class="warning_txt">
+                        <img th:src="@{/icon/icon_wow_w.svg}" alt="주의 아이콘">
+                        <span>고객 정보 수정시 회원 정보도 함께 수정됩니다.</span>
+                    </p>
+                </div>
+                <div class="payment_info">
+                    <div class="sub_title title_under">
+                        <p>유의사항</p>
+                    </div>
+                    <ul class="payment_txt">
+                        <li>재능활동가의 승인이 이루어진 후에만 재능활동에 참여할 수 있습니다.</li>
+                        <li>재능활동가의 승인 전에는 수강 취소가 가능합니다.</li>
+                        <li>승인이 완료된 재능활동에 대해서는 수강 취소가 불가능합니다.<br>
+                        (부득이한 사유로 수강 취소가 필요한 경우, 수강 신청자는 재능활동가에게 직접 연락하여 취소 요청을 해야 합니다.)</li>
+                    </ul>
+                    <p class="check_box_wrap">
+                        <input type="checkbox" name="agree" class="agree" id="agree">
+                        <label for="agree"><img th:src="@{/icon/icon_check.svg}" alt="체크 아이콘"></label>
+                        <label for="agree">동의합니다.</label>
+                    </p>
+                    <button type="button" class="submit_btn">수강신청</button>
+                </div>
+            </div>
+        </section>
+    </main>
+<script src="../../static/js/talentApply.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+@charset "utf-8";
+@import "mixin";
+
+// 묻고답하기 등록
+.qnaRegistration{
+    @include center_1400;
+    // 제목
+    h3 {
+        font-size: $padding_36;
+        margin-block: 60px $font_24;
+        @include media("mobile") {
+            margin-block: $font_24;
+        }
+    }
+    // 셀렉트 서식
+    .select_con_default {
+        @include select_con_default;
+    }
+    // 등록 버튼
+    .qna_submit_btn {
+        @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, $font_24, 300px);
+        margin: 0 auto;
+        margin-top: 60px;
+        padding-block: 1rem;
+        border-radius: 2rem;
+        font-size: $font_24;
+        @include media("mobile") {
+            margin-top: 24px;
+        }
+    }
+    // 인풋 박스 서식
+    .input_fields {
+        // label 서식
+        & > p {
+            width: max-content;
+            font-size: $font_14;
+        }
+        // label required 동그라미 표시 서식
+        & > p.required {
+            position: relative;
+        }
+        & > p.required::after {
+            content: "";
+            display: block;
+            position: absolute;
+            right: -8px;
+            top: 5px;
+            width: 5px;
+            height: 5px;
+            background: $color_main_bl;
+            border-radius: 50%;
+        }
+        // 에러메세지 서식
+        .form_check_box {
+            position: absolute; z-index: -1;
+            top: 0rem;
+            right: 0;
+            width: max-content;
+            height: 50px;
+            display: inline-flex;
+            gap: 1rem;
+            align-items: center;
+            padding-top: 0.3rem;
+            @include media("mobile") {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-end;
+                justify-content: end;
+                padding-top: 0.5rem;
+            }
+            // 체크 에러시
+            .check_error {
+                display: none;
+                color: $color_main_rd;
+            }
+        }
+        // 문의 카테고리
+        &:has(p.category) {
+            .form_check_box {
+                align-items: end;
+                padding-right: 2.5rem;
+            }
+        }
+        // 문의 내용 입력
+        &:has(label[for="content"]) {
+            .form_check_box {
+                align-items: flex-start;
+                @include media("mobile") {
+                    justify-content: flex-start;
+                    padding-top: 0;
+                }
+            }
+            textarea {margin-block: 0.5rem 1.5rem;}
+        }
+    }
+}

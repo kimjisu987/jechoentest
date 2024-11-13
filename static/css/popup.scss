@@ -1,0 +1,265 @@
+@charset "utf-8";
+@import "mixin";
+
+.popup {
+    @include center_1400;
+    margin-top: 60px;
+    display: flex; gap: $font_24;
+    .mobile_show {display: none;}
+    * {box-sizing: border-box;}
+    @include media("mobile") {
+        margin-top: $font_24;
+    }
+    & > div {flex: 1;}
+    // 좌측 목록 섹션
+    .main_list_box {
+        height: 100%;
+        // 메인이미지, 팝업 선택
+        .status_control {
+            display: flex;
+            & > li {flex: 1;}
+            & > li > label:last-of-type {
+                padding-left: 0.5rem;
+            }
+        }
+        // 출력되는 목록
+        .mainimg_list, .popup_list {
+            max-height: calc(100vh - 20rem);
+            overflow-y: auto;
+            display: flex; flex-direction: column;
+            margin-top: $font_24;
+            li > a{
+                display: block;
+                display: flex; justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid $color_sub_g2;
+                padding: $font_14;
+                // 리스트 제목
+                .list_title {
+                    @include text_short(1);
+                }
+                // 리스트 상태, 수정 박스
+                .list_status_box {
+                    text-wrap-mode: nowrap;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 0.5rem;
+                    margin-left: 1rem;
+                }
+                // 리스트 상태 체크
+                .list_status {
+                    width: $font_16; height: $font_16;
+                    background: $color_sub_g2;
+                    border-radius: 50%;
+                }
+                // 체크 on 상태
+                .list_on {
+                    background: $color_main_bl;
+                }
+                // 리스트 내 버튼 공통 서식
+                button {height: fit-content; text-wrap-mode: nowrap;}
+                // 수정 버튼
+                .mainimg_modify_btn, .popup_modify_btn {
+                    @include btn_a($color_font_wh, $color_font_bk, $color_font_bk);
+                }
+                &.list_act {
+                    background: $color_tran_yg;
+                    border-radius: $font_24 0 0 0;
+                }
+            }
+            // 리스트 상단 목록 (추가)
+            & > li:first-child {
+                .list_title {font-weight: bold}
+                .mainimg_add_btn, .popup_add_btn {
+                    @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+                }
+            }
+        }
+    }
+    // 우측 등록 섹션
+    .popup_regi {
+        .reference {
+            margin-left: 1rem;
+            margin-bottom: 1.5rem;
+            color: $color_main_rd;
+            li {list-style: disc;}
+        }
+        // 버튼 공통 서식
+        .button_box {
+            display: flex;
+            gap: $font_24;
+        }
+        button {
+            @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, $font_24, 100%);
+            padding-block: $font_20;
+            border-radius: $font_48;
+        }
+        // 등록 버튼
+        .mainimg_regi_btn {width: calc(50% - $font_24 / 2);}
+        // 미리보기 버튼
+        .mainimg_preview_btn {display: none;}
+        .mainimg_preview_btn , .popup_preview_btn {
+            background: $color_font_wh;
+            border: 2px solid $color_main_bl;
+            color: $color_main_bl;
+        }
+        // 노출, 비노출 서식
+        .exposure_radio {
+            display: flex;
+            flex-wrap: wrap;
+            & > div {flex: 1;}
+            & > div > label:last-of-type {
+                padding-left: 0.5rem;
+            }
+            margin-block: 0.5rem 1.8rem;
+        }
+        // required 서식
+        p.required {
+            display: inline; width: fit-content;
+            position: relative;
+            font-size: $font_14;
+            &::after {
+                content: "";
+                display: block;
+                position: absolute;
+                right: -8px;
+                top: 5px;
+                width: 5px;
+                height: 5px;
+                background: $color_main_bl;
+                border-radius: 50%;
+            }
+        }
+        // 노출 시작, 종료일 서식
+        .date_box {
+            display: flex; gap: $font_24;
+            & > li {flex: 1;}
+        }
+        // 유효성검사 에러메세지
+        .form_check_box {
+            position: absolute;
+            top: 0rem;
+            right: 0;
+            width: max-content;
+            height: 50px;
+            display: inline-flex;
+            gap: 1rem;
+            align-items: center;
+            @include media("mobile") {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-end;
+            }
+            .check_error {
+                display: none;
+                color: $color_main_rd;
+            }
+        }
+        // 업로드 이미지 미리보기
+        .mainimg_preview, .popup_preview {
+            display: block; margin: 0 auto;
+            overflow: hidden;
+            margin-block: 0.5rem 1.5rem;
+            border: 1px solid $color_sub_g2;
+            img {width: 100%; height: 100%; object-fit: cover;}
+        }
+        .mainimg_preview {width: 100%; aspect-ratio: 1.7777;}
+        .popup_preview {width: 50%; aspect-ratio: 1;}
+        input[type="file"]#img {display: none;}
+    }
+    // 스와이퍼 모달 서식
+    .preview_modal {
+        display: none;
+        position: fixed; z-index: 100;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: $color_tran_bk;
+    }
+    .preview_modal_inner {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%; height: 100%;
+        max-width: 500px; height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        // 페이지네이션 리스트
+        .swiper-pagination {
+            position: absolute;
+            bottom: 0;
+            background: $color_font_bk;
+            padding-block: 1rem;
+        }
+        .swiper-pagination-bullet {
+            width: $font_14; height: $font_14;
+            border-radius: $font_16;
+            background: $color_font_wh;
+            opacity: 1;
+            transition: 0.3s;
+            box-shadow: $shadow_box_s;
+        }
+        // 페이지네이션 액티브
+        .swiper-pagination-bullet-active {
+            width: $padding_36;
+        }
+        .swiper_btn {
+            display: flex;
+            button {
+                flex: 1;
+                background: $color_font_wh;
+                line-height: 300%;
+                font-size: 1.1rem;
+                font-weight: bold;
+                &:first-of-type {
+                    border-right: 1px solid $color_font_bk;
+                }
+            }
+        }
+    }
+    @include media("mobile") {
+        & > div:not(div.mobile_show) {display: none;}
+        .mobile_show {
+            margin-top: calc(60px + $font_24);
+            display: block;
+            width: 100%; height: fit-content;
+            padding: $radius_l $font_20;
+            background: $color_font_wh;
+            border-radius: $font_48;
+            box-shadow: $shadow_box_m;
+            text-align: center;
+            align-self: center;
+            dl {margin-top: $font_48;}
+            dt {
+                font-weight: bold;
+                font-size: $font_24;
+                margin-bottom: $font_16;
+            }
+            .mobile_show_icon {
+                width: 6rem;
+                height: 6rem;
+                margin: 0 auto;
+                border-radius: 50%;
+                background-size: 5rem 5rem;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-image: url("../icon/icon_x.svg");
+                background-color: $color_tran_rd;
+            }
+        }
+    }
+}

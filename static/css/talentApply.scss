@@ -1,0 +1,163 @@
+@charset "utf-8";
+@import "mixin";
+
+@mixin tablet_media {
+    @media screen and (max-width: 1000px) {
+        @content;
+    }
+}
+
+.talentApply {
+    @include center_1400;
+    margin-top: 60px;
+    @include media("mobile") {
+        margin-top: 24px;
+    }
+    // 서브타이틀 서식
+    .sub_title.title_under::after {
+        background-color: $color_font_bk;
+    }
+    .apply_inner {
+        display: flex; gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid $color_sub_g2;
+        margin-bottom: $font_24;
+        & > * {flex: 1;}
+    }
+    // 대표이미지
+    .activity_img {
+        position: relative;
+        max-width: 200px;
+        aspect-ratio: 1;
+        border-radius: 0 $font_24 0 $font_24;
+        overflow: hidden;
+        img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .item_tag {display: none;}
+        @include tablet_media {
+            max-width: 200px;
+            .item_tag {
+                position: absolute; top: 0; left: 0;
+                display: block;
+                background: $color_main_bl;
+                color: $color_font_wh;
+                width: max-content;
+                padding: 6px 12px;
+                border-radius: 0 0 16px 0;
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
+    }
+    // 재능활동 정보 리스트
+    .activity_info {
+        display: flex; gap: 1rem;
+        width: 100%; height: inherit;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        align-content: space-around;
+        & > *:not(.activity_field, .activity_yoil) {flex: 1;}
+        // 글자포인트
+        .talent_title, .activity_price {font-size: $font_20; font-weight: bold;}
+        // 긴 제목 넘어가는거 방지
+        .talent_title {@include text_short(1);}
+        // 작은 너비
+        .activity_field, .activity_yoil {margin-inline: 1rem;}
+        @include tablet_media {
+            flex-wrap: wrap;
+            text-align: left;
+            & > *:not(.activity_field, .activity_yoil) {flex: auto;}
+            li {width: 100%;}
+            .activity_field, .activity_yoil {margin-inline: 0;}
+            .activity_date {flex: 1 1 40%; text-wrap-mode: nowrap;}
+            .activity_yoil {flex: 1 1 max-content;}
+            .activity_field {display: none}
+        }
+    }
+    // 재능활동 자세히보기 버튼
+    .activity_view {
+        @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+        height: fit-content;
+        margin: 0 auto;
+        margin-bottom: 60px;
+        img {height: $font_16;}
+    }
+    // 하단 영역
+    .detail_box {
+        display: flex; gap: $font_24;
+        justify-content: space-between;
+        // 수강신청 고객 정보
+        & > * {
+            flex: 1;
+            width: 50%;
+        }
+        // 고객 정보 업데이트 주의사항
+        .warning_txt {
+            color: $color_main_rd;
+            // ! 아이콘
+            img {
+                width: $font_16;
+                background: $color_main_rd;
+                border-radius: 50%;
+                padding: 0.3rem;
+            }
+        }
+        // 유의사항
+        .payment_info {
+            max-width: 400px;
+            .payment_txt {
+                margin-left: 1rem;
+                li {list-style: disc;}
+            }
+        }
+        // 동의 체크박스
+        .check_box_wrap {
+            text-align-last: end;
+            margin-block: $font_24;
+            label:last-of-type {
+                padding-left: 0.5rem;
+            }
+        }
+        // 수강신청 버튼
+        .submit_btn {
+            @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, $font_24, 100%);
+            height: fit-content;
+            padding-block: 1rem;
+            border-radius: 2rem;
+            font-size: 1.5rem;
+            margin-top: $font_48;
+        }
+        @include media("mobile") {
+            flex-direction: column;
+            & > * {width: 100%;}
+            .payment_info {max-width: none; margin-top: $font_24;}
+        }
+    }
+    // 에러 메세지
+    .input_fields {
+        position: relative;
+        .form_check_box {
+            position: absolute;
+            top: 0rem;
+            right: 0;
+            width: max-content;
+            height: 50px;
+            display: inline-flex;
+            gap: 1rem;
+            align-items: center;
+            @include media("mobile") {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-end;
+            }
+            // 체크 에러시
+            &>.check_error {
+                display: none;
+                color: $color_main_rd;
+            }
+        }
+    }
+}

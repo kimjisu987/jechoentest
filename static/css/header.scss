@@ -1,0 +1,378 @@
+@charset "utf-8";
+@import "mixin";
+
+// 자동입력
+.main_title {@include main_title;}
+.sub_title {@include sub_title;}
+.list_number {@include list_number;}
+.sub_title_bg {@include sub_title_bg;}
+.bread_crumbs {@include bread_crumbs;}
+.content_shadow {@include content_shadow;}
+.join_step {@include join_step;}
+.alert_modal {@include alert_modal;}
+.item_photo {@include item_photo;}
+.item_list {@include item_list;}
+.item_hash {@include item_hash;}
+.input_fields {@include input_fields;}
+.input_number {@include input_number;}
+input[type="checkbox"], input[type="radio"] {@include input_check;}
+textarea {@include textarea;}
+
+// 헤더
+header {
+	width: calc(100vw - (100vw - 100%));
+	z-index: 100;
+
+	&>.header_black {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: $color_tran_bk;
+		z-index: 101;
+		display: none;
+	}
+}
+
+// 헤더 탑 - 로고,로그인 영역
+.header_top {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+	margin: 0 auto;
+	background: $color_font_wh;
+	border-bottom: 1px solid $color_sub_g2;
+}
+
+.header_top_inner {
+	@include center_1400;
+	height: 80px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	&>h1>a {
+		display: block;
+		width: 280px;
+		height: 60px;
+		background-image: url("../icon/logo_pc.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+	}
+	//1106 최민주 수정
+	.header_logoutNmypage {
+		display: flex;
+		column-gap: $padding_24;
+	}
+
+	.header_top_mo {
+		display: none;
+	}
+
+	@include media("mobile") {
+		height: 60px;
+
+		&>h1>a {
+			width: 60px;
+			height: 35px;
+			background-image: url("../icon/logo_mo.svg");
+		}
+
+		.header_top_pc {
+			display: none;
+		}
+		//1106 최민주 수정
+		.header_go_mypage {
+			display: none;
+		}
+
+		.header_top_mo {
+			display: block;
+			height: 32px;
+
+			&>img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}
+
+// 내비게이션
+.header_nav {
+	position: fixed;
+	top: 81px;
+	right: 0;
+	width: 100%;
+	margin: 0 auto;
+	background: $color_font_wh;
+	box-shadow: 0 4px 6px rgba(51, 51, 51, 0.25);
+	z-index: 100;
+
+	.toggle_close {
+		display: none;
+	}
+
+	// GNB, LNB 구분선
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 60px;
+		left: 0;
+		width: 100%;
+		height: 1px;
+		background: $color_sub_g2;
+	}
+
+	// GNB 영역
+	.gnb {
+		@include center_1400;
+		display: flex;
+		justify-content: space-around;
+		text-align: center;
+		font-size: $font_20;
+		overflow: hidden;
+		height: 60px;
+
+		&>li {
+			flex: 1;
+			box-sizing: border-box;
+			z-index: 100;
+
+			&>a {
+				display: block;
+				position: relative;
+				z-index: 100;
+				font-weight: bold;
+				height: calc(60px - 1rem);
+				line-height: 45px;
+				margin-block: 0.5rem;
+			}
+
+			&:not(:last-child)>a {
+				border-right: 1px solid $color_sub_g2;
+			}
+
+			// GNB 호버시 동그라미 이벤트
+			&>a>span {
+				position: relative;
+
+				&::before {
+					content: "";
+					display: block;
+					position: absolute;
+					left: -10%;
+					top: -20%;
+					width: $font_16;
+					height: $font_16;
+					transform: scale(0);
+					background: $color_main_bl;
+					border-radius: 50%;
+					transition: 0.3s;
+					z-index: -1;
+				}
+			}
+
+			&:hover>a>span::before {
+				transform: scale(1);
+			}
+
+			// LNB 영역
+			&>.lnb {
+				margin-block: 0.5rem;
+				padding-top: 0.5rem;
+				line-height: 240%;
+
+				&>li>a {
+					display: block;
+				}
+
+				// LNB 호버시 밑줄 이벤트
+				&>li>a>span {
+					position: relative;
+
+					&::before {
+						content: "";
+						display: block;
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						width: 100%;
+						height: 50%;
+						transform: scale(0);
+						background: $color_main_yg;
+						transition: 0.3s;
+						z-index: -1;
+					}
+				}
+
+				&>li:hover>a>span::before {
+					transform: scale(1);
+				}
+			}
+		}
+	}
+}
+
+// 내비게이션 모바일
+@include media("mobile") {
+	header {
+		&>.header_black {
+			display: none;
+		}
+	}
+
+	.header_nav {
+		position: fixed;
+		top: 0;
+		right: -100%;
+		width: 90%;
+		height: 100vh;
+		margin: 0;
+		z-index: 200;
+
+		.toggle_close {
+			width: 100%;
+			height: 60px;
+			display: flex;
+			justify-content: flex-end;
+			margin-bottom: 1.5rem;
+
+			a {
+				width: 32px;
+				padding-inline: 1rem;
+
+				img {
+					width: 100%;
+				}
+			}
+		}
+
+		&::before {
+			display: none;
+		}
+
+		.gnb {
+			width: 100%;
+			display: block;
+			height: 100vh;
+			text-align: left;
+
+			&>li {
+				flex: auto;
+				border-bottom: 1px solid $color_sub_g2;
+				margin-bottom: 1rem;
+
+				// padding-inline: 2rem;
+				&>a {
+					line-height: 160%;
+					margin-block: 0rem;
+					padding-inline: 2rem;
+
+					&::after {
+						content: "";
+						display: inline-block;
+						width: $font_16;
+						height: 50%;
+						background-image: url("../icon/icon_arrowdown.svg");
+						background-repeat: no-repeat;
+						background-position: center;
+						margin-left: 1rem;
+						padding-bottom: 1rem;
+						float: right;
+						transition: 0.3s;
+					}
+
+					&.lnb_act::after {
+						transform: rotate(-180deg);
+						transition: 0.3s;
+					}
+				}
+
+				&:not(:last-child)>a {
+					border-right: none;
+				}
+
+				// GNB 호버시 동그라미 이벤트 삭제
+				&>a>span::before {
+					display: none;
+				}
+
+				// lnb메뉴
+				&>.lnb {
+					display: none;
+					margin-block: 0rem;
+					padding-top: 0rem;
+					line-height: 240%;
+					background: $color_main_yg;
+
+					// LNB 호버시 밑줄 이벤트 삭제
+					&>li>a>span {
+						display: block;
+						padding-inline: 2rem;
+					}
+
+					&>li:not(li:last-child)>a {
+						border-bottom: 1.4px solid $color_font_wh;
+					}
+
+					&>li>a::before {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+// 브레드 크럼
+.sub_title_bg {
+	position: relative;
+	z-index: 11;
+}
+
+//로딩 스피너
+.loading_spin_wrap{
+    display: flex;
+    position: fixed; z-index: 102;
+    top: 0;left: 0;
+    width: 100%; height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: $color_tran_bk;
+    .loading_spin_inner {
+        width: 160px; height: 160px;
+        background: url(../images/loading.gif) no-repeat;
+		background-size: 100% 100%;
+        filter: brightness(1.2);
+    }
+}
+
+// 모바일 로그인/로그아웃 관련
+.user_box {
+	display: none;
+	width: max-content; margin: 0 auto;
+	font-size: $font_20;
+	margin-top: 3rem;
+	li {
+		display: inline-block;
+		margin-inline: 1rem;
+	}
+	a {
+		@include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+		display: inline-block;
+	}
+	li:nth-child(2) a {
+		background-color: $color_font_wh;
+		border-color: $color_font_bk;
+		color: $color_font_bk;
+	}
+	@include media("mobile") {
+		display: block;
+	}
+}

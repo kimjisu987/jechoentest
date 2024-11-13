@@ -1,0 +1,18 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+<head>
+    <title></title>
+    <script th:src="@{/js/login.js}"></script>
+</head>
+<body>
+    <section layout:fragment="content">
+        <h1>로그인</h1>
+        <form method="post" onsubmit="return false;">
+            <input type="text" name="userId">
+            <input type="password" name="password">
+            <button onclick="goLogin();">로그인</button>
+            <a th:href="@{/join?type=user}">Join User</a>
+            <a th:href="@{/join?type=organization}">Join Team</a>
+        </form>
+    </section>
+</body>
+</html>

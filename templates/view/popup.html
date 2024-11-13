@@ -1,0 +1,399 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/footer.css">
+    <link rel="stylesheet" href="../../static/css/popup.css">
+    <link rel="stylesheet" href="../../static/css/swiper-bundle.css">
+
+    <script src="../../static/js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/header.js"></script>
+    <script src="../../static/js/footer.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header th:fragment="header">
+        <div class="header_black"></div>
+        <!-- Header Top -->
+        <div class="header_top">
+            <div class="header_top_inner">
+                <h1><a href="index.html" title="메인으로 바로가기"></a></h1>
+                <a th:href="@{/login}" title="로그인 회원가입 바로가기" class="header_top_pc">로그인/회원가입</a>
+                <a href="#" title="메뉴 더보기" class="header_top_mo header_toggle"><img th:src="@{/icon/icon_hamburger.svg}" alt="메뉴 더보기 아이콘"></a>
+                <!--로그인 한 경우-->
+                <!--<a th:href="@{/logout}" title="로그아웃 바로가기">로그아웃</a>-->
+            </div>
+        </div>
+        <!-- Header Nav -->
+        <nav class="header_nav">
+            <div class="toggle_close">
+                <a href="#" class="toggle_close" title="토글 닫기"><img th:src="@{/icon/icon_x.svg}" alt="닫기 아이콘"></a>
+            </div>                
+            <ul class="gnb">
+                <li>
+                    <a href="#" title="커뮤니티"><span>커뮤니티</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="마을 현황"><span>마을 현황</span></a></li>
+                        <li><a href="#" title="액션그룹"><span>액션그룹</span></a></li>
+                        <li><a href="#" title="활동소식"><span>활동소식</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="공동체 마켓"><span>공동체 마켓</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="판매자 신청"><span>판매자 신청</span></a></li>
+                        <li><a href="#" title="마켓"><span>마켓</span></a></li>
+                        <li><a href="#" title="도뇽교류"><span>도뇽교류</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="공동체 플랫폼"><span>공동체 플랫폼</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="사회적 경제 공동체"><span>사회적 경제 공동체</span></a></li>
+                        <li><a href="#" title="체험마을"><span>공동체 소개</span></a></li>
+                        <li><a href="#" title="재능활동가"><span>재능활동가</span></a></li>
+                        <li><a href="#" title="공간예약"><span>공간예약</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="알림마당"><span>알림마당</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="공지사항"><span>공지사항</span></a></li>
+                        <li><a href="#" title="묻고답하기"><span>묻고답하기</span></a></li>
+                        <li><a href="#" title="일정관리"><span>일정관리</span></a></li>
+                        <li><a href="#" title="설문조사"><span>설문조사</span></a></li>
+                        <li><a href="#" title="팝업관리"><span>팝업관리</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="사업안내"><span>사업안내</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="신활력플러스사업"><span>신활력플러스사업</span></a></li>
+                        <li><a href="#" title="점프업센터"><span>점프업센터</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sub Title -->
+        <div class="sub_title_bg">
+            <h2>팝업관리</h2>
+            <div class="bread_crumbs">
+                <div class="inner">
+                    <ul>
+                        <li>
+                            <a href="#">알림마당</a>
+                            <div class="crumbs">
+                                <ul>
+                                    <li><a href="#">커뮤니티</a></li>
+                                    <li><a href="#">공동체 마켓</a></li>
+                                    <li><a href="#">알림마당</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a href="#">공지사항</a>
+                            <div class="crumbs">
+                                <ul>
+                                    <li><a href="#">도농교류</a></li>
+                                    <li><a href="#">사회적 경제 공동체</a></li>
+                                    <li><a href="#">재능활동가</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End of Header -->
+    <!-- ------------------------- -->
+    <!-- Main -->
+    <main>
+        <section layout:fragment="content" class="popup">
+            <div class="main_list_box">
+                <div class="sub_title title_under">
+                    <p>목록</p>
+                </div>
+                <ul class="status_control">
+                    <li>
+                        <input type="radio" class="main_check" id="main_check" name="popup_select" checked>
+                        <label for="main_check"><img th:src="@{/icon/icon_check.svg}" alt="체크 아이콘"></label>
+                        <label for="main_check">메인이미지</label>
+                    </li>
+                    <li>
+                        <input type="radio" class="popup_check" id="popup_check" name="popup_select">
+                        <label for="popup_check"><img th:src="@{/icon/icon_check.svg}" alt="체크 아이콘"></label>
+                        <label for="popup_check">팝업</label>
+                    </li>
+                </ul>
+                <ul class="mainimg_list">
+                    <li>
+                        <a href="#" title="추가하기" class="mainimg_add list_act">
+                            <p class="list_title">메인이미지 등록</p>
+                            <button type="button" class="mainimg_add_btn">추가</button>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="popup_list">
+                    <li>
+                        <a href="#" title="추가하기" class="popup_add list_act">
+                            <p class="list_title">팝업 등록</p>
+                            <button type="button" class="popup_add_btn">추가</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="popup_regi">
+                <div class="sub_title title_under">
+                    <p>등록</p>
+                </div>
+                <div class="mainimg_regi_input">
+                    <ul class="reference">
+                        <li>최대 10개까지 노출이 가능하며, 해상도 1920픽셀 x 1080픽셀 이상의 가로 방향 이미지를 권장합니다.</li>
+                    </ul>
+                    <div class="input_fields">
+                        <label for="mainimg_title" class="required">제목</label>
+                        <input type="text" name="mainimg_title" id="mainimg_title" class="mainimg_title" placeholder="제목 입력">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="exposure_box">
+                        <p class="required">노출 여부</p>
+                        <div class="exposure_radio">
+                            <div>
+                                <input type="radio" class="mainimg_exposure_on" id="mainimg_exposure_on" name="mainimg_exposure">
+                                <label for="mainimg_exposure_on"><img th:src="@{/icon/icon_check.svg}" alt="체크 아이콘"></label>
+                                <label for="mainimg_exposure_on">노출</label>
+                            </div>
+                            <div>
+                                <input type="radio" class="mainimg_exposure_off" id="mainimg_exposure_off" name="mainimg_exposure" checked>
+                                <label for="mainimg_exposure_off"><img th:src="@{/icon/icon_check.svg}" alt="체크 아이콘"></label>
+                                <label for="mainimg_exposure_off">비노출</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="mainimg_img" class="required">이미지 첨부</label>
+                        <label for="mainimg_img" class="mainimg_preview">
+                            <img src="http://placehold.it/1920X1080" alt="미리보기 이미지">
+                            
+                        </label>
+                        <input type="file" name="mainimg_img" id="mainimg_img" class="mainimg_img">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="mainimg_imgtitle1">이미지 제목1</label>
+                        <input type="text" name="mainimg_imgtitle1" id="mainimg_imgtitle1" class="mainimg_imgtitle1" placeholder="이미지 제목1 입력 (최대 8자)" maxlength="8">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="mainimg_imgtitle2">이미지 제목2</label>
+                        <input type="text" name="mainimg_imgtitle2" id="mainimg_imgtitle2" class="mainimg_imgtitle2" placeholder="이미지 제목2 입력 (최대 8자)" maxlength="8">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="mainimg_imgsub">이미지 부가 설명</label>
+                        <input type="text" name="mainimg_imgsub" id="mainimg_imgsub" class="mainimg_imgsub" placeholder="이미지 부가 설명 입력 (최대 20자)" maxlength="20">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="button_box">
+                        <button type="button" class="mainimg_regi_btn">등록</button>
+                        <button type="button" class="mainimg_preview_btn">미리보기</button>
+                    </div>
+                </div>
+                <div class="popup_regi_input">
+                    <ul class="reference">
+                        <li>최대 3개까지 노출이 가능하며, 정사각형 비율의 슬라이드 형식으로 표시됩니다.</li>
+                    </ul>
+                    <div class="input_fields">
+                        <label for="popup_title" class="required">제목</label>
+                        <input type="text" name="popup_title" id="popup_title" class="popup_title" placeholder="제목 입력">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="exposure_box">
+                        <p class="required">노출 여부</p>
+                        <div class="exposure_radio">
+                            <div>
+                                <input type="radio" class="exposure_on" id="exposure_on" name="exposure">
+                                <label for="exposure_on"><img th:src="@{/icon/icon_check.svg}" alt="체크 아이콘"></label>
+                                <label for="exposure_on">노출</label>
+                            </div>
+                            <div>
+                                <input type="radio" class="exposure_off" id="exposure_off" name="exposure" checked>
+                                <label for="exposure_off"><img th:src="@{/icon/icon_check.svg}" alt="체크 아이콘"></label>
+                                <label for="exposure_off">비노출</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="popup_img" class="required">이미지 첨부</label>
+                        <label for="popup_img" class="popup_preview">
+                            <img src="../../static/images/dummy1.png" alt="미리보기 이미지">
+                        </label>
+                        <input type="file" name="popup_img" id="popup_img" class="popup_img">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="date_box">
+                        <div class="input_fields">
+                            <label for="start_date" class="required">노출 시작</label>
+                            <input type="datetime-local" name="start_date" id="start_date" class="start_date">
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="end_date" class="required">노출 종료</label>
+                            <input type="datetime-local" name="end_date" id="end_date" class="end_date">
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="popup_link">링크 (선택)</label>
+                        <input type="text" name="popup_link" id="popup_link" class="popup_link" placeholder="클릭시 이동할 링크 주소 입력">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="button_box">
+                        <button type="button" class="popup_regi_btn">등록</button>
+                        <button type="button" class="popup_preview_btn">미리보기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="preview_modal">
+                <div class="preview_modal_inner">
+                    <!-- Swiper -->
+                    <div class="swiper preview_swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="https://lh6.googleusercontent.com/proxy/5jGXDv6AeQbnaDaNHeo0jIerJ-GtGdqcX44viEDLS-JA7NaJ72Y4pLlYFNG_v6zWjesCPHqLF7wUN-Cq6MupjH_j6pKBiE_7oI1i6zSrfBIfnRGXG06IMAlWnNHFDA" alt="팝업 이미지">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://marketplace.canva.com/EAGK_wgEbQQ/1/0/1131w/canva-%ED%95%91%ED%81%AC-%EC%A3%BC%ED%99%A9-%EB%A0%88%ED%8A%B8%EB%A1%9C-%EC%98%A4%ED%94%881%EC%A3%BC%EB%85%84-%EA%B8%B0%EB%85%90-%ED%8C%9D%EC%97%85%EC%8A%A4%ED%86%A0%EC%96%B4-%ED%8F%AC%EC%8A%A4%ED%84%B0-zWZ6eXMpIQ8.jpg" alt="팝업 이미지">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://www.kvca.or.kr/files/popup.1/184_%EC%97%B0%EC%88%98%EC%9B%90%20%ED%99%88%ED%8E%98%EC%9D%B4%EC%A7%80%20%EC%98%A4%ED%94%88%20%ED%8C%9D%EC%97%85(600,695).jpg" alt="팝업 이미지">
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="swiper_btn">
+                        <button type="button" class="preview_24">24시간 동안 열지 않기</button>
+                        <button type="button" class="preview_close">닫기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile_show">
+                <div class="mobile_show_inner">
+                    <p class="mobile_show_icon"></p>
+                    <dl>
+                        <dt class="mobile_show_title">팝업 관리</dt>
+                        <dd class="mobile_show_text">팝업 관리는 PC에서만 가능합니다.</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer th:fragment="footer">
+        <div class="foot_family">
+            <ul>
+                <li>
+                    <a href="#" title="직속기관/사업소" class="family_title">직속기관/사업소</a>
+                    <ul class="family_cont">
+                        <li><a href="#" title="보건소">보건소</a></li>
+                        <li><a href="#" title="농업기술센터">농업기술센터</a></li>
+                        <li><a href="#" title="환경사업소">환경사업소</a></li>
+                        <li><a href="#" title="시설관리사업소">시설관리사업소</a></li>
+                        <li><a href="#" title="수도사업소">수도사업소</a></li>
+                        <li><a href="#" title="시립도서관">시립도서관</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="직속기관/사업소" class="family_title">직속기관/사업소</a>
+                    <ul class="family_cont">
+                        <li><a href="#" title="보건소">보건소</a></li>
+                        <li><a href="#" title="농업기술센터">농업기술센터</a></li>
+                        <li><a href="#" title="환경사업소">환경사업소</a></li>
+                        <li><a href="#" title="시설관리사업소">시설관리사업소</a></li>
+                        <li><a href="#" title="수도사업소">수도사업소</a></li>
+                        <li><a href="#" title="시립도서관">시립도서관</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="직속기관/사업소" class="family_title">직속기관/사업소</a>
+                    <ul class="family_cont">
+                        <li><a href="#" title="보건소">보건소</a></li>
+                        <li><a href="#" title="농업기술센터">농업기술센터</a></li>
+                        <li><a href="#" title="수도사업소">수도사업소</a></li>
+                        <li><a href="#" title="시립도서관">시립도서관</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="직속기관/사업소" class="family_title">직속기관/사업소</a>
+                    <ul class="family_cont">
+                        <li><a href="#" title="보건소">보건소</a></li>
+                        <li><a href="#" title="농업기술센터">농업기술센터</a></li>
+                        <li><a href="#" title="환경사업소">환경사업소</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="직속기관/사업소" class="family_title">직속기관/사업소</a>
+                    <ul class="family_cont">
+                        <li><a href="#" title="보건소">보건소</a></li>
+                        <li><a href="#" title="농업기술센터">농업기술센터</a></li>
+                        <li><a href="#" title="환경사업소">환경사업소</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="foot_txt">
+            <div class="foot_logo">
+                <img th:src="@{/icon/logo_foot.svg}" alt="foot_logo">
+            </div>
+            <div>
+                <ul>
+                    <li><a href="#" title="개인정보처리방침">개인정보처리방침</a></li>
+                    <li><a href="#" title="저작권보호정책">저작권보호정책</a></li>
+                    <li><a href="#" title="뷰어다운로드">뷰어다운로드</a></li>
+                    <li><a href="#" title="찾아오시는길">찾아오시는길</a></li>
+                </ul>
+                <p>
+                    [27188] 충청북도 제천시 내토로295(천남동)<br>대표전화 : 043-641-5114 (평일 09시~18시, ※ 점심시간, 토·공휴일 제외)
+                    <span>COPYRIGHT (C) JECHEON CITY. ALL RIGHTS RESERVED.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- top btn-->
+        <div class="top_btn">
+            <a href="#" title="top">TOP</a>
+        </div>
+
+    </footer>
+    <script src="../../static/js/swiper/swiper-bundle.min.js"></script>
+    <script src="../../static/js/popup.js"></script>
+</body>
+</html>

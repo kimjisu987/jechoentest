@@ -1,0 +1,545 @@
+@charset "utf-8";
+@import "mixin";
+
+@mixin tablet_media {
+    @media screen and (max-width: 1000px) {
+        @content;
+    }
+}
+
+// 재능활동가 등록
+.talentActivistRegistration{
+    @include center_1400;
+    & > h2 {display: none;}
+    // 서브타이틀 아이콘 배치
+    .sub_title {
+        margin-top: 60px;
+        cursor: pointer;
+        img {float: right; margin-top: 0.5rem; transition: 0.3s;}
+        &.view_more img {
+            transform: rotate(-180deg);
+        }
+    }
+    // 재능활동가 찾기 박스
+    .authority_sec {
+        width: 50%;
+        box-sizing: border-box;
+        padding: $font_24 $font_24 $font_14 $font_24;
+        background: $color_sub_g4;
+        border-radius: 0 $padding_36 0 $padding_36;
+        margin-bottom: 1.5rem;
+        .title_search {background: none !important;}
+        @include tablet_media {
+            width: 100%;
+        }
+    }
+    .input_fields {
+        position: relative;
+        // z-index 상위
+        input, textarea, .target_select, .activity_select, .select_con_default, .activity_field_text, button {
+            position: relative;
+            z-index: 1;
+        }
+        // 에러메세지 박스
+        .form_check_box {
+            position: absolute;
+            top: 0; right: 0;
+            width: calc(100% - $font_24); height: calc(100% - $font_14);
+            display: inline-flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            // 재능활동가 권한자 찾기
+            .activist_search {
+                @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+                margin-bottom: 2rem;
+                margin-right: $font_24;
+                z-index: 1;
+            }
+            // 체크 에러시
+            .check_error {
+                // display: none;
+                position: relative; z-index: 0;
+                color: $color_main_rd;
+                flex: 1;
+            }
+        }
+        .textarea_form_check {
+            align-items: baseline;
+            @include tablet_media {
+                .check_error {transform: translateY(-1rem);}
+            }
+        }
+        // 참고 메세지
+        &:has(.reference) input {
+            margin-bottom: 0;
+            @include tablet_media {
+                padding-block: 1.5rem;
+            }
+        }
+        &>.reference {
+            font-size: $font_14;
+            margin-bottom: 1.5rem;
+            color: $color_sub_g1;
+        }
+        // 주소
+        &.address_input_box {
+            .last_address {
+                display: flex;
+                gap: 1rem;
+                .detailAddress, .extraAddress {width: calc(100%);}
+            }
+        }
+        // 웹에디터(설명) 추가 서식
+        #detail {
+            margin-block: 1rem $font_24;
+            @include tablet_media {
+                margin-block: 1rem $font_24;
+            }
+        }
+        // 파일 첨부 보조 텍스트 삽입
+        label[for="addfiles"] {margin-bottom: 1.5rem;}
+        .file_sub_text {
+            position: absolute; top: 1.5rem;
+            font-size: $font_14;
+            color: $color_sub_g1;
+        }
+        // 활동요일 추가되는 박스
+        .input_file_add {
+            width: 100%;
+            display: flex; gap: 1rem;
+            & > .addfile {flex: 1;}
+            & > .file_add {@include btn_a(
+                $color_main_bl, $color_main_bl, $color_font_wh);
+                height: fit-content;
+            }
+            & > .file_del {
+                @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+                display: inline-block;
+                margin: 0; height: fit-content;
+            }
+        }
+    }
+    // 활동요일 폼 체크박스 모바일
+    .input_day_box .form_check_box .check_error {
+        position: absolute; right: $font_24; top: 1.5rem;
+    }
+    // 신청분야 에러메세지 박스
+    .input_fields:has(select#activity_field) .form_check_box {
+        top: 0.8rem; right: 1.5rem;
+    }
+    // 재능활동가 검색 후 보여지는 개인정보
+    .search_result {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        // display: none;
+        & > div {width: calc(50% - 1rem);}
+        @include tablet_media {
+            & > div {width: 100%;}
+            & > div:nth-of-type(1), & > div:nth-of-type(2), & > div:nth-of-type(3), & > div:nth-of-type(4) {
+                width: calc(50% - 0.5rem);
+            }
+        }
+    }
+    // readonly 아이콘 삭제
+    // #postcode, #address, #extraAddress {background: none;}
+    .talent_activities {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        .input_write {flex: 1;}
+    }
+    // 대표사진 등록
+    .main_photo {
+        position: relative;
+        background: $color_sub_g4;
+        width: 27vw; height: 27vw;
+        max-width: 27rem; max-height: 27rem;
+        border-radius: 0 $font_48 0 $font_48;
+        text-align: center;
+        align-content: center;
+        // background-image: url("../images/main_map_all.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        input {display: none;}
+        img {
+            width: 15%; aspect-ratio: 1;
+            background: $color_font_bk;
+            border-radius: 50%;
+            padding: $font_24;
+        }
+        span {
+            display: block;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        .file_check_box {
+            position: absolute;
+            width: 100%;
+            bottom: 1.5rem; text-align: center;
+            color: $color_main_rd;
+        }
+    }
+    @include tablet_media {
+        .talent_activities {
+            flex-direction: column;
+        }
+        .main_photo {
+            width: 100%; height: auto;
+            max-width: 460px; max-height: 460px;
+            aspect-ratio: 1;
+            margin: 0 auto;
+        }
+    }
+    // 재능활동 input 입력
+    .input_write {
+        display: flex; flex-wrap: wrap;
+        justify-content: space-between;
+        & > .input_fields, .activity_field_box {
+            box-sizing: border-box;
+            padding: $font_24 $font_24 $font_14 $font_24;
+            background: $color_sub_g4;
+            border-radius: 0 $padding_36 0 $padding_36;
+            margin-bottom: 1.5rem;
+        }
+        @include media("mobile") {
+            & > .input_day_box {
+                padding-bottom: $font_24;
+            }
+        }
+        // 신청분야
+        .activity_field_box {
+            display: flex; gap: 1rem;
+            width: 100%;
+            & > * {width: 100%; flex: 1;}
+        }
+        // 신청분야 셀렉트
+        .select_con_default {
+            @include select_con_default;
+            width: 100%;
+            select {padding-block: 0.5rem;}
+            @include media("mobile") {
+                select {padding-block: 1.3rem;}
+            }
+        }
+        .input_day_box .select_con_default {
+            @include media("mobile") {
+                background-position: calc(100% - 0.5rem) 0.8rem;
+            }
+        }
+        // 50% input 필드들
+        .input_fields {
+            &:has(input.location), &:has(input.price), &:has(input.start_date), &:has(input.end_date), &:has(input.target), &:has(input.activity_type) {
+                width: calc(50% - $font_24 / 2);
+                @include tablet_media {
+                    width: 100%;
+                }
+            }
+        }
+        // 수강대상자, 활동형식
+        .target_select, .activity_select {
+            margin-bottom: $font_24;
+            display: flex; flex-wrap: wrap; gap: 1rem;
+            & > * {flex: 1;}
+            label {
+                font-size: $font_16;
+                word-break: keep-all;
+            }
+            .check_box_wrap {
+                min-width: fit-content;
+                label:not(:has(img)) {
+                    padding-left: 0.5rem;
+                    vertical-align: sub;
+                }
+            }
+            @include tablet_media {margin-block: 0.5rem $font_24;}
+        }
+        // 수강요금
+        .input_fields:has(input.price) {
+            input {padding-right: 1.3rem;}
+            position: relative;
+            &::before {
+                position: absolute; right: $font_24; bottom: calc($font_24 + 1.3rem);
+                content: "원";
+                display: inline;
+            }
+        }
+        .input_day_box {
+            .add_day {
+                width: max-content;
+                font-size: $font_14;
+                margin-bottom: 1.5rem;
+            }
+            .form_check_box {
+                .add_day_btn {
+                    @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+                }
+            }
+        }
+        .input_day_add {
+            display: flex; gap: 1rem;
+            input {width: 100%;}
+            select {
+                padding-block: 0.63rem;
+            }
+            .day_result {
+                @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+                word-break: keep-all;
+                height: fit-content;
+            }
+            .day_del {
+                @include btn_a(transparent, $color_font_bk, $color_font_bk);
+                word-break: keep-all;
+                height: fit-content;
+            }
+            .day_line {
+                height: 50%;
+                align-content: end;
+            }
+            @include media("mobile") {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                background: $color_font_wh;
+                border-radius: 0 1.5rem 0 1.5rem;
+                padding: 1rem;
+                &:not(:last-of-type) {
+                    border-bottom: 1rem solid $color_font_wh;
+                    margin-bottom: 1.5rem;
+                }                
+                .select_con_default {width: 65%; order: 1;}
+                select {padding-block: 0.83rem; margin-bottom: 0rem;}
+                input {flex: 1; order: 3; margin-bottom: 0.5rem;}
+                .day_line {
+                    order: 3;
+                    width: max-content;
+                    height: 35%;
+                    align-content: center;
+                }
+                .day_result, .day_del {order: 2;}
+            }
+        }
+    }
+    // 활동 경력 사항
+    .career_box, .valid_box {
+        border-bottom: 1px solid $color_sub_g3; margin-bottom: 1rem;
+        @include media("mobile") {
+            border-bottom: none; margin-bottom: -2rem;
+        }
+        .career_inner, .valid_inner {
+            display: flex; gap: 1rem;
+            align-items: baseline;
+            .input_fields {
+                box-sizing: border-box;
+                padding: $font_24 $font_24 $font_14 $font_24;
+                background: $color_sub_g4;
+                border-radius: 0 $padding_36 0 $padding_36;
+                width: 100%; flex: 1;
+            }
+            input[type=text] {
+                padding-block: 0.6rem;
+                width: 100%;
+            }
+            .career_result, .valid_result {
+                @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+                word-break: keep-all;
+                height: fit-content;
+            }
+            .career_del, .valid_del {
+                @include btn_a(transparent, $color_font_bk, $color_font_bk);
+                word-break: keep-all;
+                height: fit-content;
+            }
+            @include media("mobile") {
+                flex-wrap: wrap;
+                box-sizing: border-box;
+                padding: $font_24 $font_24 $font_14 $font_24;
+                background: $color_sub_g4;
+                border-radius: 0 $padding_36 0 $padding_36;
+                .input_fields {
+                    padding: 0;
+                    background: transparent;
+                    border-radius: 0;
+                    width: 100%; flex: auto;
+                }
+                .input_fields:has(input.career_from), .input_fields:has(input.career_to),
+                .input_fields:has(input.valid_from), .input_fields:has(input.valid_to) {
+                    width: 40%;
+                }
+                .career_result, .valid_result, .career_del, .valid_del {
+                    margin: 0 auto;
+                }
+            }
+        }
+        .alltime_box {
+            text-align: end;
+            padding-right: 6rem;
+            margin-block: 0.5rem 1rem;
+            label:last-of-type {
+                vertical-align: sub;
+                margin-left: 0.5rem;
+            }
+            @include media("mobile") {
+                position: relative; z-index: 1; top: -6.5rem;                
+                padding-right: 1.5rem;
+            }
+        }
+    }
+    .career_add_btn, .valid_add_btn {
+        @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+        margin: 0 auto;
+    }
+    // 등록 버튼
+    .talent_comple_btn {
+        @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, $font_24, 300px);
+        margin: 0 auto;
+        margin-top: 60px;
+        padding-block: 1rem;
+        border-radius: 2rem;
+        font-size: $font_24;
+        @include tablet_media {
+            margin-top: 24px;
+        }
+    }
+    // 재능활동가 권한자 찾기 모달
+    .authority_modal {
+        display: none;
+        width: 100vw; height: 100vh;
+        position: fixed; top: 0; left: 0; z-index: 100;
+        background: $color_tran_bk;
+        .modal_inner {
+            @include center_1400(900px);
+            position: absolute;
+            background: $color_font_wh;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            padding: $font_48;
+            border-radius: $radius_m;
+            box-shadow: $shadow_box_m;
+            @include media("mobile") {
+                padding: $font_24;
+                padding-bottom: 2rem;
+                border-radius: 3rem;
+            }
+        }
+        // 닫기 버튼
+        .modal_close {
+            float: right;
+            background: #333;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            transition: 0.5s;
+            img {width: 100%;}
+            &:hover {transform: rotate(180deg);}
+        }
+        // 제목
+        .authority_title {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: $font_24;
+            font-weight: bold;
+        }
+        // 검색 input
+        .input_fields {
+            position: relative;
+            input {padding-block: 1rem;}
+            .form_check_box {
+                position: absolute;
+                top: 0; right: 0;
+                width: max-content;
+                height: 50px;
+                display: inline-flex;
+                gap: 1rem;
+                align-items: center;
+                @include tablet_media {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    align-items: flex-end;
+                    justify-content: center;
+                }
+            }
+        }
+        // 검색 버튼
+        .search_btn {
+            @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+            text-indent: 0;
+            height: fit-content;
+            @include media("mobile") {
+                transform: translateY(-1.8rem);
+            }
+        }
+        // 삭제 가능 태그
+        .add_member {
+            @include add_member;
+            background: transparent;
+            & > div {
+                background: $color_sub_g3;
+                padding-left: 1rem;
+            }
+        }
+        // 검색시 리스트
+        .sub_title_list {
+            @include sub_title;
+            margin-top: $font_48;
+        }
+        .member_list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 1.5rem;
+            background: $color_sub_g3;        
+            & > li {
+                width: calc(50% - 1rem);
+                min-width: 200px; // 필요에 따라 최소 너비 설정
+                white-space: nowrap;
+                @include tablet_media {
+                    width: 100%;
+                    white-space: nowrap;
+                }
+            }
+            &::-webkit-scrollbar {
+                width: 16px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: $color_sub_g2;
+                border-right: 8px solid $color_sub_g4;
+            }
+            .member_result {
+                @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+                display: inline-block;
+                padding-block: 6px;
+                float: right;
+                cursor: pointer;        
+                &.member_disabled {
+                    background: $color_sub_g2;
+                    border-color: $color_sub_g2;
+                }
+            }
+        }
+        // 모달 완료 버튼
+        .authority_result {
+            @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, $font_16, 320px);
+            padding-block: $font_16; border-radius: $font_48;
+            font-size: $font_24;
+            margin: 0 auto;
+            margin-top: $font_48;
+        }
+    }
+    // required 서식
+    p.required {
+        display: inline; width: fit-content;
+		position: relative;
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            right: -8px;
+            top: 5px;
+            width: 5px;
+            height: 5px;
+            background: $color_main_bl;
+            border-radius: 50%;
+        }
+	}
+}

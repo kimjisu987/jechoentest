@@ -1,0 +1,229 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Insert title here</title>
+        <link rel="stylesheet" href="../../static/css/header.css">
+        <link rel="stylesheet" href="../../static/css/activityNewsRegistration.css">
+    
+        <script src="../../static/js/jquery/jquery-3.6.0.min.js"></script>
+        <script src="../../static/js/common.js"></script>
+        <script src="../../static/js/header.js"></script>
+    </head>
+<body>
+    <!-- Header -->
+    <header th:fragment="header">
+        <div class="header_black"></div>
+        <!-- Header Top -->
+        <div class="header_top">
+            <div class="header_top_inner">
+                <h1><a href="index.html" title="메인으로 바로가기"></a></h1>
+                <a th:href="@{/login}" title="로그인 회원가입 바로가기" class="header_top_pc">로그인/회원가입</a>
+                <a href="#" title="메뉴 더보기" class="header_top_mo header_toggle"><img src="../../static/icon/icon_hamburger.svg" alt="메뉴 더보기 아이콘"></a>
+                <!--로그인 한 경우-->
+                <!--<a th:href="@{/logout}" title="로그아웃 바로가기">로그아웃</a>-->
+            </div>
+        </div>
+        <!-- Header Nav -->
+        <nav class="header_nav">
+            <div class="toggle_close">
+                <a href="#" class="toggle_close" title="토글 닫기"><img src="../../static/icon/icon_x.svg" alt="닫기 아이콘"></a>
+            </div>                
+            <ul class="gnb">
+                <li>
+                    <a href="#" title="커뮤니티"><span>커뮤니티</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="마을 현황"><span>마을 현황</span></a></li>
+                        <li><a href="#" title="액션그룹"><span>액션그룹</span></a></li>
+                        <li><a href="#" title="활동소식"><span>활동소식</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="공동체 마켓"><span>공동체 마켓</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="판매자 신청"><span>판매자 신청</span></a></li>
+                        <li><a href="#" title="마켓"><span>마켓</span></a></li>
+                        <li><a href="#" title="도뇽교류"><span>도뇽교류</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="공동체 플랫폼"><span>공동체 플랫폼</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="사회적 경제 공동체"><span>사회적 경제 공동체</span></a></li>
+                        <li><a href="#" title="체험마을"><span>공동체 소개</span></a></li>
+                        <li><a href="#" title="재능활동가"><span>재능활동가</span></a></li>
+                        <li><a href="#" title="공간예약"><span>공간예약</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="알림마당"><span>알림마당</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="공지사항"><span>공지사항</span></a></li>
+                        <li><a href="#" title="묻고답하기"><span>묻고답하기</span></a></li>
+                        <li><a href="#" title="일정관리"><span>일정관리</span></a></li>
+                        <li><a href="#" title="설문조사"><span>설문조사</span></a></li>
+                        <li><a href="#" title="팝업관리"><span>팝업관리</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="사업안내"><span>사업안내</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="신활력플러스사업"><span>신활력플러스사업</span></a></li>
+                        <li><a href="#" title="점프업센터"><span>점프업센터</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sub Title -->
+        <div class="sub_title_bg">
+            <h2>활동소식 등록</h2>
+            <div class="bread_crumbs">
+                <div class="inner">
+                    <ul>
+                        <li>
+                            <a href="#">알림마당</a>
+                            <div class="crumbs">
+                                <ul>
+                                    <li><a href="#">커뮤니티</a></li>
+                                    <li><a href="#">공동체 마켓</a></li>
+                                    <li><a href="#">알림마당</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a href="#">공지사항</a>
+                            <div class="crumbs">
+                                <ul>
+                                    <li><a href="#">도농교류</a></li>
+                                    <li><a href="#">사회적 경제 공동체</a></li>
+                                    <li><a href="#">재능활동가</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End of Header -->
+    <!-- ------------------------- -->
+    <!-- Main -->
+    <main>
+        <section layout:fragment="content" class="activityNewsRegistration">
+            <div class="news_section">
+                <div class="main_photo">
+                <!-- 프로필 이미지 등록시 background-image 추가 -->
+                <!-- <div class="main_photo" style="background-image: url('../../static/images/main_map_all.png');"> -->
+                    <div>
+                        <!-- 프로필 미리보기 영역 -->
+                        <div class="preview">
+                            <label for="profile">
+                                <img th:src="@{/icon/icon_plus_w.svg}" alt="등록하기 아이콘">
+                                <span>대표사진등록</span>
+                            </label>
+                        </div>
+                        <div class="file_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <input type="file" id="profile" name="profile" onchange="previewFile()" accept="image/*">
+                </div>
+                <div class="input_write">
+                    <div class="input_fields">
+                        <label for="name">액션그룹명</label>
+                        <input type="text" name="name" id="name" class="name" value="액션그룹명" readonly>
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="generation">기수</label>
+                        <div class="input_number">
+                            <button class="minus"><img th:src="@{/icon/icon_minus_w.svg}" alt="수량 빼기 아이콘"></button>
+                            <input class="generation" type="number" min="1" max="9999"  value="3" readonly id="generation">
+                            <button class="plus"><img th:src="@{/icon/icon_plus_w.svg}" alt="수량 더하기 아이콘"></button>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <p>단계</p>
+                        <div class="select_con_default">
+                            <select name="stage" id="stage" readonly>
+                                <option value="" disabled="disabled">단계 선택</option>
+                                <option value="스타트업" disabled="disabled" selected>스타트업</option>
+                                <option value="스텝업" disabled="disabled">스텝업</option>
+                                <option value="점프업" disabled="disabled">점프업</option>
+                            </select>
+                        </div>
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <p >유형</p>
+                        <div class="select_con_default">
+                            <select name="group_type" id="group_type">
+                                <option value="" disabled="disabled">유형 선택</option>
+                                <option value="생산가공" disabled="disabled" selected>생산가공</option>
+                                <option value="유통소비" disabled="disabled">유통소비</option>
+                                <option value="공동체" disabled="disabled">공동체</option>
+                                <option value="체험프로그램" disabled="disabled">체험프로그램</option>
+                            </select>
+                        </div>
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="subject">사업주제</label>
+                        <input type="text" name="subject" id="subject" class="subject" value="사업주제" readonly>
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="start_time" class="required">활동기간 시작일</label>
+                        <input type="date" name="start_time" id="start_time" class="start_time">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <label for="end_time" class="required">활동기간 종료일</label>
+                        <input type="date" name="end_time" id="end_time" class="end_time">
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <p class="required">활동내용</p>
+                        <textarea name="description" id="description" class="description" placeholder="활동내용 입력"></textarea>
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                    <div class="input_fields">
+                        <p class="required">공개 여부</p>
+                        <div class="select_con_default">
+                            <select name="status" id="status">
+                                <option value="">공개 여부 선택</option>
+                                <option value="공개">공개</option>
+                                <option value="비공개">비공개</option>
+                            </select>
+                        </div>
+                        <div class="form_check_box">
+                            <p class="check_error"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit_btn_box">
+                <button type="button" class="save_btn">저장</button>
+                <button type="button" class="submit_btn">등록</button>
+            </div>
+        </section>
+    </main>
+    <script src="../../static/js/activityNewsRegistration.js"></script>
+</body>
+</html>

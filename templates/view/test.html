@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="../../static/css/test.css">
+	<script src='../../static/js/fullcalendar/index.global.min.js'></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var calendarEl = document.getElementById('calendar');
+
+			var calendar = new FullCalendar.Calendar(calendarEl, {
+				headerToolbar: {		// 상단 툴바 설정
+					left: 'prev,today',
+					center: 'title',
+					right: 'dayGridMonth,listWeek,next'	
+				},
+				editable: false,		// 드래그앤드롭 수정
+				selectable: true,		// 하루 최대 이벤트수
+				select: function(info) {		// 클릭or드래그 이벤트 설정
+					alert('Selected range: ' + info.startStr + ' to ' + info.endStr);
+				},
+				dayMaxEvents: true,
+				firstDay: 0,	 // 주의 시작 날짜 (0=일요일/1=월요일)
+				locale: "ko",		// 언어 설정
+				eventClick: function(info) {		// 이벤트 클릭시 동작
+					alert('이벤트 클릭시: ' + info.event.title);
+				},
+				dateClick: function(info) {		// 날짜 클릭시 동작
+					alert('날짜 클릭시: ' + info.dateStr);
+				},
+				events: [
+					{title: '일정1',
+					start: '2024-11-01'},
+					{title: '일정1',
+					start: '2024-11-01'},
+					{title: '일정1',
+					start: '2024-11-01'},
+					{title: '일정1',
+					start: '2024-11-04'},
+					{title: '일정1',
+					start: '2024-11-04'},
+					{title: '일정2',
+					start: '2024-11-05',
+					end: '2024-11-11'},
+					{groupId: 999,
+					title: '일정3',
+					start: '2024-11-12T10:30:00',
+					end: '2024-11-12T12:30:00'},
+					{groupId: 999,
+					title: 'Repeating Event',
+					start: '2024-11-16T16:00:00'},
+					{title: 'Click for Google',
+					url: 'http://google.com/',
+					start: '2024-11-28'}
+				]
+			});
+
+			calendar.render();
+		});
+	</script>
+	</head>
+	<body>
+		<div id='calendar'></div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+@charset "utf-8";
+@import "mixin";
+
+@mixin tablet_media {
+    @media screen and (max-width: 1000px) {
+        @content;
+    }
+}
+
+.activityNewsRegistration {
+    margin-top: 60px;
+    @include media("mobile") {margin-top: $font_24;}
+    // 전체 레이아웃
+    .news_section {
+        @include center_1400;
+        display: flex;
+        justify-content: space-between;
+        gap: $font_24;
+        .input_write {
+            flex: 1;
+            display: flex; justify-content: space-between;
+            flex-wrap: wrap;
+            & > .input_fields, .activity_field_box {
+                box-sizing: border-box;
+                padding: $font_24 $font_24 $font_14 $font_24;
+                background: $color_sub_g4;
+                border-radius: 0 $padding_36 0 $padding_36;
+                margin-bottom: 1.5rem;
+            }
+            // 너비 조절
+            & > .input_fields:nth-of-type(1) {width: calc(65% - $font_24 / 2);}
+            & > .input_fields:nth-of-type(2) {width: calc(35% - $font_24 / 2);}
+            & > .input_fields:nth-of-type(n+3):nth-of-type(-n+8),
+            & > .input_fields:nth-of-type(10) {
+                width: calc(50% - $font_24 / 2);
+            }
+            // 컬러 조절
+            & > .input_fields:nth-of-type(n+1):nth-of-type(-n+5) {
+                select {color: $color_sub_g1;}
+            }
+            // z-index 상위
+            input, textarea, .select_con_default, button {
+                position: relative;
+                z-index: 1;
+            }
+            @include media("mobile") {                
+                // 너비 조절
+                & > .input_fields:nth-of-type(1) {width: 100%;}
+                & > .input_fields:nth-of-type(n+2):nth-of-type(-n+3) {
+                    width: calc(50% - $font_24 / 2);
+                }
+                & > .input_fields:nth-of-type(n+4):nth-of-type(-n+12) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    // 대표사진 등록
+    .main_photo {
+        position: relative;
+        background: $color_sub_g4;
+        width: 27vw; height: 27vw;
+        max-width: 27rem; max-height: 27rem;
+        border-radius: 0 $font_48 0 $font_48;
+        text-align: center;
+        align-content: center;
+        // background-image: url("../images/main_map_all.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        input {display: none;}
+        img {
+            width: 15%; aspect-ratio: 1;
+            background: $color_font_bk;
+            border-radius: 50%;
+            padding: $font_24;
+        }
+        span {
+            display: block;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        .file_check_box {
+            position: absolute;
+            width: 100%;
+            bottom: 1.5rem; text-align: center;
+            color: $color_main_rd;
+        }
+    }
+    @include tablet_media {
+        .news_section {
+            flex-direction: column;
+        }
+        .main_photo {
+            width: 100%; height: auto;
+            max-width: 460px; max-height: 460px;
+            aspect-ratio: 1;
+            margin: 0 auto;
+        }
+    }
+    // 신청분야 셀렉트
+    .select_con_default {
+        @include select_con_default;
+        width: 100%;
+        select {padding-block: 0.5rem;}
+        @include media("mobile") {
+            select {padding-block: 1.3rem;}
+        }
+    }
+    // 기수 서식
+    .input_number {
+        display: flex;
+        justify-content: space-between;
+        button {
+            width: $padding_32; height: $padding_32;
+            background: $color_sub_g2;
+        }
+    }
+    // 기수 input 뒤 disabled 아이콘 숨기기
+    .input_number input {background: none !important;}
+    // required 서식
+    p.required {
+        display: inline; width: fit-content;
+		position: relative;
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            right: -8px;
+            top: 5px;
+            width: 5px;
+            height: 5px;
+            background: $color_main_bl;
+            border-radius: 50%;
+        }
+	}
+    // 에러메세지 박스
+    .form_check_box {
+        position: absolute;
+        top: 0; right: 0;
+        width: calc(100% - $font_24); height: calc(100% - $font_14);
+        display: inline-flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        // 재능활동가 권한자 찾기
+        .activist_search {
+            @include btn_a($color_font_bk, $color_font_bk, $color_font_wh);
+            margin-bottom: 2rem;
+            margin-right: $font_24;
+            z-index: 1;
+        }
+        // 체크 에러시
+        .check_error {
+            // display: none;
+            position: relative; z-index: 0;
+            color: $color_main_rd;
+            flex: 1;
+        }
+    }
+    // textarea(액션그룹 설명) 추가 서식
+    textarea {
+        margin-bottom: $font_24;
+        @include tablet_media {
+            margin-block: 1rem $font_24;
+        }
+    }
+    // 최종 버튼 서식
+    .submit_btn_box {
+        display: flex; gap: $font_24;
+        @include center_1400;
+        margin-top: 3.75rem;
+        justify-content: center;
+        button {
+            @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, $font_16, 320px);
+            padding-block: 1rem;
+            border-radius: 2rem;
+            font-size: 1.5rem;
+        }
+        .save_btn {
+            background: transparent;
+            border: 2px solid $color_main_bl;
+            color: $color_main_bl;
+        }
+        @include media("mobile") {
+            flex-direction: column-reverse;
+            button {width: 100%;}
+        }
+    }
+}

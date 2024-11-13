@@ -1,0 +1,72 @@
+spring:
+  profiles:
+    group:
+      "dev" : "dev,common"
+      "prod" : "prod,common"
+---
+#common
+spring:
+  config:
+    activate:
+      on-profile: "common"
+
+  thymeleaf:
+    cache: false
+
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://15.164.61.237:3306/jecheon?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+      username: jc
+      password: jc11
+      connection-timeout: 30000
+      maximum-pool-size: 60
+      minimum-idle: 50
+      idle-timeout: 600000
+
+  data:
+    redis:
+      host: 15.164.61.237
+      port: 6379
+      password: 1234
+
+  session:
+    redis:
+      repository-type: indexed
+    timeout: 60s
+
+server:
+  port: 9000
+  shutdown: graceful
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID
+        secure: false          # HTTPS에서만 쿠키 전송
+        http-only: true       # JavaScript로 쿠키 접근 금지
+        same-site: Strict     # 동일 사이트에서만 쿠키 전송
+      timeout: 60s
+
+---
+#dev
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+
+logging:
+  level:
+    '[com.jecheon.platform]': DEBUG
+    '[org.springframework]' : INFO
+    '[org.springframework.data.elasticsearch.client.WIRE]': TRACE
+---
+#prod
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+logging:
+  level:
+    root: error
+    '[com.jecheon.platform]': INFO

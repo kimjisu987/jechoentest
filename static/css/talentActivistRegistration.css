@@ -1,0 +1,1209 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  src: url("../fonts/Pretendard-Bold.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  src: url("../fonts/Pretendard-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  src: url("../fonts/Pretendard-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 300;
+  src: url("../fonts/Pretendard-Light.woff") format("woff");
+}
+/* 카드이미지 호버용 */
+/* 프리텐다드 다운로드 후 이름 정의 */
+/* 로그인, 회원가입 카테고리 */
+/* 카드, 이미지 */
+/* 섹션 박스, 작은 서브 메인 배경 */
+/* 큰 서브 메인 배경 */
+/* CSS 초기화 */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  border: transparent;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul, li {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* change border colour to suit your needs */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input, select, label, img, input, select, textarea, button, a {
+  font-family: "Pretendard", "맑은고딕", arial;
+  vertical-align: middle;
+}
+
+select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration,
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number],
+input[type=text],
+input[type=password],
+input[type=url],
+input[type=email],
+input[type=tel],
+input[type=date],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-border-radius: 0;
+  outline: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+address {
+  font-style: normal;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  font-size: 1rem;
+  line-height: 160%;
+  font-family: "Pretendard", "맑은고딕", arial;
+  color: #333;
+  background: #fff;
+  scroll-behavior: smooth;
+}
+
+body.toggle_fixed {
+  position: fixed;
+  overflow-y: hidden;
+  touch-action: none;
+}
+
+a, button {
+  color: inherit;
+}
+
+table > caption, legend, .txt_hide {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  border: 0;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.clear {
+  clear: both;
+}
+
+.clear:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+h1 {
+  font-size: 1rem;
+}
+
+h2 {
+  font-size: 3rem;
+  line-height: 160%;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 160%;
+}
+
+.talentActivistRegistration {
+  width: min(100vw - (100vw - 100%) - 2rem, 1400px);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.talentActivistRegistration > h2 {
+  display: none;
+}
+.talentActivistRegistration .sub_title {
+  margin-top: 60px;
+  cursor: pointer;
+}
+.talentActivistRegistration .sub_title img {
+  float: right;
+  margin-top: 0.5rem;
+  transition: 0.3s;
+}
+.talentActivistRegistration .sub_title.view_more img {
+  transform: rotate(-180deg);
+}
+.talentActivistRegistration .authority_sec {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 1.5rem 1.5rem 0.88rem 1.5rem;
+  background: #f5f5f5;
+  border-radius: 0 2.25rem 0 2.25rem;
+  margin-bottom: 1.5rem;
+}
+.talentActivistRegistration .authority_sec .title_search {
+  background: none !important;
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .authority_sec {
+    width: 100%;
+  }
+}
+.talentActivistRegistration .input_fields {
+  position: relative;
+}
+.talentActivistRegistration .input_fields input, .talentActivistRegistration .input_fields textarea, .talentActivistRegistration .input_fields .target_select, .talentActivistRegistration .input_fields .activity_select, .talentActivistRegistration .input_fields .select_con_default, .talentActivistRegistration .input_fields .activity_field_text, .talentActivistRegistration .input_fields button {
+  position: relative;
+  z-index: 1;
+}
+.talentActivistRegistration .input_fields .form_check_box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100% - 1.5rem);
+  height: calc(100% - 0.88rem);
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.talentActivistRegistration .input_fields .form_check_box .activist_search {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  margin-bottom: 2rem;
+  margin-right: 1.5rem;
+  z-index: 1;
+}
+.talentActivistRegistration .input_fields .form_check_box .activist_search:hover {
+  background: #000;
+}
+.talentActivistRegistration .input_fields .form_check_box .activist_search.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration .input_fields .form_check_box .check_error {
+  position: relative;
+  z-index: 0;
+  color: #E45B5E;
+  flex: 1;
+}
+.talentActivistRegistration .input_fields .textarea_form_check {
+  align-items: baseline;
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .input_fields .textarea_form_check .check_error {
+    transform: translateY(-1rem);
+  }
+}
+.talentActivistRegistration .input_fields:has(.reference) input {
+  margin-bottom: 0;
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .input_fields:has(.reference) input {
+    padding-block: 1.5rem;
+  }
+}
+.talentActivistRegistration .input_fields > .reference {
+  font-size: 0.88rem;
+  margin-bottom: 1.5rem;
+  color: #999;
+}
+.talentActivistRegistration .input_fields.address_input_box .last_address {
+  display: flex;
+  gap: 1rem;
+}
+.talentActivistRegistration .input_fields.address_input_box .last_address .detailAddress, .talentActivistRegistration .input_fields.address_input_box .last_address .extraAddress {
+  width: 100%;
+}
+.talentActivistRegistration .input_fields #detail {
+  margin-block: 1rem 1.5rem;
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .input_fields #detail {
+    margin-block: 1rem 1.5rem;
+  }
+}
+.talentActivistRegistration .input_fields label[for=addfiles] {
+  margin-bottom: 1.5rem;
+}
+.talentActivistRegistration .input_fields .file_sub_text {
+  position: absolute;
+  top: 1.5rem;
+  font-size: 0.88rem;
+  color: #999;
+}
+.talentActivistRegistration .input_fields .input_file_add {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.talentActivistRegistration .input_fields .input_file_add > .addfile {
+  flex: 1;
+}
+.talentActivistRegistration .input_fields .input_file_add > .file_add {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #0191B6;
+  border: 1px solid #0191B6;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.talentActivistRegistration .input_fields .input_file_add > .file_add:hover {
+  opacity: 0.8;
+}
+.talentActivistRegistration .input_fields .input_file_add > .file_add.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration .input_fields .input_file_add > .file_del {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  display: inline-block;
+  margin: 0;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.talentActivistRegistration .input_fields .input_file_add > .file_del:hover {
+  background: #000;
+}
+.talentActivistRegistration .input_fields .input_file_add > .file_del.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration .input_day_box .form_check_box .check_error {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+}
+.talentActivistRegistration .input_fields:has(select#activity_field) .form_check_box {
+  top: 0.8rem;
+  right: 1.5rem;
+}
+.talentActivistRegistration .search_result {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.talentActivistRegistration .search_result > div {
+  width: calc(50% - 1rem);
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .search_result > div {
+    width: 100%;
+  }
+  .talentActivistRegistration .search_result > div:nth-of-type(1), .talentActivistRegistration .search_result > div:nth-of-type(2), .talentActivistRegistration .search_result > div:nth-of-type(3), .talentActivistRegistration .search_result > div:nth-of-type(4) {
+    width: calc(50% - 0.5rem);
+  }
+}
+.talentActivistRegistration .talent_activities {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.talentActivistRegistration .talent_activities .input_write {
+  flex: 1;
+}
+.talentActivistRegistration .main_photo {
+  position: relative;
+  background: #f5f5f5;
+  width: 27vw;
+  height: 27vw;
+  max-width: 27rem;
+  max-height: 27rem;
+  border-radius: 0 3rem 0 3rem;
+  text-align: center;
+  align-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.talentActivistRegistration .main_photo input {
+  display: none;
+}
+.talentActivistRegistration .main_photo img {
+  width: 15%;
+  aspect-ratio: 1;
+  background: #333;
+  border-radius: 50%;
+  padding: 1.5rem;
+}
+.talentActivistRegistration .main_photo span {
+  display: block;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+.talentActivistRegistration .main_photo .file_check_box {
+  position: absolute;
+  width: 100%;
+  bottom: 1.5rem;
+  text-align: center;
+  color: #E45B5E;
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .talent_activities {
+    flex-direction: column;
+  }
+  .talentActivistRegistration .main_photo {
+    width: 100%;
+    height: auto;
+    max-width: 460px;
+    max-height: 460px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+}
+.talentActivistRegistration .input_write {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.talentActivistRegistration .input_write > .input_fields, .talentActivistRegistration .input_write .activity_field_box {
+  box-sizing: border-box;
+  padding: 1.5rem 1.5rem 0.88rem 1.5rem;
+  background: #f5f5f5;
+  border-radius: 0 2.25rem 0 2.25rem;
+  margin-bottom: 1.5rem;
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .input_write > .input_day_box {
+    padding-bottom: 1.5rem;
+  }
+}
+.talentActivistRegistration .input_write .activity_field_box {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+.talentActivistRegistration .input_write .activity_field_box > * {
+  width: 100%;
+  flex: 1;
+}
+.talentActivistRegistration .input_write .select_con_default {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  background: url("../icon/icon_arrowdown.svg") no-repeat center/1.25rem auto;
+  background-position: calc(100% - 0.5rem) 0.5rem;
+  width: 100%;
+  width: 100%;
+}
+.talentActivistRegistration .input_write .select_con_default select {
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 0.5rem;
+  padding-right: 2.75rem;
+  border: none;
+  border-bottom: 1px solid #999;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+  margin-bottom: 1.5rem;
+}
+.talentActivistRegistration .input_write .select_con_default select option {
+  font-size: 1rem;
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .input_write .select_con_default {
+    background-position: calc(100% - 0.5rem) 1.3rem;
+  }
+  .talentActivistRegistration .input_write .select_con_default select {
+    padding: 1.3rem 0.5rem;
+  }
+}
+.talentActivistRegistration .input_write .select_con_default select {
+  padding-block: 0.5rem;
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .input_write .select_con_default select {
+    padding-block: 1.3rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .input_write .input_day_box .select_con_default {
+    background-position: calc(100% - 0.5rem) 0.8rem;
+  }
+}
+.talentActivistRegistration .input_write .input_fields:has(input.location), .talentActivistRegistration .input_write .input_fields:has(input.price), .talentActivistRegistration .input_write .input_fields:has(input.start_date), .talentActivistRegistration .input_write .input_fields:has(input.end_date), .talentActivistRegistration .input_write .input_fields:has(input.target), .talentActivistRegistration .input_write .input_fields:has(input.activity_type) {
+  width: calc(50% - 0.75rem);
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .input_write .input_fields:has(input.location), .talentActivistRegistration .input_write .input_fields:has(input.price), .talentActivistRegistration .input_write .input_fields:has(input.start_date), .talentActivistRegistration .input_write .input_fields:has(input.end_date), .talentActivistRegistration .input_write .input_fields:has(input.target), .talentActivistRegistration .input_write .input_fields:has(input.activity_type) {
+    width: 100%;
+  }
+}
+.talentActivistRegistration .input_write .target_select, .talentActivistRegistration .input_write .activity_select {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.talentActivistRegistration .input_write .target_select > *, .talentActivistRegistration .input_write .activity_select > * {
+  flex: 1;
+}
+.talentActivistRegistration .input_write .target_select label, .talentActivistRegistration .input_write .activity_select label {
+  font-size: 1rem;
+  word-break: keep-all;
+}
+.talentActivistRegistration .input_write .target_select .check_box_wrap, .talentActivistRegistration .input_write .activity_select .check_box_wrap {
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+.talentActivistRegistration .input_write .target_select .check_box_wrap label:not(:has(img)), .talentActivistRegistration .input_write .activity_select .check_box_wrap label:not(:has(img)) {
+  padding-left: 0.5rem;
+  vertical-align: sub;
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .input_write .target_select, .talentActivistRegistration .input_write .activity_select {
+    margin-block: 0.5rem 1.5rem;
+  }
+}
+.talentActivistRegistration .input_write .input_fields:has(input.price) {
+  position: relative;
+}
+.talentActivistRegistration .input_write .input_fields:has(input.price) input {
+  padding-right: 1.3rem;
+}
+.talentActivistRegistration .input_write .input_fields:has(input.price)::before {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 2.8rem;
+  content: "원";
+  display: inline;
+}
+.talentActivistRegistration .input_write .input_day_box .add_day {
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 0.88rem;
+  margin-bottom: 1.5rem;
+}
+.talentActivistRegistration .input_write .input_day_box .form_check_box .add_day_btn {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+.talentActivistRegistration .input_write .input_day_box .form_check_box .add_day_btn:hover {
+  background: #000;
+}
+.talentActivistRegistration .input_write .input_day_box .form_check_box .add_day_btn.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration .input_write .input_day_add {
+  display: flex;
+  gap: 1rem;
+}
+.talentActivistRegistration .input_write .input_day_add input {
+  width: 100%;
+}
+.talentActivistRegistration .input_write .input_day_add select {
+  padding-block: 0.63rem;
+}
+.talentActivistRegistration .input_write .input_day_add .day_result {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  word-break: keep-all;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.talentActivistRegistration .input_write .input_day_add .day_result:hover {
+  background: #000;
+}
+.talentActivistRegistration .input_write .input_day_add .day_result.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration .input_write .input_day_add .day_del {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #333;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  word-break: keep-all;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.talentActivistRegistration .input_write .input_day_add .day_del:hover {
+  opacity: 0.8;
+}
+.talentActivistRegistration .input_write .input_day_add .day_del.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration .input_write .input_day_add .day_line {
+  height: 50%;
+  align-content: end;
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .input_write .input_day_add {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 0 1.5rem 0 1.5rem;
+    padding: 1rem;
+  }
+  .talentActivistRegistration .input_write .input_day_add:not(:last-of-type) {
+    border-bottom: 1rem solid #fff;
+    margin-bottom: 1.5rem;
+  }
+  .talentActivistRegistration .input_write .input_day_add .select_con_default {
+    width: 65%;
+    order: 1;
+  }
+  .talentActivistRegistration .input_write .input_day_add select {
+    padding-block: 0.83rem;
+    margin-bottom: 0rem;
+  }
+  .talentActivistRegistration .input_write .input_day_add input {
+    flex: 1;
+    order: 3;
+    margin-bottom: 0.5rem;
+  }
+  .talentActivistRegistration .input_write .input_day_add .day_line {
+    order: 3;
+    width: -moz-max-content;
+    width: max-content;
+    height: 35%;
+    align-content: center;
+  }
+  .talentActivistRegistration .input_write .input_day_add .day_result, .talentActivistRegistration .input_write .input_day_add .day_del {
+    order: 2;
+  }
+}
+.talentActivistRegistration .career_box, .talentActivistRegistration .valid_box {
+  border-bottom: 1px solid #EEE;
+  margin-bottom: 1rem;
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .career_box, .talentActivistRegistration .valid_box {
+    border-bottom: none;
+    margin-bottom: -2rem;
+  }
+}
+.talentActivistRegistration .career_box .career_inner, .talentActivistRegistration .career_box .valid_inner, .talentActivistRegistration .valid_box .career_inner, .talentActivistRegistration .valid_box .valid_inner {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+}
+.talentActivistRegistration .career_box .career_inner .input_fields, .talentActivistRegistration .career_box .valid_inner .input_fields, .talentActivistRegistration .valid_box .career_inner .input_fields, .talentActivistRegistration .valid_box .valid_inner .input_fields {
+  box-sizing: border-box;
+  padding: 1.5rem 1.5rem 0.88rem 1.5rem;
+  background: #f5f5f5;
+  border-radius: 0 2.25rem 0 2.25rem;
+  width: 100%;
+  flex: 1;
+}
+.talentActivistRegistration .career_box .career_inner input[type=text], .talentActivistRegistration .career_box .valid_inner input[type=text], .talentActivistRegistration .valid_box .career_inner input[type=text], .talentActivistRegistration .valid_box .valid_inner input[type=text] {
+  padding-block: 0.6rem;
+  width: 100%;
+}
+.talentActivistRegistration .career_box .career_inner .career_result, .talentActivistRegistration .career_box .career_inner .valid_result, .talentActivistRegistration .career_box .valid_inner .career_result, .talentActivistRegistration .career_box .valid_inner .valid_result, .talentActivistRegistration .valid_box .career_inner .career_result, .talentActivistRegistration .valid_box .career_inner .valid_result, .talentActivistRegistration .valid_box .valid_inner .career_result, .talentActivistRegistration .valid_box .valid_inner .valid_result {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  word-break: keep-all;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.talentActivistRegistration .career_box .career_inner .career_result:hover, .talentActivistRegistration .career_box .career_inner .valid_result:hover, .talentActivistRegistration .career_box .valid_inner .career_result:hover, .talentActivistRegistration .career_box .valid_inner .valid_result:hover, .talentActivistRegistration .valid_box .career_inner .career_result:hover, .talentActivistRegistration .valid_box .career_inner .valid_result:hover, .talentActivistRegistration .valid_box .valid_inner .career_result:hover, .talentActivistRegistration .valid_box .valid_inner .valid_result:hover {
+  background: #000;
+}
+.talentActivistRegistration .career_box .career_inner .career_result.btn_off, .talentActivistRegistration .career_box .career_inner .valid_result.btn_off, .talentActivistRegistration .career_box .valid_inner .career_result.btn_off, .talentActivistRegistration .career_box .valid_inner .valid_result.btn_off, .talentActivistRegistration .valid_box .career_inner .career_result.btn_off, .talentActivistRegistration .valid_box .career_inner .valid_result.btn_off, .talentActivistRegistration .valid_box .valid_inner .career_result.btn_off, .talentActivistRegistration .valid_box .valid_inner .valid_result.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration .career_box .career_inner .career_del, .talentActivistRegistration .career_box .career_inner .valid_del, .talentActivistRegistration .career_box .valid_inner .career_del, .talentActivistRegistration .career_box .valid_inner .valid_del, .talentActivistRegistration .valid_box .career_inner .career_del, .talentActivistRegistration .valid_box .career_inner .valid_del, .talentActivistRegistration .valid_box .valid_inner .career_del, .talentActivistRegistration .valid_box .valid_inner .valid_del {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #333;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  word-break: keep-all;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.talentActivistRegistration .career_box .career_inner .career_del:hover, .talentActivistRegistration .career_box .career_inner .valid_del:hover, .talentActivistRegistration .career_box .valid_inner .career_del:hover, .talentActivistRegistration .career_box .valid_inner .valid_del:hover, .talentActivistRegistration .valid_box .career_inner .career_del:hover, .talentActivistRegistration .valid_box .career_inner .valid_del:hover, .talentActivistRegistration .valid_box .valid_inner .career_del:hover, .talentActivistRegistration .valid_box .valid_inner .valid_del:hover {
+  opacity: 0.8;
+}
+.talentActivistRegistration .career_box .career_inner .career_del.btn_off, .talentActivistRegistration .career_box .career_inner .valid_del.btn_off, .talentActivistRegistration .career_box .valid_inner .career_del.btn_off, .talentActivistRegistration .career_box .valid_inner .valid_del.btn_off, .talentActivistRegistration .valid_box .career_inner .career_del.btn_off, .talentActivistRegistration .valid_box .career_inner .valid_del.btn_off, .talentActivistRegistration .valid_box .valid_inner .career_del.btn_off, .talentActivistRegistration .valid_box .valid_inner .valid_del.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .career_box .career_inner, .talentActivistRegistration .career_box .valid_inner, .talentActivistRegistration .valid_box .career_inner, .talentActivistRegistration .valid_box .valid_inner {
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 1.5rem 1.5rem 0.88rem 1.5rem;
+    background: #f5f5f5;
+    border-radius: 0 2.25rem 0 2.25rem;
+  }
+  .talentActivistRegistration .career_box .career_inner .input_fields, .talentActivistRegistration .career_box .valid_inner .input_fields, .talentActivistRegistration .valid_box .career_inner .input_fields, .talentActivistRegistration .valid_box .valid_inner .input_fields {
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    width: 100%;
+    flex: auto;
+  }
+  .talentActivistRegistration .career_box .career_inner .input_fields:has(input.career_from), .talentActivistRegistration .career_box .career_inner .input_fields:has(input.career_to),
+  .talentActivistRegistration .career_box .career_inner .input_fields:has(input.valid_from), .talentActivistRegistration .career_box .career_inner .input_fields:has(input.valid_to), .talentActivistRegistration .career_box .valid_inner .input_fields:has(input.career_from), .talentActivistRegistration .career_box .valid_inner .input_fields:has(input.career_to),
+  .talentActivistRegistration .career_box .valid_inner .input_fields:has(input.valid_from), .talentActivistRegistration .career_box .valid_inner .input_fields:has(input.valid_to), .talentActivistRegistration .valid_box .career_inner .input_fields:has(input.career_from), .talentActivistRegistration .valid_box .career_inner .input_fields:has(input.career_to),
+  .talentActivistRegistration .valid_box .career_inner .input_fields:has(input.valid_from), .talentActivistRegistration .valid_box .career_inner .input_fields:has(input.valid_to), .talentActivistRegistration .valid_box .valid_inner .input_fields:has(input.career_from), .talentActivistRegistration .valid_box .valid_inner .input_fields:has(input.career_to),
+  .talentActivistRegistration .valid_box .valid_inner .input_fields:has(input.valid_from), .talentActivistRegistration .valid_box .valid_inner .input_fields:has(input.valid_to) {
+    width: 40%;
+  }
+  .talentActivistRegistration .career_box .career_inner .career_result, .talentActivistRegistration .career_box .career_inner .valid_result, .talentActivistRegistration .career_box .career_inner .career_del, .talentActivistRegistration .career_box .career_inner .valid_del, .talentActivistRegistration .career_box .valid_inner .career_result, .talentActivistRegistration .career_box .valid_inner .valid_result, .talentActivistRegistration .career_box .valid_inner .career_del, .talentActivistRegistration .career_box .valid_inner .valid_del, .talentActivistRegistration .valid_box .career_inner .career_result, .talentActivistRegistration .valid_box .career_inner .valid_result, .talentActivistRegistration .valid_box .career_inner .career_del, .talentActivistRegistration .valid_box .career_inner .valid_del, .talentActivistRegistration .valid_box .valid_inner .career_result, .talentActivistRegistration .valid_box .valid_inner .valid_result, .talentActivistRegistration .valid_box .valid_inner .career_del, .talentActivistRegistration .valid_box .valid_inner .valid_del {
+    margin: 0 auto;
+  }
+}
+.talentActivistRegistration .career_box .alltime_box, .talentActivistRegistration .valid_box .alltime_box {
+  text-align: end;
+  padding-right: 6rem;
+  margin-block: 0.5rem 1rem;
+}
+.talentActivistRegistration .career_box .alltime_box label:last-of-type, .talentActivistRegistration .valid_box .alltime_box label:last-of-type {
+  vertical-align: sub;
+  margin-left: 0.5rem;
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .career_box .alltime_box, .talentActivistRegistration .valid_box .alltime_box {
+    position: relative;
+    z-index: 1;
+    top: -6.5rem;
+    padding-right: 1.5rem;
+  }
+}
+.talentActivistRegistration .career_add_btn, .talentActivistRegistration .valid_add_btn {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  margin: 0 auto;
+}
+.talentActivistRegistration .career_add_btn:hover, .talentActivistRegistration .valid_add_btn:hover {
+  background: #000;
+}
+.talentActivistRegistration .career_add_btn.btn_off, .talentActivistRegistration .valid_add_btn.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration .talent_comple_btn {
+  display: block;
+  text-align: center;
+  width: 300px;
+  padding: 12px 1.5rem;
+  font-size: 1rem;
+  background-color: #0191B6;
+  border: 1px solid #0191B6;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  margin: 0 auto;
+  margin-top: 60px;
+  padding-block: 1rem;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+}
+.talentActivistRegistration .talent_comple_btn:hover {
+  opacity: 0.8;
+}
+.talentActivistRegistration .talent_comple_btn.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .talent_comple_btn {
+    margin-top: 24px;
+  }
+}
+.talentActivistRegistration .authority_modal {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(51, 51, 51, 0.4);
+}
+.talentActivistRegistration .authority_modal .modal_inner {
+  width: min(100vw - (100vw - 100%) - 2rem, 900px);
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: absolute;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3rem;
+  border-radius: 60px;
+  box-shadow: 0px 0px 16px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .authority_modal .modal_inner {
+    padding: 1.5rem;
+    padding-bottom: 2rem;
+    border-radius: 3rem;
+  }
+}
+.talentActivistRegistration .authority_modal .modal_close {
+  float: right;
+  background: #333;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.talentActivistRegistration .authority_modal .modal_close img {
+  width: 100%;
+}
+.talentActivistRegistration .authority_modal .modal_close:hover {
+  transform: rotate(180deg);
+}
+.talentActivistRegistration .authority_modal .authority_title {
+  text-align: center;
+  margin-top: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.talentActivistRegistration .authority_modal .input_fields {
+  position: relative;
+}
+.talentActivistRegistration .authority_modal .input_fields input {
+  padding-block: 1rem;
+}
+.talentActivistRegistration .authority_modal .input_fields .form_check_box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: -moz-max-content;
+  width: max-content;
+  height: 50px;
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .authority_modal .input_fields .form_check_box {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    justify-content: center;
+  }
+}
+.talentActivistRegistration .authority_modal .search_btn {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  text-indent: 0;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.talentActivistRegistration .authority_modal .search_btn:hover {
+  background: #000;
+}
+.talentActivistRegistration .authority_modal .search_btn.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .talentActivistRegistration .authority_modal .search_btn {
+    transform: translateY(-1.8rem);
+  }
+}
+.talentActivistRegistration .authority_modal .add_member {
+  background: #999;
+  background: transparent;
+}
+.talentActivistRegistration .authority_modal .add_member > div {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: inline-block;
+  background: #fff;
+  display: flex;
+  padding: 12px;
+  border-radius: 32px;
+  box-sizing: border-box;
+}
+.talentActivistRegistration .authority_modal .add_member > div p {
+  margin-right: 10px;
+  font-weight: bold;
+}
+.talentActivistRegistration .authority_modal .add_member > div button {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #333;
+  color: #fff;
+  border-radius: 50%;
+}
+.talentActivistRegistration .authority_modal .add_member > div img {
+  width: 120%;
+  transform: translate(-10%, 5%);
+}
+.talentActivistRegistration .authority_modal .add_member > div {
+  background: #EEE;
+  padding-left: 1rem;
+}
+.talentActivistRegistration .authority_modal .sub_title_list {
+  margin-top: 3rem;
+}
+.talentActivistRegistration .authority_modal .sub_title_list > p {
+  display: inline-block;
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.talentActivistRegistration .authority_modal .sub_title_list > p::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 50%;
+  background: #D5DE33;
+  z-index: -1;
+}
+.talentActivistRegistration .authority_modal .sub_title_list.title_under {
+  position: relative;
+  margin-bottom: 0.88rem;
+}
+.talentActivistRegistration .authority_modal .sub_title_list.title_under::after {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #D9D9D9;
+}
+.talentActivistRegistration .authority_modal .sub_title_list.title_off > p {
+  color: #D9D9D9;
+}
+.talentActivistRegistration .authority_modal .sub_title_list.title_off > p::before {
+  width: 0%;
+}
+.talentActivistRegistration .authority_modal .member_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: #EEE;
+}
+.talentActivistRegistration .authority_modal .member_list > li {
+  width: calc(50% - 1rem);
+  min-width: 200px;
+  white-space: nowrap;
+}
+@media screen and (max-width: 1000px) {
+  .talentActivistRegistration .authority_modal .member_list > li {
+    width: 100%;
+    white-space: nowrap;
+  }
+}
+.talentActivistRegistration .authority_modal .member_list::-webkit-scrollbar {
+  width: 16px;
+}
+.talentActivistRegistration .authority_modal .member_list::-webkit-scrollbar-thumb {
+  background: #D9D9D9;
+  border-right: 8px solid #f5f5f5;
+}
+.talentActivistRegistration .authority_modal .member_list .member_result {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  display: inline-block;
+  padding-block: 6px;
+  float: right;
+  cursor: pointer;
+}
+.talentActivistRegistration .authority_modal .member_list .member_result:hover {
+  background: #000;
+}
+.talentActivistRegistration .authority_modal .member_list .member_result.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration .authority_modal .member_list .member_result.member_disabled {
+  background: #D9D9D9;
+  border-color: #D9D9D9;
+}
+.talentActivistRegistration .authority_modal .authority_result {
+  display: block;
+  text-align: center;
+  width: 320px;
+  padding: 12px 1rem;
+  font-size: 1rem;
+  background-color: #0191B6;
+  border: 1px solid #0191B6;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  padding-block: 1rem;
+  border-radius: 3rem;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+.talentActivistRegistration .authority_modal .authority_result:hover {
+  opacity: 0.8;
+}
+.talentActivistRegistration .authority_modal .authority_result.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.talentActivistRegistration p.required {
+  display: inline;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+}
+.talentActivistRegistration p.required::after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -8px;
+  top: 5px;
+  width: 5px;
+  height: 5px;
+  background: #0191B6;
+  border-radius: 50%;
+}/*# sourceMappingURL=talentActivistRegistration.css.map */

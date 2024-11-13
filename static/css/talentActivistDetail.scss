@@ -1,0 +1,209 @@
+@charset "utf-8";
+@import "mixin";
+
+section {
+    @include center_1400();
+    margin-top: 60px;
+        @include media("mobile") {
+            width: 100%;
+            margin-top: 0;
+        }
+}
+
+.talentDetail_wrap {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 120px;
+        @media screen and (max-width : 1024px){
+            flex-direction: column;
+            column-gap: 0;
+            row-gap: $font_24;
+        }
+    .talentDetail_main_img{
+        width: 500px;height: 500px;
+        border-radius: 0 $radius_m 0 $radius_m;
+        overflow: hidden;
+            @include media("mobile") {
+                width: 100vw; height: 100vw;
+            }
+            @media (min-width : 768px) and (max-width : 1024px){
+                margin: 0 auto;
+            }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .talentDetail_cont{
+        width: calc(100% - 500px - 120px);
+        display: flex;
+        flex-direction: column;
+        row-gap: $padding_24;
+
+            @media screen and (max-width : 1024px){
+                @include center_1400();
+            }
+        .talentDetail_cont_top {
+            position: relative;
+            display: flex;
+            column-gap: $font_24;
+            @media screen and (max-width : 1024px){
+                flex-direction: column-reverse;
+                column-gap: 0;
+                align-items: center;
+                row-gap: $font_24;
+            }
+            h2 {
+                width: calc(100% - 200px);
+                @media screen and (max-width : 1024px) {
+                    width: 100%;
+                }
+            }
+            .talentDetail_edit_wrap {
+                position: absolute; right: 0;
+                display: flex;
+                column-gap: 6px;
+                @media screen and (max-width : 1024px) {
+                    position: static;
+                }
+                .talentDetail_list_btn{
+                    @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, 16px);
+                    height: fit-content;
+                        @media screen and (max-width : 1024px){
+                            padding: 12px $font_24;
+                        }
+                }
+                .talentDetail_edit_btn {
+                    @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, 16px);
+                    height: fit-content;
+                        @media screen and (max-width : 1024px){
+                            padding: 12px $font_24;
+                        }
+                }
+                .talentDetail_delete_btn {
+                    @include btn_a($color_font_wh, $color_main_bl, $color_main_bl, 16px);
+                    height: fit-content;
+                        @media screen and (max-width : 1024px){
+                            padding: 12px $font_24;
+                        }
+                }
+            }
+        }
+        .talentDetail_cont_mid_cont {
+            th {
+                width: 60px;
+                text-align: left;
+                padding-right: $font_24;
+                padding-bottom: $font_16;
+                align-content: baseline;
+            }
+
+            td {
+                padding-bottom: $font_16;
+            }
+
+            .talentDetail_cont_career, .talentDetail_cont_license {
+                padding-bottom: 8px;
+                display: flex;
+                flex-wrap: wrap;
+                column-gap: $padding_12;
+                row-gap: 4px;
+            }
+        }
+        .talentDetail_cont_bttm_cont {
+            th {
+                width: 60px;
+                text-align: left;
+                padding-right: $font_24;
+                padding-bottom: $font_16;
+                align-content: baseline;
+            }
+
+            td {
+                padding-bottom: $font_16;
+            }
+
+            .talentDetail_cont_subject {
+                padding-bottom: $padding_12;
+                display: flex;
+                flex-wrap: wrap;
+                column-gap: $padding_12;
+            }
+
+            .talentDetail_cont_field {
+                display: flex;
+                flex-wrap: wrap;
+                column-gap: $padding_12;
+                row-gap: $padding_12;
+            }
+
+            .talentDetail_cont_time {
+                padding-bottom: $padding_12;
+                display: flex;
+                flex-wrap: wrap;
+                column-gap: $padding_12;
+                row-gap: 6px;
+            }
+        }
+    }
+}
+
+.talentDetail_cont2{
+        @media screen and (max-width : 1024px){
+            @include center_1400();
+        }
+    .talentDetail_txt {
+        padding-bottom: $padding_24;
+        border-bottom: 1px solid $color_sub_g2;
+        .talentDetail_txt_detail{
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    }
+    
+    .talentDetail_txt_more {
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+        padding: $padding_12;
+        position: relative;
+        cursor: pointer;
+        &::after {
+            content: "";
+            background: url(../icon/icon_arrowdown.svg) no-repeat;
+            width: 20px; height: 20px;
+            display: inline-block;
+            position: absolute; top: 15px;right: -36px;
+                @media screen and (max-width : 1024px){
+                    width: 15px; height: 15px;
+                    right: -20px;
+                }
+        }
+        &:hover::after{
+            animation: arrowFloat .5s ease-in-out 0s infinite alternate forwards;
+        }
+        &.show::after {
+            background: url(../icon/icon_arrowup.svg) no-repeat;
+        }
+    }
+    
+    .talentDetail_enroll_wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 60px;
+        .talentDetail_enroll_btn {
+            @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, 48px, 400px);
+        }
+    }
+    
+    @keyframes arrowFloat {
+        0% {
+            transform: translateY(3px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+}

@@ -1,0 +1,162 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/noticeRegistration.css">
+
+    <script src="../../static/js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/header.js"></script>
+</head>
+<body>
+    <!-- Header -->
+        <!-- Header -->
+        <header th:fragment="header">
+            <div class="header_black"></div>
+            <!-- Header Top -->
+            <div class="header_top">
+                <div class="header_top_inner">
+                    <h1><a href="index.html" title="메인으로 바로가기"></a></h1>
+                    <a th:href="@{/login}" title="로그인 회원가입 바로가기" class="header_top_pc">로그인/회원가입</a>
+                    <a href="#" title="메뉴 더보기" class="header_top_mo header_toggle"><img src="../../static/icon/icon_hamburger.svg" alt="메뉴 더보기 아이콘"></a>
+                    <!--로그인 한 경우-->
+                    <!--<a th:href="@{/logout}" title="로그아웃 바로가기">로그아웃</a>-->
+                </div>
+            </div>
+            <!-- Header Nav -->
+            <nav class="header_nav">
+                <div class="toggle_close">
+                    <a href="#" class="toggle_close" title="토글 닫기"><img src="../../static/icon/icon_x.svg" alt="닫기 아이콘"></a>
+                </div>                
+                <ul class="gnb">
+                    <li>
+                        <a href="#" title="커뮤니티"><span>커뮤니티</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="마을 현황"><span>마을 현황</span></a></li>
+                            <li><a href="#" title="액션그룹"><span>액션그룹</span></a></li>
+                            <li><a href="#" title="활동소식"><span>활동소식</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="공동체 마켓"><span>공동체 마켓</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="판매자 신청"><span>판매자 신청</span></a></li>
+                            <li><a href="#" title="마켓"><span>마켓</span></a></li>
+                            <li><a href="#" title="도뇽교류"><span>도뇽교류</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="공동체 플랫폼"><span>공동체 플랫폼</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="사회적 경제 공동체"><span>사회적 경제 공동체</span></a></li>
+                            <li><a href="#" title="체험마을"><span>공동체 소개</span></a></li>
+                            <li><a href="#" title="재능활동가"><span>재능활동가</span></a></li>
+                            <li><a href="#" title="공간예약"><span>공간예약</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="알림마당"><span>알림마당</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="공지사항"><span>공지사항</span></a></li>
+                            <li><a href="#" title="묻고답하기"><span>묻고답하기</span></a></li>
+                            <li><a href="#" title="일정관리"><span>일정관리</span></a></li>
+                            <li><a href="#" title="설문조사"><span>설문조사</span></a></li>
+                            <li><a href="#" title="팝업관리"><span>팝업관리</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="사업안내"><span>사업안내</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="신활력플러스사업"><span>신활력플러스사업</span></a></li>
+                            <li><a href="#" title="점프업센터"><span>점프업센터</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+			<!-- Sub Title -->
+            <div class="sub_title_bg">
+                <h2>공지사항 등록</h2>
+                <div class="bread_crumbs">
+					<div class="inner">
+						<ul>
+							<li>
+								<a href="#">알림마당</a>
+								<div class="crumbs">
+									<ul>
+										<li><a href="#">커뮤니티</a></li>
+										<li><a href="#">공동체 마켓</a></li>
+										<li><a href="#">알림마당</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+						<ul>
+							<li>
+								<a href="#">공지사항</a>
+								<div class="crumbs">
+									<ul>
+										<li><a href="#">도농교류</a></li>
+										<li><a href="#">사회적 경제 공동체</a></li>
+										<li><a href="#">재능활동가</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+                </div>
+			</div>
+        </header>
+    <!-- End of Header -->
+    <!-- ------------------------- -->
+    <!-- Main -->
+    <main>
+        <section layout:fragment="content" class="noticeRegistration">
+            <h3>공지사항 등록하기</h3>
+            <div class="input_fields">
+                <p class="category required">카테고리</p>
+                <div class="select_con_default">
+                    <select name="category_no" id="category_no" class="category_no">
+                        <option value="">카테고리 선택</option>
+                        <option value="액션그룹">액션그룹</option>
+                        <option value="마켓">마켓</option>
+                        <option value="재능활동가">재능활동가</option>
+                        <option value="시스템">시스템</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                <div class="form_check_box">
+                    <p class="check_error"></p>
+                </div>
+            </div>
+            <div class="input_fields">
+                <label for="title" class="required">공지사항 제목</label>
+                <input type="text" name="title" id="title" class="title" placeholder="공지사항 제목 입력" maxlength="20">
+                <div class="form_check_box">
+                    <p class="check_error"></p>
+                </div>
+            </div>
+            <div class="input_fields">
+                <label for="content" class="required">공지사항 내용</label>
+                <textarea name="content" id="content" class="content" placeholder="공지사항 내용 입력" rows="16"></textarea>
+                <div class="form_check_box">
+                    <p class="check_error"></p>
+                </div>
+            </div>
+            <div class="input_fields input_file_box">
+                <p class="add_file">첨부파일</p>
+                <div class="form_check_box">
+                    <p class="check_error"></p>
+                </div>
+                <div class="input_file_add">
+                    <input type="file" name="addfile" class="addfile">
+                    <button type="button" class="file_add">파일 추가</button>
+                </div>
+            </div>
+            <button type="submit" class="notice_submit_btn">등록</button>
+        </section>
+    </main>
+    <script src="../../static/js/noticeRegistration.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+@charset "utf-8";
+@import "mixin";
+
+section {
+    @include center_1400();
+    margin-top: 60px;
+        @include media("mobile"){
+            width: 100%;
+            margin-top: 0;
+        }
+}
+
+.actionNewsDetail_wrap {
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width : 1024px) {
+        flex-direction: column;
+    }
+    .actionNewsDetail_main_img {
+        width: 500px; height: 500px;
+        border-radius: 0 $radius_m 0 $radius_m;
+        overflow: hidden;
+            @include media("mobile") {
+                width: 100vw; height: 100vw;
+            }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+    }
+}
+
+.actionNewsDetail_top{
+    position: relative;
+    display: flex;
+        @media screen and (max-width : 1024px){
+            flex-direction: column-reverse;
+            column-gap: 0;
+        }
+    }
+
+    .actionNewsDetail_title {
+        width: calc(100% - 200px);
+        @media screen and (max-width : 1024px) {
+            width: 100%;
+        }
+    }
+
+    .actionNewsDetail_edit_wrap {
+        position: absolute; top: 0; right: 0;
+        display: flex;
+        justify-content: flex-end;
+        column-gap: $padding_12;
+            @media screen and (max-width : 1024px){
+                justify-content: center;
+                column-gap: $padding_12;
+                position: static;
+                padding-top: $padding_24;
+            }
+        .actionNewsDetail_edit_btn {
+            @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, 24px);
+            height: fit-content;
+        }
+
+        .actionNewsDetail_delete_btn {
+            @include btn_a($color_font_wh, $color_main_bl, $color_main_bl, 24px);
+            height: fit-content;
+        }
+    }
+}
+
+.actionNews_contents {
+    width: calc(100% - 600px);
+    display: flex;
+    flex-direction: column;
+        @include media("mobile"){
+            margin-top: $padding_24;
+            @include center_1400();
+        }
+
+    .actionNewsDetail_title{
+        @include media("mobile"){
+            margin-top: $padding_24;
+        }
+    }
+    .actionNewsDetail_groupIntro {
+        margin-top: $padding_24;
+            @include media("mobile"){
+                margin-top: $padding_24;
+            }
+
+        .actionNewsDetail_groupIntro_table {
+            th, td {
+                padding: $padding_12;
+            }
+
+            th {
+                align-content: baseline;
+                text-align: left;
+                width: 80px;
+            }
+        }
+    }
+}
+.actionNewsDetail_actContent {
+    @include center_1400;
+    margin-top: 60px;
+}

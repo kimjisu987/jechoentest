@@ -1,0 +1,377 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/joinOrganization.css">
+
+    <script src="../../static/js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/header.js"></script>
+</head>
+<body>
+    <!-- Header -->
+        <!-- Header -->
+        <header th:fragment="header">
+            <div class="header_black"></div>
+            <!-- Header Top -->
+            <div class="header_top">
+                <div class="header_top_inner">
+                    <h1><a href="index.html" title="메인으로 바로가기"></a></h1>
+                    <a th:href="@{/login}" title="로그인 회원가입 바로가기" class="header_top_pc">로그인/회원가입</a>
+                    <a href="#" title="메뉴 더보기" class="header_top_mo header_toggle"><img src="../../static/icon/icon_hamburger.svg" alt="메뉴 더보기 아이콘"></a>
+                    <!--로그인 한 경우-->
+                    <!--<a th:href="@{/logout}" title="로그아웃 바로가기">로그아웃</a>-->
+                </div>
+            </div>
+            <!-- Header Nav -->
+            <nav class="header_nav">
+                <div class="toggle_close">
+                    <a href="#" class="toggle_close" title="토글 닫기"><img src="../../static/icon/icon_x.svg" alt="닫기 아이콘"></a>
+                </div>                
+                <ul class="gnb">
+                    <li>
+                        <a href="#" title="커뮤니티"><span>커뮤니티</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="마을 현황"><span>마을 현황</span></a></li>
+                            <li><a href="#" title="액션그룹"><span>액션그룹</span></a></li>
+                            <li><a href="#" title="활동소식"><span>활동소식</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="공동체 마켓"><span>공동체 마켓</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="판매자 신청"><span>판매자 신청</span></a></li>
+                            <li><a href="#" title="마켓"><span>마켓</span></a></li>
+                            <li><a href="#" title="도뇽교류"><span>도뇽교류</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="공동체 플랫폼"><span>공동체 플랫폼</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="사회적 경제 공동체"><span>사회적 경제 공동체</span></a></li>
+                            <li><a href="#" title="체험마을"><span>공동체 소개</span></a></li>
+                            <li><a href="#" title="재능활동가"><span>재능활동가</span></a></li>
+                            <li><a href="#" title="공간예약"><span>공간예약</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="알림마당"><span>알림마당</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="공지사항"><span>공지사항</span></a></li>
+                            <li><a href="#" title="묻고답하기"><span>묻고답하기</span></a></li>
+                            <li><a href="#" title="일정관리"><span>일정관리</span></a></li>
+                            <li><a href="#" title="설문조사"><span>설문조사</span></a></li>
+                            <li><a href="#" title="팝업관리"><span>팝업관리</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="사업안내"><span>사업안내</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="신활력플러스사업"><span>신활력플러스사업</span></a></li>
+                            <li><a href="#" title="점프업센터"><span>점프업센터</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+			<!-- Sub Title -->
+            <div class="sub_title_bg">
+                <h2>개인 회원가입</h2>
+                <div class="bread_crumbs">
+					<div class="inner">
+						<ul>
+							<li>
+								<a href="#">공동체 플랫폼</a>
+								<div class="crumbs">
+									<ul>
+										<li><a href="#">커뮤니티</a></li>
+										<li><a href="#">공동체 마켓</a></li>
+										<li><a href="#">알림마당</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+						<ul>
+							<li>
+								<a href="#">마켓</a>
+								<div class="crumbs">
+									<ul>
+										<li><a href="#">도농교류</a></li>
+										<li><a href="#">사회적 경제 공동체</a></li>
+										<li><a href="#">재능활동가</a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+                </div>
+			</div>
+        </header>
+    <!-- End of Header -->
+    <!-- ------------------------- -->
+    <!-- Main -->
+    <main class="joinUser_main">
+        <!-- Main Contents -->
+        <form action="" method="post" name="개인 회원가입">
+            <ul class="join_step">
+                <li>
+                    <span class="step_circle step_number step_on">1</span>
+                    <span class="step_circle step_check"><img src="../../static/icon/icon_check.svg" alt="체크 아이콘"></span>
+                    <span class="step_text">약관 동의</span>
+                </li>
+                <li>
+                    <span class="step_circle step_number">2</span>
+                    <span class="step_circle step_check"><img src="../../static/icon/icon_check.svg" alt="체크 아이콘"></span>
+                    <span class="step_text">본인 인증</span>
+                </li>
+                <li>
+                    <span class="step_circle step_number">3</span>
+                    <span class="step_circle step_check"><img src="../../static/icon/icon_check.svg" alt="체크 아이콘"></span>
+                    <span class="step_text">정보 입력</span>
+                </li>
+                <li>
+                    <span class="step_circle step_number">4</span>
+                    <span class="step_text">완료</span>
+                </li>
+            </ul>
+            <section layout:fragment="content" class="joinUser_sec">
+                <div class="section_inner section_inner1">
+                    <div class="content_shadow">
+                        <div class="joinUser_left">
+                            약관 동의
+                        </div>
+                        <div class="joinUser_right">
+                            <p class="sub_text">(사이트이름) 회원 가입을 위하여 아래와 같이 개인정보를 수집, 이용 및 제공하고자 합니다.<br>전체 동의 시 선택 동의 항목이 포함되어 있습니다.</p>
+                            <p class="agree_box all_agree_box">
+                                <input type="checkbox" name="all_agree" id="all_agree">
+                                <label for="all_agree"><img src="../../static/icon/icon_check.svg" alt="체크 아이콘"></label>
+                                <label for="all_agree">전체 동의</label>
+                            </p>
+                            <p class="agree_box terms_agree_box">
+                                <input type="checkbox" name="terms_agree" id="terms_agree" class="one_agree">
+                                <label for="terms_agree"><img src="../../static/icon/icon_check.svg" alt="체크 아이콘"></label>
+                                <a href="#" title="이용약관 보기">[필수] 이용약관
+                                    <img src="../../static/icon/icon_arrowdown.svg" alt="더보기 아이콘">
+                                </a>
+                            </p>
+                            <div class="agree_sub_text">
+                                제 1 장 총칙<br><br>
+                                제 1 조 (목적)<br>
+                                본 약관은 제천시 농촌신활력플러스사업 추진단이 운영하는 제천시 농촌신활력플러스사업 선순환공동체 플랫폼(이하 "당 플랫폼")에서 제공하는 모든 서비스(이하 "서비스")의 이용조건 및 절차, 이용자와 당 플랫폼의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.
+                            </div>
+                            <p class="agree_box personal_agree_box">
+                                <input type="checkbox" name="personal_agree " id="personal_agree" class="one_agree">
+                                <label for="personal_agree"><img src="../../static/icon/icon_check.svg" alt="체크 아이콘"></label>
+                                <a href="#" title="개인정보 수집, 이용 약관 보기">[필수] 개인정보 수집, 이용 동의
+                                    <img src="../../static/icon/icon_arrowdown.svg" alt="더보기 아이콘">
+                                </a>
+                            </p>
+                            <div class="agree_sub_text">
+                                1. 개인정보의 수집항목 및 수집방법<br>
+                                제천시 농촌신활력플러스사업 선순환공동체 플랫폼에서는 기본적인 회원 서비스 제공을 위한 필수정보로 실명인증정보와 가입정보로 구분하여 다음의 정보를 수집하고 있습니다. 필수정보를 입력해주셔야 회원 서비스 이용이 가능합니다.<br><br>
+                                가. 수집하는 개인정보의 항목<br>
+                                    * 수집하는 필수항목<br>
+                                    - 실명인증정보 : 이름, 휴대전화번호, 휴대폰 본인인증<br>
+                                    - 가입정보 : 아이디, 비밀번호, 성명, 이메일, 전화번호, 휴대전화번호, 기관명
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="step_button joinUser_next step1_btn">다음</button>
+                </div>
+                <div class="section_inner section_inner2">
+                    <div class="secon_inner secon_inner1">
+                        <div class="content_shadow">
+                            <div class="joinUser_left">
+                                사업자 인증
+                            </div>
+                            <div class="joinUser_right">
+                                <p class="sub_text"><span>사업자번호 인증</span>을 통한 사업자 확인이 필요합니다.</p>
+                                <p class="secon_text">사업자 인증은 사업자 등록번호를 통해 확인을 하는 서비스입니다.</p>
+                                <ul>
+                                    <li>입력하신 정보는 사업자 확인을 위해 사용되며, 사업자 확인 용도 외에 사용되거나 저장되지 않습니다.</li>
+                                    <li>개인정보는 본인 동의 없이 공개되지 않으며  개인정보보호정책에 의해 보호받고 있습니다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 인증 완료시 버튼에 클래스 verifi_ok 추가 -->
+                        <button type="button" class="step_button joinUser_next step2_btn1">&nbsp;</button>                        
+                    </div>
+                    <div class="secon_inner secon_inner2" id="secon_inner2">
+                        <div class="content_shadow">
+                            <div class="joinUser_left">
+                                본인 인증
+                            </div>
+                            <div class="joinUser_right">
+                                <p class="sub_text"><span>휴대폰 인증</span>을 통한 본인 확인이 필요합니다.</p>
+                                <p class="secon_text">본인인증은 회원님께서 소지하고 계신 휴대폰을 통해 본인확인을 하는 서비스입니다.</p>
+                                <ul>
+                                    <li>입력하신 정보는 본인확인을 위해 사용되며, 본인확인 용도 외에 사용되거나 저장되지 않습니다.</li>
+                                    <li>개인정보는 본인 동의 없이 공개되지 않으며  개인정보보호정책에 의해 보호받고 있습니다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 인증 완료시 버튼에 클래스 verifi_ok 추가 - 완료되면 넘어갈건데 굳이 필요 있나 싶긴 함... -->
+                        <button type="button" class="step_button joinUser_next step2_btn2" disabled>&nbsp;</button>
+                    </div>
+                </div>
+                <div class="section_inner section_inner3">
+                    <div class="content_shadow">
+                        <div class="joinUser_left">
+                            사업자정보 (입력)<br>
+                            <span>사업장 팩스번호, 홈페이지 주소 외 필수 입력</span>
+                        </div>
+                        <div class="joinUser_right">
+                            <div class="input_fields">
+                                <label for="user_id" class="required">아이디</label>
+                                <input type="text" name="user_id" id="user_id" class="user_id" placeholder="아이디 입력" maxlength="20">
+                                <p class="reference">영문, 숫자 6~20자 이내 입력 입력</p>
+                                <div class="form_check_box">
+                                    <p class="id_check_result"><!-- 사용 가능 / 중복된 아이디 --></p>
+                                    <p class="check_error"></p>
+                                    <button type="button" class="id_check">중복확인</button>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="password" class="required">비밀번호</label>
+                                <input type="password" name="password" id="password" class="password" placeholder="비밀번호 입력" autocomplete="off" maxlength="20">
+                                <p class="reference">영문, 숫자, 특수문자(!@#$%^*+=-) 포함 8~20자 이내 입력</p>
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="password_re" class="required">비밀번호 확인</label>
+                                <input type="password" name="password_re" id="password_re" class="password_re" placeholder="비밀번호 재입력" autocomplete="off" maxlength="20">
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="name" class="required">이름</label>
+                                <input type="text" name="name" id="name" class="name" placeholder="이름 입력">
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="birth" class="required">생년월일</label>
+                                <input type="text" name="birth" id="birth" class="birth" maxlength="10" placeholder="1900-01-01">
+                                <p class="reference">생년월일 8자리 입력</p>
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="tel" class="required">휴대폰번호</label>
+                                <input type="text" name="tel" id="tel" class="tel" maxlength="13" placeholder="휴대폰번호 입력">
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="email" class="required">이메일 주소</label>
+                                <input type="email" name="email" id="email" class="email" placeholder="이메일주소 입력">
+                                <div class="form_check_box">
+                                    <p class="check_error">형식이 올바르지 않은 이메일 주소</p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="license_name" class="required">사업자명</label>
+                                <input type="text" name="license_name" id="license_name" class="license_name" placeholder="사업자명 입력">
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="license_no" class="required">사업자등록번호</label>
+                                <input type="text" name="license_no" id="license_no" class="license_no" placeholder="사업자등록번호 입력" maxlength="12">
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="ceo_name" class="required">대표자명</label>
+                                <input type="text" name="ceo_name" id="ceo_name" class="ceo_name" placeholder="대표자명 입력">
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="organ_tel" class="required">사업장 연락처</label>
+                                <input type="text" name="organ_tel" id="organ_tel" class="organ_tel" maxlength="13" placeholder="사업장 연락처 입력">
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="fax">사업장 팩스번호</label>
+                                <input type="text" name="fax" id="fax" class="fax" maxlength="12" placeholder="사업장 팩스번호 입력">
+                            </div>
+                            <div class="input_fields address_input_box">
+                                <label for="address" class="required">주소</label>
+                                <input type="text" name="address" id="postcode" class="postcode" placeholder="우편번호" autocomplete="off" readonly>
+                                <div class="form_check_box">
+                                    <p class="check_error">주소 검색으로 입력해주세요.</p>
+                                    <input type="button" value="주소 검색" class="address_search">
+                                </div>
+                                <input type="text" name="address" id="address" class="address" placeholder="주소" autocomplete="off" readonly>
+                                <div class="last_address">
+                                    <input type="text" name="address" id="detailAddress" class="detailAddress" placeholder="상세주소" autocomplete="off">
+                                    <input type="text" name="address" id="extraAddress" class="extraAddress" placeholder="참고항목" autocomplete="off" readonly>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="website">홈페이지 주소</label>
+                                <input type="text" name="website" id="website" class="website" maxlength="13" placeholder="홈페이지 주소 입력">
+                            </div>
+                            <div class="input_fields">
+                                <label for="description" class="required">기관/단체 설명</label>
+                                <textarea name="description" id="description" class="description" placeholder="기관/단체 설명 입력"></textarea>
+                                <div class="form_check_box textarea_form_check">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="main_item" class="required">주요 아이템(생산품목)</label>
+                                <input type="text" name="main_item" id="main_item" class="main_item" maxlength="13" placeholder="주요 아이템(생산품목) 입력">
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_fields input_file_box">
+                                <label for="addfiles" class="required">첨부파일</label>
+                                <p class="file_sub_text">사업자등록증 등 기타 서류 파일 첨부</p>
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                                <div class="input_file_add">
+                                    <input type="file" name="addfile" class="addfile" maxlength="13">
+                                    <button type="button" class="file_add">파일 추가</button>
+                                    <!-- <button type="button" class="file_del">삭제</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <button type="submit" class="step_button joinUser_next step3_btn">회원가입</button>  -->
+                    <button type="button" class="step_button joinUser_next step3_btn">회원가입</button>
+                </div>
+                <div class="section_inner section_inner4">
+                    <div class="content_shadow">
+                        <div class="join_compl">
+                            <p class="compl_icon"><img src="../../static/icon/icon_check.svg" alt="체크 아이콘"></p>                            
+                            <p class="line1"><span>홍길동</span>님 반갑습니다.</p>
+                            <p class="line2">회원가입이 완료되었습니다!</p>
+                            <p class="line3">다양한 <b>제천시 농촌신활력 플러스사업추진단</b>의 콘텐츠를 이용해보세요!</p>
+                        </div>
+                    </div>
+                    <button type="button" class="step_button joinUser_next step4_btn">홈으로</button>
+                    <button type="button" class="step_button joinUser_next step4_btn">로그인</button>
+                </div>
+            </section>
+        </form>
+    </main>
+    <script src="../../static/js/joinOrganization.js"></script>
+</body>
+</html>

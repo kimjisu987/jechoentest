@@ -1,0 +1,583 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <link rel="stylesheet" href="../../static/css/swiper-bundle.css">
+
+    <script src="../../static/js/jquery/jquery-3.6.0.min.js"></script>
+	<script src='../../static/js/fullcalendar/index.global.js'></script>
+    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/header.js"></script>
+</head>
+    <body>
+        <!-- Header -->
+        <header th:fragment="header">
+            <div class="header_black"></div>
+            <!-- Header Top -->
+            <div class="header_top">
+                <div class="header_top_inner">
+                    <h1><a href="index.html" title="메인으로 바로가기"></a></h1>
+                    <a th:href="@{/login}" title="로그인 회원가입 바로가기" class="header_top_pc">로그인/회원가입</a>
+                    <a href="#" title="메뉴 더보기" class="header_top_mo header_toggle"><img src="../../static/icon/icon_hamburger.svg" alt="메뉴 더보기 아이콘"></a>
+                    <!--로그인 한 경우-->
+                    <!--<a th:href="@{/logout}" title="로그아웃 바로가기">로그아웃</a>-->
+                </div>
+            </div>
+            <!-- Header Nav -->
+            <nav class="header_nav">
+                <div class="toggle_close">
+                    <a href="#" class="toggle_close" title="토글 닫기"><img src="../../static/icon/icon_x.svg" alt="닫기 아이콘"></a>
+                </div>                
+                <ul class="gnb">
+                    <li>
+                        <a href="#" title="커뮤니티"><span>커뮤니티</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="마을 현황"><span>마을 현황</span></a></li>
+                            <li><a href="#" title="액션그룹"><span>액션그룹</span></a></li>
+                            <li><a href="#" title="활동소식"><span>활동소식</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="공동체 마켓"><span>공동체 마켓</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="판매자 신청"><span>판매자 신청</span></a></li>
+                            <li><a href="#" title="마켓"><span>마켓</span></a></li>
+                            <li><a href="#" title="도뇽교류"><span>도뇽교류</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="공동체 플랫폼"><span>공동체 플랫폼</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="사회적 경제 공동체"><span>사회적 경제 공동체</span></a></li>
+                            <li><a href="#" title="체험마을"><span>공동체 소개</span></a></li>
+                            <li><a href="#" title="재능활동가"><span>재능활동가</span></a></li>
+                            <li><a href="#" title="공간예약"><span>공간예약</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="알림마당"><span>알림마당</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="공지사항"><span>공지사항</span></a></li>
+                            <li><a href="#" title="묻고답하기"><span>묻고답하기</span></a></li>
+                            <li><a href="#" title="일정관리"><span>일정관리</span></a></li>
+                            <li><a href="#" title="설문조사"><span>설문조사</span></a></li>
+                            <li><a href="#" title="팝업관리"><span>팝업관리</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" title="사업안내"><span>사업안내</span></a>
+                        <ul class="lnb">
+                            <li><a href="#" title="신활력플러스사업"><span>신활력플러스사업</span></a></li>
+                            <li><a href="#" title="점프업센터"><span>점프업센터</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Sub Title -->
+            <div class="sub_title_bg">
+                <h2>메인페이지</h2>
+                <div class="bread_crumbs">
+                    <div class="inner">
+                        <ul>
+                            <li>
+                                <a href="#">알림마당</a>
+                                <div class="crumbs">
+                                    <ul>
+                                        <li><a href="#">커뮤니티</a></li>
+                                        <li><a href="#">공동체 마켓</a></li>
+                                        <li><a href="#">알림마당</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <a href="#">공지사항</a>
+                                <div class="crumbs">
+                                    <ul>
+                                        <li><a href="#">도농교류</a></li>
+                                        <li><a href="#">사회적 경제 공동체</a></li>
+                                        <li><a href="#">재능활동가</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End of Header -->
+        <!-- ------------------------- -->
+        <!-- Main -->
+        <main>
+            <section layout:fragment="content" class="main">
+                <!-- 비주얼 영역 -->
+                <div class="visual">
+                    <!-- 비주얼 Swiper -->
+                    <div class="swiper visual_swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1530878902700-5ad4f9e4c318?q=80&w=1934&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="비주얼이미지">
+                                <p class="slide_txt">
+                                    제천과 함께하는<br>
+                                    활력플러스!<br>
+                                    <span>활동공간 조성을 위해 노력합니다.</span>
+                                </p>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1529883585542-46370800f653?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="비주얼이미지">
+                                <p class="slide_txt">
+                                    최소<br>
+                                    <span>최소</span>
+                                </p>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1476725376606-78bd56004997?q=80&w=1979&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="비주얼이미지">
+                                <p class="slide_txt">
+                                    최대최대최대최대<br>
+                                    최대최대최대최대<br>
+                                    <span>최대최대최대최대최대최대최대최대최대최대</span>
+                                </p>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1600020505739-9c55e7760de3?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="비주얼이미지">
+                                <p class="slide_txt">
+                                    최소<br>
+                                    <span>최소</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <!-- 퀵메뉴 -->
+                    <div class="quick_menu">
+                        <div class="main_title">
+                            <p>농촌신활력플러스의 주요 서비스를 소개합니다.</p>
+                            <h2>바로가기</h2>
+                        </div>
+                        <ul class="quick_list">
+                            <li>
+                                <a href="#" title="공지사항 바로가기">
+                                    <p class="icon_img"><img th:src="@{/icon/icon_notice.svg}" alt="공지사항 아이콘"></p>
+                                    <p class="icon_txt">공지사항</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="마을현황 바로가기">
+                                    <p class="icon_img"><img th:src="@{/icon/icon_town.svg}" alt="마을현황 아이콘"></p>
+                                    <p class="icon_txt">마을현황</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="액션그룹 바로가기">
+                                    <p class="icon_img"><img th:src="@{/icon/icon_actiongroup.svg}" alt="액션그룹 아이콘"></p>
+                                    <p class="icon_txt">액션그룹</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="재능활동가 바로가기">
+                                    <p class="icon_img"><img th:src="@{/icon/icon_talent.svg}" alt="재능활동가 아이콘"></p>
+                                    <p class="icon_txt">재능활동가</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="마켓 바로가기">
+                                    <p class="icon_img"><img th:src="@{/icon/icon_market.svg}" alt="마켓 아이콘"></p>
+                                    <p class="icon_txt">마켓</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="공간예약 바로가기">
+                                    <p class="icon_img"><img th:src="@{/icon/icon_space.svg}" alt="공간예약 아이콘"></p>
+                                    <p class="icon_txt">공간예약</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 사업소개 영역 -->
+                <div class="business">
+                    <div class="busi_text_box">
+                        <div class="main_title">
+                            <p>제천시 농촌신활력플러스를 소개합니다.</p>
+                            <h2>농촌신활력플러스사업</h2>
+                        </div>
+                        <p class="busi_detail">
+                            제천시농촌신활력플러스사업추진단은 지역의 유·무형의 자원과 민간 조직을 활용하여 지역에서 기획한 창의적 사업을 지원함으로써 자립적·지속적 성장이 가능한 농촌사회를 구현하는데 있으며, 제천시 마을의 지역공동체 활성화를 추진하기 위하여 2023년 1월 1일 자로 제천시농촌협약지원센터로 분리·출발하였습니다.<br>
+                            다양한 민간 조직 발굴과 육성, 선순환공동체 경쟁력 강화와 운영관리시스템, 활동공간 조성을 위해 제천시 각종 기관, 마을 단체, 위원회, 사회적 경제조직 등과 협업하여 추진하고 있습니다.
+                        </p>
+                        <button type="button" class="busi_btn pc_btn">더보기</button>
+                    </div>
+                    <div class="busi_img_box">
+                        <img src="https://images.unsplash.com/photo-1600020505739-9c55e7760de3?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="사업 관련 이미지">
+                        <img src="https://images.unsplash.com/photo-1529883585542-46370800f653?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="사업 관련 이미지">
+                        <img src="https://images.unsplash.com/photo-1530878902700-5ad4f9e4c318?q=80&w=1934&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="사업 관련 이미지">
+                    </div>
+                    <button type="button" class="busi_btn mobile_btn">더보기</button>
+                </div>
+                <!-- 마을현황 영역 -->
+                <div class="village">
+                    <div class="village_wrap">
+                        <div class="main_title">
+                            <p>제천 읍면동 마을을 지도로 찾아보세요.</p>
+                            <h2>마을 현황</h2>
+                            <button type="button" class="village_btn">더보기</button>
+                        </div>
+                        <ul class="village_tab">
+                            <li><a href="#" title="봉양읍 더보기" class="bongyang village_act">봉양읍</a></li>
+                            <li><a href="#" title="금성면 더보기" class="geumseong">금성면</a></li>
+                            <li><a href="#" title="청풍면 더보기" class="cheongpung">청풍면</a></li>
+                            <li><a href="#" title="수산면 더보기" class="susan">수산면</a></li>
+                            <li><a href="#" title="덕산면 더보기" class="deoksan">덕산면</a></li>
+                            <li><a href="#" title="한수면 더보기" class="hansu">한수면</a></li>
+                            <li><a href="#" title="백운면 더보기" class="baegun">백운면</a></li>
+                            <li><a href="#" title="송학면 더보기" class="songhak">송학면</a></li>
+                            <li><a href="#" title="교동 더보기" class="gyo">교동</a></li>
+                            <li><a href="#" title="의림지동 더보기" class="uirimji">의림지동</a></li>
+                            <li><a href="#" title="중앙동 더보기" class="jungang">중앙동</a></li>
+                            <li><a href="#" title="남현동 더보기" class="namhyeon">남현동</a></li>
+                            <li><a href="#" title="영서동 더보기" class="yeongseo">영서동</a></li>
+                            <li><a href="#" title="용두동 더보기" class="yongdu">용두동</a></li>
+                            <li><a href="#" title="신백동 더보기" class="sinbaek">신백동</a></li>
+                            <li><a href="#" title="청전동 더보기" class="cheongjeon">청전동</a></li>
+                            <li><a href="#" title="화산동 더보기" class="hwasan">화산동</a></li>
+                        </ul>
+                        <div class="village_detail">
+                            <!-- 마을 지도 이미지 -->
+                            <div class="village_map"></div>
+                            <div class="village_txt">
+                                <div class="village_title">
+                                    <h2 id="villageName"></h2>
+                                    <!--<div class="village_address">
+                                        <img th:src="@{/icon/icon_mappick.svg}" alt="맵픽 아이콘">
+                                        <p><span>행정복지센터</span> 충북 제천시 봉양읍 주포로 83</p>
+                                    </div>-->
+                                </div>
+                                <p>봉양읍은 제천의 관문이며 철도(충북, 중앙선), 국도교(5번, 38번), 중앙고속도로 관통 및 제천 IC가 위치한 산지수려한지역으로 농업 및 상공업이 고루 발달한 전형적인 도/농 복합형 지형입니다.</p>
+                                <dl>
+                                    <dt>농산물가공시설</dt>
+                                    <dd>콩, 고추, 담배, 사과</dd>
+                                    <dt>지역특성</dt>
+                                    <dd>국도5호·38호선, 중앙선, 충북선 철도의 교차점으로 제천의 관문이자 교통의 요충지<br>농업과 상공업이 고루 발달한 전형적인 도농 복합형 지역임</dd>
+                                </dl>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 액션그룹, 재능활동가, 공동체마켓 탭 -->
+                <div class="section_tab">
+                    <div class="sec_tab_inner">
+                        <div class="main_title">
+                            <p>다양한 상품과 재능을 만나보세요.</p>
+                            <ul class="sec_tab_list">
+                                <li><a href="#" title="전체 목록보기" class="tab_list_all tab_list_act">전체</a></li>
+                                <li><a href="#" title="액션그룹 목록보기" class="tab_list_action">액션그룹</a></li>
+                                <li><a href="#" title="재능활동가 목록보기" class="tab_list_talent">재능활동가</a></li>
+                                <li><a href="#" title="공동체마켓 목록보기" class="tab_list_market">공동체마켓</a></li>
+                            </ul>
+                        </div>
+                        <!-- 스와이퍼 -->
+                        <div class="swiper tab_swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="#" title="내용 더보기">
+                                        <div class="list_photo">
+                                            <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/quick-actions/remove-background-before-qa1.png" alt="">
+                                            <div class="item_imgtag">
+                                                <span class="tag_action">액션그룹</span>
+                                            </div>
+                                        </div>
+                                        <div class="item_text">
+                                            <ul>
+                                                <li class="item_hash hash_yg">생산가공</li>
+                                                <li class="item_hash hash_black">사업진행</li>
+                                            </ul>
+                                            <p class="list_title">액션그룹명</p>
+                                            <p class="list_detail">
+                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem iure earum dicta non aspernatur repellat reprehenderit, numquam doloribus quis, sunt cum laborum voluptates natus quam placeat distinctio quas. Culpa, ad.
+                                            </p>
+                                            <p class="list_date">2024-10-31 14:28</p>
+                                        </div>
+                                        <button type="button" class="swiper_view_btn">더보기</button>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="#" title="내용 더보기">
+                                        <div class="list_photo">
+                                            <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/quick-actions/remove-background-before-qa1.png" alt="">
+                                            <div class="item_imgtag">
+                                                <span class="tag_talent">재능활동가</span>
+                                            </div>
+                                        </div>
+                                        <div class="item_text">
+                                            <ul>
+                                                <li class="item_hash hash_yg">목공</li>
+                                                <li class="item_hash hash_white">강의</li>
+                                            </ul>
+                                            <p class="list_title">재능활동명</p>
+                                            <p class="list_detail">
+                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem iure earum dicta non aspernatur repellat reprehenderit, numquam doloribus quis, sunt cum laborum voluptates natus quam placeat distinctio quas. Culpa, ad.
+                                            </p>
+                                            <p class="list_date">2024-10-31 14:28</p>
+                                        </div>
+                                        <button type="button" class="swiper_view_btn">더보기</button>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="#" title="내용 더보기">
+                                        <div class="list_photo">
+                                            <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/quick-actions/remove-background-before-qa1.png" alt="">
+                                            <div class="item_imgtag">
+                                                <span class="tag_market">공동체마켓</span>
+                                            </div>
+                                        </div>
+                                        <div class="item_text">
+                                            <ul>
+                                                <li class="item_hash hash_yg">농산물</li>
+                                                <li class="item_hash hash_black">판매중</li>
+                                            </ul>
+                                            <p class="list_title">판매물품명</p>
+                                            <p class="list_detail">
+                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem iure earum dicta non aspernatur repellat reprehenderit, numquam doloribus quis, sunt cum laborum voluptates natus quam placeat distinctio quas. Culpa, ad.
+                                            </p>
+                                            <p class="list_date">2024-10-31 14:28</p>
+                                        </div>
+                                        <button type="button" class="swiper_view_btn">더보기</button>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="#" title="내용 더보기">
+                                        <div class="list_photo">
+                                            <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/quick-actions/remove-background-before-qa1.png" alt="">
+                                            <div class="item_imgtag">
+                                                <span class="tag_action">액션그룹</span>
+                                            </div>
+                                        </div>
+                                        <div class="item_text">
+                                            <ul>
+                                                <li class="item_hash hash_yg">수공예품</li>
+                                                <li class="item_hash hash_white">품절</li>
+                                            </ul>
+                                            <p class="list_title">판매물품명</p>
+                                            <p class="list_detail">
+                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem iure earum dicta non aspernatur repellat reprehenderit, numquam doloribus quis, sunt cum laborum voluptates natus quam placeat distinctio quas. Culpa, ad.
+                                            </p>
+                                            <p class="list_date">2024-10-31 14:28</p>
+                                        </div>
+                                        <button type="button" class="swiper_view_btn">더보기</button>
+                                    </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="#" title="내용 더보기">
+                                        <div class="list_photo">
+                                            <img src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/quick-actions/remove-background-before-qa1.png" alt="">
+                                            <div class="item_imgtag">
+                                                <span class="tag_talent">재능활동가</span>
+                                            </div>
+                                        </div>
+                                        <div class="item_text">
+                                            <ul>
+                                                <li class="item_hash hash_yg">생산가공</li>
+                                                <li class="item_hash hash_black">사업진행</li>
+                                            </ul>
+                                            <p class="list_title">액션그룹명</p>
+                                            <p class="list_detail">
+                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem iure earum dicta non aspernatur repellat reprehenderit, numquam doloribus quis, sunt cum laborum voluptates natus quam placeat distinctio quas. Culpa, ad.
+                                            </p>
+                                            <p class="list_date">2024-10-31 14:28</p>
+                                        </div>
+                                        <button type="button" class="swiper_view_btn">더보기</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                        <button type="button" class="tab_list_btn">더보기</button>
+                    </div>
+                </div>
+                <!-- 알림마당 영역 -->
+                <div class="service">
+                    <div class="main_title">
+                        <p>제천시 농촌신활력플러스사업 관련 소식을 알려드려요.</p>
+                        <h2>알림 마당</h2>
+                    </div>
+                    <div class="service_inner">
+                        <div class="notice_box">
+                            <div class="sub_title title_under">
+                                <p>공지사항</p>
+                                <button type="button" class="notice_btn">더보기</button>
+                            </div>
+                            <ul class="notice_list">
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="notice_title">공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목</span>
+                                        <span class="notice_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="notice_title">공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목</span>
+                                        <span class="notice_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="notice_title">공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목</span>
+                                        <span class="notice_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="notice_title">공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목</span>
+                                        <span class="notice_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="notice_title">공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목 공지사항 제목</span>
+                                        <span class="notice_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="qna_box">
+                            <div class="sub_title title_under">
+                                <p>묻고 답하기</p>
+                                <button type="button" class="qna_btn">더보기</button>
+                            </div>
+                            <ul class="qna_list">
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="qna_title">묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목</span>
+                                        <span class="qna_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="qna_title">묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목</span>
+                                        <span class="qna_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="qna_title">묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목</span>
+                                        <span class="qna_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="qna_title">묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목</span>
+                                        <span class="qna_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="내용 더보기">
+                                        <span class="qna_title">묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목 묻고 답하기 제목</span>
+                                        <span class="qna_date">2024-10-08</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 일정 영역 -->
+                <div class="schedule">
+                    <div class="main_title">
+                        <p>제천시 농촌신활력플러스사업의 일정을 확인하세요.</p>
+                        <h2>일정</h2>
+                    </div>
+                    <div class="schedule_inner">
+                        <div class="schedule_left">
+                            <div id="calendar"></div>
+                        </div>
+                        <div class="schedule_right">
+                            <p class="schedule_title">
+                                <span></span>
+                                <button type="button" class="day_add_btn">일정 등록</button>
+                            </p>
+                            <div class="schedule_list_wrap">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 일정 등록 모달 -->
+                <div class="schedule_modal">
+                    <div class="schedule_modal_inner">
+                        <div class="schedule_modal_top">
+                            <p class="schedule_modal_title">일정 등록</p>
+                            <a href="#" title="일정 등록 닫기" class="schedule_add_close"><img th:src="@{/icon/icon_x_w.svg}" alt="닫기 아이콘"></a>
+                        </div>
+                        <div class="schedule_input">
+                            <div class="schedule_checkbox">
+                                <div class="checkbox_inner">
+                                    <input type="radio" name="schedule_check" class="single_schedule" id="single_schedule" checked>
+                                    <label for="single_schedule">
+                                        <img th:src="@{/icon/icon_check.svg}" alt="체크 아이콘">
+                                    </label>
+                                    <label for="single_schedule">단일 일정</label>
+                                </div>
+                                <div class="checkbox_inner">
+                                    <input type="radio" name="schedule_check" class="multi_schedule" id="multi_schedule">
+                                    <label for="multi_schedule">
+                                        <img th:src="@{/icon/icon_check.svg}" alt="체크 아이콘">
+                                    </label>
+                                    <label for="multi_schedule">다일 일정</label>
+                                </div>
+                            </div>
+                            <div class="input_fields">
+                                <label for="title" class="required">일정 제목</label>
+                                <input type="text" name="title" id="title" class="title" placeholder="일정 제목 입력">
+                                <div class="form_check_box">
+                                    <p class="check_error"></p>
+                                </div>
+                            </div>
+                            <div class="input_date">
+                                <div class="input_fields">
+                                    <label for="start_date" class="required">일정 시작일</label>
+                                    <input type="date" name="start_date" id="start_date" class="start_date">
+                                    <div class="form_check_box">
+                                        <p class="check_error"></p>
+                                    </div>
+                                </div>
+                                <div class="input_fields">
+                                    <label for="end_date" class="required">일정 종료일</label>
+                                    <input type="date" name="end_date" id="end_date" class="end_date">
+                                    <div class="form_check_box">
+                                        <p class="check_error"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input_time">
+                                <div class="input_fields">
+                                    <label for="start_time" class="required">일정 시작시간</label>
+                                    <input type="time" name="start_time" id="start_time" class="start_time">
+                                    <div class="form_check_box">
+                                        <p class="check_error"></p>
+                                    </div>
+                                </div>
+                                <div class="input_fields">
+                                    <label for="end_time" class="required">일정 종료시간</label>
+                                    <input type="time" name="end_time" id="end_time" class="end_time">
+                                    <div class="form_check_box">
+                                        <p class="check_error"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="caution">하루 일정은 시간 설정이 가능하나, 다일 일정은 시간 설정이 불가능합니다.</p>
+                            <div class="schedule_submit">
+                                <button type="button" class="schedule_submit_btn">일정 등록</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script src="../../static/js/swiper/swiper-bundle.min.js"></script>
+        <script src="../../static/js/main.js"></script>
+    </body>
+</html>

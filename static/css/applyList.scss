@@ -1,0 +1,439 @@
+@charset "utf-8";
+@import "mixin";
+
+section {
+    @include center_1400();
+    margin-top: 60px;
+    @include media("mobile"){
+        margin-top: $padding_24;
+    }
+}
+
+//모달
+.applyModal {
+    display: none;
+    background: $color_tran_bk;
+    top: 0; left: 0;
+    position: fixed; z-index: 101;
+    width: 100%; height: 100%;
+}
+.applyModal_wrap {
+    position: relative;
+    background: $color_font_wh;
+    border-radius: $radius_s;
+    box-shadow: $shadow_box_m;
+    width: 1400px;
+    padding: 60px 0;
+    top: 30%; left: calc(50% - 700px);
+    display: flex;
+    column-gap: $padding_24;
+    justify-content: center;
+    @media (max-width: 1270px) {
+        padding: 30px 0;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100vw; height: 100vh;
+        border-radius: 0;
+        top: 0;left: 0;
+        overflow-y: scroll;
+    }
+    @media (min-width: 1280px) and (max-width: 1920px) {
+        width: 1100px;
+        left: calc(50% - 550px);
+        top: 15%;
+    }
+
+    .applyModal_modal_x {
+        position: absolute;
+        top: 0; right: 0;
+        margin: $font_24 $font_24 $padding_12 $font_24;
+        float: right;
+        background: $color_font_bk;
+        width: $padding_36; height: $padding_36;
+        border-radius: 50%;
+        transition: .5s;
+            img{
+                width: 100%;
+            }
+            @include media("pc"){
+                &:hover {
+                    transform: rotate(180deg);
+                }
+            }    
+    }
+}
+
+.class_title {
+    font-size: $font_20;
+    font-weight: bold;
+    padding-bottom: $padding_12;
+    border-bottom: 2px solid $color_font_bk
+}
+
+.applyModal_info {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    row-gap: $padding_12;
+
+    @media (max-width: 1270px) {
+        @include center_1400();
+    }
+
+    .applyModal_info_class {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: $padding_12 0;
+        border-bottom: 1px solid $color_sub_g2;
+
+        @media (max-width: 1270px) {
+            column-gap: 6px;
+        }
+
+        img {
+            border-radius: 0 $radius_s 0 $radius_s;
+            width: 80px; height: 80px;
+        }
+        .text_short3 {
+            width: 160px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .class_price {
+            width: 160px;
+            font-weight: bold;
+            @media (max-width: 1270px) {
+                width:80px;
+            }
+        }
+    }
+
+    .applyModal_info_mid {
+        ul {
+            padding: $padding_12 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            li {
+                &:first-child, &:nth-child(2) {
+                    width: 48%;
+                }
+                &:last-child {
+                    width: 100%;
+                }
+                padding: $padding_12 0;
+                span {
+                    font-size: $font_14;
+                }
+                p {
+                    padding: $padding_12 0;
+                    border-bottom: 1px solid $color_font_bk;
+                }
+            }
+        }
+    }
+}
+
+.input_fields{
+    position: relative;
+    textarea {
+        margin-top: $padding_12;
+        @include textarea;
+    }
+    .reason_error {
+        display: block;
+        position: absolute;
+        font-size: $font_14;
+        color: $color_main_rd;
+        bottom: -45px; left: 5px;
+        border: 0 !important;
+    }
+}
+
+
+.applyModal_btns {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    row-gap: $padding_12;
+    @media (max-width: 1270px) {
+        @include center_1400();
+    }
+
+    button.on { 
+        background: $color_font_bk !important;
+        color: $color_font_wh !important;
+    }
+    
+    button.disabled { 
+        background: $color_font_wh !important;
+        border-color: $color_sub_g2 !important;
+        color: $color_sub_g2 !important;
+    }
+    .off {
+            display: none !important;
+    }
+    .applyModal_btns_top_wrap {
+        padding: $padding_12 0;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: $padding_12;
+        @include media("mobile"){
+            justify-content: center;
+        }
+        @media (max-width: 1270px) {
+            row-gap: 6px;
+        }
+
+        .applyModal_btns_approve,
+        .applyModal_btns_deny,
+        .applyModal_btns_reject{
+            @include btn_a($color_font_wh, $color_font_bk, $color_font_bk, 12px ,120px);
+        }
+
+        //수강취소의 경우에는 아래 진행현황 none, 수강 사유 노출
+        .applyModal_class_no {
+            @include btn_a($color_font_wh, $color_sub_g2, $color_sub_g2, 12px ,120px);
+        }
+        .user_class_no, .class_no {
+            width: 100%;
+            margin-top: $padding_24;
+            span { 
+                font-size: $font_14;
+            }
+            p{
+                padding: $padding_12 0;
+                border-bottom: 1px solid $color_font_bk;
+            }
+        }
+    }
+
+    .apply_btns_mid_wrap {
+        padding: $padding_12 0;
+        display: flex;
+        column-gap: $padding_12;
+        .applyModal_btns_before {
+            @include btn_a($color_font_wh, $color_font_bk, $color_font_bk, 12px ,120px);
+        }
+        .applyModal_btns_ing {
+            @include btn_a($color_font_wh, $color_font_bk, $color_font_bk, 12px ,120px);
+        }
+        .applyModal_btns_done {
+            @include btn_a($color_font_wh, $color_font_bk, $color_font_bk, 12px ,120px);
+        }
+    }
+
+    .apply_btns_submit {
+        margin-top: 60px;
+        @include media("mobile"){
+            margin-top: $padding_24 !important;
+            margin-bottom: 60px;
+        }
+        .btn_submit {
+            margin: 0 auto;
+            @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, 48px, 400px);
+            @include media("mobile"){
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+//검색
+.list_search {
+    @include list_search;
+    margin-bottom: 60px;
+    float: right;
+    @include media("mobile"){
+        margin-bottom: $padding_24;
+        width: 100%;
+    }
+}
+
+//수강신청 목록
+.board_table {
+    @include board_table;
+    @include table_weight(2);
+    width: 100%;
+    th{
+        &:nth-child(2) {
+            width: 400px;
+        }
+        &:nth-child(3) {
+            width: 160px;
+        }
+        &:nth-child(6), &:nth-child(7) {
+            width: 120px;
+        }
+    }
+    tr {
+        &:hover>td>span::before{
+            transform: scale(1);
+        }
+    }
+
+    td{
+        cursor: default;
+        text-align: center;
+        &:nth-child(2) {
+            span {
+                cursor: pointer;
+                display: block;
+                position: relative;
+                width: fit-content;
+                &::before {
+                    content: "";
+                            display: block;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 50%;
+                            transform: scale(0);
+                            background: $color_tran_bl;
+                            transition: 0.3s;
+                            z-index: -1;
+                }
+            }    
+        }
+    }
+    
+    thead th {
+        font-size: $font_20;
+    }
+
+    .text_short {
+        max-width: 400px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: start;
+        @include media("mobile"){
+            width: 92vw;
+            max-width: 92vw;
+            text-align: start;
+        }
+        @media (min-width: 768px) and (max-width: 1270px){
+            width: 92vw;
+            max-width: 92vw;
+            text-align: start;
+        }
+    }
+    .text_short2 {
+        max-width: 160px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        @include media("mobile"){
+            width: 92vw;
+            max-width: 92vw;
+            overflow: visible;
+            text-align: start;
+        }
+    }
+
+    .applyList_abled {
+        @include btn_a($color_font_wh, $color_main_bl, $color_main_bl, 12px ,120px);
+            @include media("mobile"){
+                width: 100px;
+            }
+    }
+    .applyList_disabled {
+        @include btn_a($color_font_wh, $color_sub_g2, $color_sub_g2, 12px ,120px);
+            @include media("mobile"){
+                width: 100px;
+            }
+    }
+    .applyList_reject {
+        @include btn_a($color_font_wh, $color_font_bk, $color_font_bk, 12px ,120px);
+            @include media("mobile"){
+                width: 100px;
+            }
+    }
+    .applyList_ready {
+        @include btn_a($color_font_wh, $color_font_bk, $color_font_bk, 12px ,120px);
+            @include media("mobile"){
+                width: 100px;
+            }
+    }
+
+    @include media("mobile"){
+        thead, tbody>tr>td:nth-child(1){
+            display: none;
+        }
+        tr {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: end;
+            column-gap: $padding_12;
+            row-gap: $padding_12;
+            padding: 12px 0;
+            border-bottom: 1px solid $color_sub_g2;
+        }
+        th, td {
+            padding: 0;
+        }
+        td {
+            text-align: start;
+            border: 0;
+            width: 92vw;
+            &:nth-child(6), &:nth-child(7) {
+                width: fit-content;
+            }
+        }
+    }
+    @media (min-width: 768px) and (max-width: 1270px) {
+        thead, tbody>tr>td:nth-child(1){
+            display: none;
+        }
+        tr {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            row-gap: $padding_12;
+            padding: 12px 0;
+            border-bottom: 1px solid $color_sub_g2;
+        }
+        td {
+            text-align: start;
+            width: 17%;
+            align-content: center;
+            border: 0;
+            &:nth-child(6),  &:nth-child(7) {
+                justify-items: end;
+            }
+        }  
+    }
+}
+
+//페이지네이션
+.list_number {
+    margin-top: 60px;
+    justify-content: center;
+    align-items: center;
+    @media screen and (max-width: 1024px){
+        margin-top: $padding_24;
+        justify-content: center;
+            ul>li {
+                @for $i from 6 through 10 {
+                                &:nth-child(#{$i}) {
+                                display: none;
+                                }
+                            }
+            }   
+    }
+    @media screen and (max-width: 320px) {
+        li {
+            padding-inline: 6px !important;
+        }
+    }
+    .prevFirst, .nextLast {
+        margin: 0 $padding_12;
+        @media screen and (max-width: 320px) {
+            margin: 0 6px;
+        }
+    }
+}

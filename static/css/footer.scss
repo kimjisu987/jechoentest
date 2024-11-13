@@ -1,0 +1,204 @@
+@charset "utf-8";
+@import "mixin";
+
+section{
+    min-height: calc(100vh - 500px);
+        @include media("mobile"){
+            min-height: calc(100vh - 500px - 100px) !important;
+        }
+}
+
+.top_btn {
+    display: none;
+    text-align: center;
+    background: linear-gradient(-135deg, rgb(206, 234, 239) 0%, rgb(244, 247, 216) 100%);
+    width: 60px;height: 60px;
+    border-radius: 0 $radius_s 0 $radius_s;
+    position: fixed; bottom: 60px; right: 60px;z-index: 10;
+        @include media("mobile"){
+            bottom: 30px; right: 30px;
+            box-shadow: $shadow_box_s;
+        }
+        a {
+            width: 100%;height: 100%;
+            padding-top: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: $font_14;
+            font-weight: bold;
+            color: $color_font_bk;
+            &::before {
+                content: "";
+                background: url("../icon/icon_arrowup.svg");
+                background-repeat: no-repeat;
+                display: block;
+                position: absolute;top: 8px;left: 20px;
+                width: 20px;height: 20px;
+            }
+        }
+}
+
+footer {
+    width: 100%;
+    background: $color_font_bk;
+    color: $color_font_wh;
+    margin-top: 120px !important;
+        @include media("mobile"){
+            overflow: hidden;
+            margin-top: 60px !important;
+        }
+    .foot_family{
+        @include center_1400;
+        padding: $padding_36 0;
+        border-bottom: 1px solid $color_font_wh;
+            @include media("mobile"){
+                border-bottom: 0;
+            }
+        ul{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            column-gap: $font_48;
+            justify-content: space-between;
+                @include media("mobile"){
+                    grid-template-columns: repeat(2, 1fr);
+                    column-gap: $font_24;
+                    row-gap: $font_16;
+                }
+                @media (max-width: 1024px) and (min-width: 768px){
+                    column-gap: $font_20;
+                  }
+            li{
+                position: relative;
+            }                    
+        }
+        .family_title{
+            display: block;
+            padding-bottom: $font_20;
+            border-bottom: 1px solid $color_sub_g1;
+            position: relative; z-index: 1;
+            background: $color_font_bk;
+                @include media("mobile"){
+                    padding-bottom: $padding_32;
+                }
+            &::after{
+                content: "";
+                width: $font_20; height: $font_20;
+                position: absolute;
+                right: 0;
+                top: 5px;
+                display: inline-block;
+                background-image: url(../icon/icon_arrowup_w.svg);
+                background-repeat: no-repeat;
+                transition: all .3s; 
+                    @media screen and (max-width: 1024px){
+                        width: $font_16; height: $font_16;
+                      }
+            }
+            &.on::after{
+                transform: rotate(180deg);
+            }
+        }
+        
+        .family_cont {
+            display: block;
+            position: absolute;
+            bottom: 40; left: 0px;
+            width: $w_100;
+            font-size: $font_14;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: $color_font_bk;
+                &::-webkit-scrollbar {width: 5px;}
+                &::-webkit-scrollbar-thumb {
+                    background: $color_sub_g1;
+                    border-right: 5px solid $color_sub_g1;
+                    }
+                @include media("mobile"){
+                    top: 50;
+                    z-index: 2;
+                }
+            &.on {
+                border: 1px solid $color_sub_g1;
+                box-sizing: border-box;
+            }
+            li {
+                background: $color_font_bk;
+                &:hover {
+                    background: $color_sub_g1;
+                }
+                &:last-child {
+                    margin-bottom: 25px;
+                        @include media("mobile"){
+                            margin-bottom: 0;
+                        }
+                }
+                a{
+                    display: block;
+                    padding: $padding_12;
+                }
+            }
+        }
+    }
+
+    .foot_txt{
+        @include center_1400;
+        display: flex;
+            @include media("mobile"){
+                justify-content: center;
+            }
+        gap: 160px;
+        padding: $padding_36 0;
+        font-size: $font_14;
+            @include media("mobile"){
+                flex-wrap: wrap;
+                gap: $padding_36;
+            }
+        .foot_logo {
+            width: 220px; height: 50px;
+                @include media("mobile"){
+                    margin: 0 auto;
+                }
+            img {
+                filter: grayscale(100%);
+            }
+        }
+        div ul {
+            display: flex;
+            gap: $font_24;
+                @include media("mobile"){
+                    justify-content: center;
+                    gap: $font_16;
+                }
+            li{
+                position: relative;
+                &::after{
+                    content: "";
+                    position: absolute;
+                    width: 1px;height: $font_14;
+                    background: $color_sub_g2;
+                    top: 5; right: -$padding_12;
+                        @include media("mobile"){
+                            right: -8px;
+                        }
+                    }
+                &:first-child{
+                    font-weight: bold;
+                }
+                &:last-child::after{
+                    display: none;
+                }
+            }
+
+        }
+        p{
+            span{
+                padding-top: $font_14;
+                display: block;
+            }
+                @include media("mobile"){
+                    text-align: center;
+                }
+        }
+    }
+}

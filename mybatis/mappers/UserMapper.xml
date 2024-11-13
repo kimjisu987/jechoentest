@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jecheon.platform.repository.UserRepository">
+
+    <select id="findByUserId" resultType="com.jecheon.platform.domain.User">
+        /* 사용자 정보 조회 */
+        SELECT
+            NO,
+            USER_ID,
+            PASSWORD,
+            NAME,
+            ROLE,
+            TYPE
+        FROM
+            tb_user
+        WHERE
+            USER_ID = #{userId} AND
+            STATUS = 'ACTIVE'
+    </select>
+    
+    <update id="updateLastLogin">
+        UPDATE
+            tb_user
+        SET
+            LAST_LOGIN_AT = now()
+        WHERE
+            NO = #{userNo}
+    </update>
+
+</mapper>

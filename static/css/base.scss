@@ -1,0 +1,282 @@
+@charset "utf-8";
+
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 700;
+	src: url("../fonts/Pretendard-Bold.woff") format("woff");
+}
+
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 500;
+	src: url("../fonts/Pretendard-Medium.woff") format("woff");
+}
+
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 400;
+	src: url("../fonts/Pretendard-Regular.woff") format("woff");
+}
+
+@font-face {
+	font-family: "Pretendard";
+	font-weight: 300;
+	src: url("../fonts/Pretendard-Light.woff") format("woff");
+}
+
+// 컬러 관련 변수
+$color_main_bl : #0191B6;
+$color_tran_bl : rgba(1, 146, 183, 0.4);
+$color_main_yg : #D5DE33;
+$color_tran_yg : rgba(213, 222, 51, 0.4);
+$color_main_rd : #E45B5E;
+$color_tran_rd : rgba(228, 91, 94, 0.4);
+$color_main_gra : linear-gradient(-135deg, rgba(1, 146, 183, 0.2) 0%, rgba(213, 222, 51, 0.2) 100%);
+$color_font_bk : #333;
+$color_tran_bk : rgba(51, 51, 51, 0.4);
+/* 카드이미지 호버용 */
+$color_font_wh : #fff;
+$color_sub_g1 : #999;
+$color_sub_g2 : #D9D9D9;
+$color_sub_g3 : #EEE;
+$color_sub_g4 : #f5f5f5;
+
+// 폰트 관련 변수
+$font_family : "Pretendard",
+"맑은고딕",
+arial;
+/* 프리텐다드 다운로드 후 이름 정의 */
+
+// 박스 그림자 관련 변수
+$shadow_box_m : 0px 0px 16px rgba(51, 51, 51, 0.25);
+$shadow_box_s : 0px 0px 6px rgba(51, 51, 51, 0.25);
+
+// 박스 라운드
+$radius_s : 24px;
+/* 로그인, 회원가입 카테고리 */
+$radius_m : 60px;
+/* 카드, 이미지 */
+$radius_l : 120px;
+/* 섹션 박스, 작은 서브 메인 배경 */
+$radius_xl : 240px;
+/* 큰 서브 메인 배경 */
+
+// 스크롤바 제외 width 100%
+$w_100 : calc(100vw - (100vw - 100%));
+
+// 폰트 사이즈 관련 변수
+$font_14 : 0.88rem;
+$font_16 : 1rem;
+$font_20 : 1.25rem;
+$font_24 : 1.5rem;
+$font_48 : 3rem;
+// 패딩 관련 변수
+$padding_12 : 0.75rem;
+$padding_24 : 1.5rem;
+$padding_32 : 2rem;
+$padding_36 : 2.25rem;
+
+/* CSS 초기화 */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	cursor: pointer;
+	background: transparent;
+	border: transparent;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+ol, ul, li {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: "";
+	content: none;
+}
+
+a {
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	text-decoration: none;
+}
+
+/* change colours to suit your needs */
+ins {
+	background-color: #ff9;
+	color: #000;
+	text-decoration: none;
+}
+
+/* change colours to suit your needs */
+mark {
+	background-color: #ff9;
+	color: #000;
+	font-style: italic;
+	font-weight: bold;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* change border colour to suit your needs */
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #cccccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+input, select, label, img, input, select, textarea, button, a {
+	font-family: $font_family;
+	vertical-align: middle;
+}
+
+select {
+	appearance: none;
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration,
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+input[type="number"],
+input[type="text"],
+input[type="password"],
+input[type="url"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+textarea {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-border-radius: 0;
+	outline: 0;
+}
+
+textarea {
+	resize: none;
+}
+
+address {
+	font-style: normal;
+}
+
+// 미디어 쿼리 관련 서식
+@mixin media($size) {
+	@if $size =='mobile' {
+		@media screen and (max-width: 767px) {
+			@content;
+		}
+	}
+
+	@else if $size =='pc' {
+		@media screen and (min-width: 768px) {
+			@content;
+		}
+	}
+}
+
+html {
+	@include media("pc") {
+		font-size: 16px;
+	}
+
+	@include media("mobile") {
+		font-size: 14px;
+	}
+}
+
+body {
+	overflow-x: hidden;
+	font-size: 1rem;
+	line-height: 160%;
+	font-family: $font_family;
+	color: $color_font_bk;
+	background: $color_font_wh;
+	scroll-behavior: smooth;
+}
+
+// 모바일에서 토글 눌렀을 때 바디 고정하기 - 스크롤 안되게
+body.toggle_fixed {
+	position: fixed;
+	overflow-y: hidden;
+	touch-action: none;
+}
+
+a, button {
+	color: inherit;
+}
+
+// 숨겨야 하는데 스크린리더에 읽혀야 하는 요소들
+table>caption, legend, .txt_hide {
+	overflow: hidden;
+	display: block;
+	position: absolute;
+	border: 0;
+	width: 1px;
+	height: 1px;
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+.clear {
+	clear: both;
+}
+
+.clear:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+h1 {
+	font-size: 1rem;
+}
+
+h2 {
+	font-size: $font_48;
+	line-height: 160%;
+}
+
+h3 {
+	font-size: $font_24;
+	line-height: 160%;
+}

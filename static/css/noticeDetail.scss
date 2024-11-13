@@ -1,0 +1,128 @@
+@charset "utf-8";
+@import "mixin";
+
+section {
+    @include center_1400();
+    margin-top: 60px;
+    @include media("mobile"){
+        margin-top: $padding_24;
+    }
+}
+
+/* 공지사항 첨부파일 제목, 유저정보 */
+.noticeDetail_top {
+    display: flex;
+    flex-direction: column;
+    row-gap: $font_24;
+    padding-bottom: $font_24;
+    span {
+        color: $color_main_bl;
+        font-size: $font_14;
+    }
+}
+
+.noticeDetail_top_cont {
+    display: flex;
+    justify-content: space-between;
+        @include media("mobile") {
+            flex-direction: column;
+        }
+}
+
+.noticeDetail_title{
+    width: 75%;
+    line-height: $padding_36;
+    font-size: $padding_36;
+    font-weight: bold;
+        @include media("mobile"){
+            width: 100%;
+            font-size: $padding_32;
+            height: fit-content;
+            padding-bottom: $padding_12;
+        }
+}
+
+.noticeDetail_userData {
+    display: flex;
+    justify-content: space-between;
+    column-gap: $font_24;
+    align-items: flex-end;
+        @include media("mobile"){
+            font-size: $font_14;
+        }
+}
+
+/* 공지사항 내용 */
+.noticeDetail_mid {
+    padding: $font_14 0;
+    border-top: 1px solid $color_sub_g1;
+    border-bottom: 1px solid $color_sub_g1;
+    margin-bottom: $font_24;
+    .noticeDetail_mid_cont {
+        min-height: 250px;
+        @include media("mobile") {
+            min-height: 160px;
+        }
+    }
+}
+
+/* 공지사항 첨부파일 다운로드 */
+.noticeDetail_bttm {
+    display: flex;
+    flex-direction: column;
+    row-gap: $font_14;
+}
+
+.noticeDetail_download {
+    background: $color_sub_g3;
+    padding: $padding_12 $padding_24;
+    display: flex;
+    flex-direction: column;
+    row-gap: $padding_12;
+    margin-bottom: $font_24;
+    border-radius: 0 $radius_s 0 $radius_s;
+    a {
+        position: relative;
+        &::after {
+            content: "";
+            background: url(../icon/icon_download.svg);
+            display: inline-block;
+            position: absolute; top: 0; right: 0;
+            width: $font_24; height: $font_24;
+        }
+        /* 첨부파일 추가 시에 붙는 언더라인 */
+            @for $i from 2 through 99 {
+                &:nth-child(#{$i}) {
+                    border-top: 1px solid $color_sub_g2;
+                    padding-top: $padding_12;
+                    &::after{
+                        top: 12px;
+                    }
+                }
+            }
+    }
+}
+
+/* 공지사항 삭제/수정 버튼 */
+.noticeDetail_edit{
+    display: flex;
+    justify-content: center;
+    column-gap: $font_24;
+    @include media("mobile"){
+        flex-direction: column;
+        row-gap: $font_24;
+    }
+}
+.noticeDetail_delete_btn {
+    @include btn_a($color_font_wh, $color_main_bl, $color_main_bl, 48px, 180px);
+        @include media("mobile"){
+            width: 100%;
+        }
+}
+
+.noticeDetail_edit_btn {
+    @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, 48px, 180px);
+        @include media("mobile"){
+            width: 100%;
+        }
+}

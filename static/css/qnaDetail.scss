@@ -1,0 +1,152 @@
+@charset "utf-8";
+@import "mixin";
+
+section {
+    @include center_1400();
+    margin-top: 60px;
+}
+
+//문의 상세
+.qnaDetail_q {
+    display: flex;
+    flex-direction: column;
+    row-gap: $font_24;
+    border-bottom: 2px solid $color_font_bk;
+    padding-bottom: 60px;
+        @include media("mobile"){
+            padding-bottom: $padding_36;
+        }
+}
+
+.qnaDetail_q_title {
+    display: flex;
+    justify-content: space-between;
+        @include media("mobile"){
+            flex-direction: column;
+            row-gap: $padding_12;
+        }
+    p{
+        &:first-child {
+            width: 75%;
+            line-height: $padding_36;
+            font-size: $padding_36;
+            font-weight: bold;
+                @include media("mobile"){
+                    width: 100%;
+                }
+        }
+        &:last-child {
+            font-size: $font_14;
+            text-align: end;
+        }
+    }
+}
+
+.qnaDetail_q_category {
+    border-bottom: 1px solid $color_sub_g2;
+    span{
+        font-size: $font_14;
+    }
+    p{
+        padding: $padding_12 0;
+    }
+}
+
+.qnaDetail_a_subTitle {
+    border-bottom: 1px solid $color_sub_g2;
+    span{
+        font-size: $font_14;
+    }
+    p{
+        padding: $padding_12 0;
+    }
+}
+
+.qnaDetail_q_bttm {
+    span{
+        font-size: $font_14;
+    }
+    p{
+       padding-top: $padding_12;
+    }
+}
+
+//답변 상세
+.qnaDetail_a {
+    display: flex;
+    flex-direction: column;
+    row-gap: $font_24;
+    padding-top: 60px;
+        @include media("mobile"){
+            padding-top: $padding_36;
+        }
+}
+
+.qnaDetail_a_title {
+    p{
+        line-height: $padding_36;
+        font-size: $padding_36;
+        font-weight: bold;
+    }
+}
+
+.qnaDetail_a_answer {
+    span{
+        font-size: $font_14;
+    }
+    p{
+       padding-top: $padding_12;
+    }
+}
+
+//추진단 전용 답변하기
+.qnaDetail_admin_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.qnaDetail_admin_show {
+    display: flex;
+    justify-content: space-between;
+    column-gap: $padding_12;
+}
+
+.qnaDetail_admin_answer {
+    label {
+        display: block;
+        font-size: $font_14;
+        margin-bottom: $padding_12;
+    }
+    textarea {
+        height: 150px;
+        border: 1px solid $color_sub_g2;
+        &:focus {
+            border: 1px solid $color_main_bl;
+        }
+    }
+}
+
+.qnaDetail_admin_submit{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center
+}
+
+.qnaDetail_admin_btn {
+    @include btn_a($color_main_bl, $color_main_bl, $color_font_wh, 48px, 350px);
+}
+
+//답변 대기
+.qnaDetail_wait {
+    width: 100%;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+        font-size: $padding_36;
+        font-weight: bold;
+        color: $color_sub_g2;
+    }
+}

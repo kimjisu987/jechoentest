@@ -1,0 +1,906 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  src: url("../fonts/Pretendard-Bold.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  src: url("../fonts/Pretendard-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  src: url("../fonts/Pretendard-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 300;
+  src: url("../fonts/Pretendard-Light.woff") format("woff");
+}
+/* 카드이미지 호버용 */
+/* 프리텐다드 다운로드 후 이름 정의 */
+/* 로그인, 회원가입 카테고리 */
+/* 카드, 이미지 */
+/* 섹션 박스, 작은 서브 메인 배경 */
+/* 큰 서브 메인 배경 */
+/* CSS 초기화 */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  border: transparent;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul, li {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* change border colour to suit your needs */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input, select, label, img, input, select, textarea, button, a {
+  font-family: "Pretendard", "맑은고딕", arial;
+  vertical-align: middle;
+}
+
+select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration,
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number],
+input[type=text],
+input[type=password],
+input[type=url],
+input[type=email],
+input[type=tel],
+input[type=date],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-border-radius: 0;
+  outline: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+address {
+  font-style: normal;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  font-size: 1rem;
+  line-height: 160%;
+  font-family: "Pretendard", "맑은고딕", arial;
+  color: #333;
+  background: #fff;
+  scroll-behavior: smooth;
+}
+
+body.toggle_fixed {
+  position: fixed;
+  overflow-y: hidden;
+  touch-action: none;
+}
+
+a, button {
+  color: inherit;
+}
+
+table > caption, legend, .txt_hide {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  border: 0;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.clear {
+  clear: both;
+}
+
+.clear:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+h1 {
+  font-size: 1rem;
+}
+
+h2 {
+  font-size: 3rem;
+  line-height: 160%;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 160%;
+}
+
+.actionGroupRegistration {
+  margin-top: 60px;
+}
+@media screen and (max-width: 767px) {
+  .actionGroupRegistration {
+    margin-top: 1.5rem;
+  }
+}
+.actionGroupRegistration .action_section {
+  width: min(100vw - (100vw - 100%) - 2rem, 1400px);
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.actionGroupRegistration .action_section .input_write {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.actionGroupRegistration .action_section .input_write > .input_fields, .actionGroupRegistration .action_section .input_write .activity_field_box {
+  box-sizing: border-box;
+  padding: 1.5rem 1.5rem 0.88rem 1.5rem;
+  background: #f5f5f5;
+  border-radius: 0 2.25rem 0 2.25rem;
+  margin-bottom: 1.5rem;
+}
+.actionGroupRegistration .action_section .input_write > .input_fields:nth-of-type(1) {
+  width: calc(65% - 0.75rem);
+}
+.actionGroupRegistration .action_section .input_write > .input_fields:nth-of-type(2) {
+  width: calc(35% - 0.75rem);
+}
+.actionGroupRegistration .action_section .input_write > .input_fields:nth-of-type(n+3):nth-of-type(-n+12) {
+  width: calc(50% - 0.75rem);
+}
+.actionGroupRegistration .action_section .input_write input, .actionGroupRegistration .action_section .input_write textarea, .actionGroupRegistration .action_section .input_write .select_con_default, .actionGroupRegistration .action_section .input_write button {
+  position: relative;
+  z-index: 1;
+}
+@media screen and (max-width: 767px) {
+  .actionGroupRegistration .action_section .input_write > .input_fields:nth-of-type(1) {
+    width: 100%;
+  }
+  .actionGroupRegistration .action_section .input_write > .input_fields:nth-of-type(n+2):nth-of-type(-n+3) {
+    width: calc(50% - 0.75rem);
+  }
+  .actionGroupRegistration .action_section .input_write > .input_fields:nth-of-type(n+4):nth-of-type(-n+12) {
+    width: 100%;
+  }
+}
+.actionGroupRegistration .main_photo {
+  position: relative;
+  background: #f5f5f5;
+  width: 27vw;
+  height: 27vw;
+  max-width: 27rem;
+  max-height: 27rem;
+  border-radius: 0 3rem 0 3rem;
+  text-align: center;
+  align-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.actionGroupRegistration .main_photo input {
+  display: none;
+}
+.actionGroupRegistration .main_photo img {
+  width: 15%;
+  aspect-ratio: 1;
+  background: #333;
+  border-radius: 50%;
+  padding: 1.5rem;
+}
+.actionGroupRegistration .main_photo span {
+  display: block;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+.actionGroupRegistration .main_photo .file_check_box {
+  position: absolute;
+  width: 100%;
+  bottom: 1.5rem;
+  text-align: center;
+  color: #E45B5E;
+}
+@media screen and (max-width: 1000px) {
+  .actionGroupRegistration .action_section {
+    flex-direction: column;
+  }
+  .actionGroupRegistration .main_photo {
+    width: 100%;
+    height: auto;
+    max-width: 460px;
+    max-height: 460px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+}
+.actionGroupRegistration .select_con_default {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  background: url("../icon/icon_arrowdown.svg") no-repeat center/1.25rem auto;
+  background-position: calc(100% - 0.5rem) 0.5rem;
+  width: 100%;
+  width: 100%;
+}
+.actionGroupRegistration .select_con_default select {
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 0.5rem;
+  padding-right: 2.75rem;
+  border: none;
+  border-bottom: 1px solid #999;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+  margin-bottom: 1.5rem;
+}
+.actionGroupRegistration .select_con_default select option {
+  font-size: 1rem;
+}
+@media screen and (max-width: 767px) {
+  .actionGroupRegistration .select_con_default {
+    background-position: calc(100% - 0.5rem) 1.3rem;
+  }
+  .actionGroupRegistration .select_con_default select {
+    padding: 1.3rem 0.5rem;
+  }
+}
+.actionGroupRegistration .select_con_default select {
+  padding-block: 0.5rem;
+}
+@media screen and (max-width: 767px) {
+  .actionGroupRegistration .select_con_default select {
+    padding-block: 1.3rem;
+  }
+}
+.actionGroupRegistration .input_number {
+  display: flex;
+  justify-content: space-between;
+}
+.actionGroupRegistration .input_number button {
+  width: 2rem;
+  height: 2rem;
+}
+.actionGroupRegistration p.required {
+  display: inline;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+}
+.actionGroupRegistration p.required::after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -8px;
+  top: 5px;
+  width: 5px;
+  height: 5px;
+  background: #0191B6;
+  border-radius: 50%;
+}
+.actionGroupRegistration .form_check_box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100% - 1.5rem);
+  height: calc(100% - 0.88rem);
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.actionGroupRegistration .form_check_box .activist_search {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  margin-bottom: 2rem;
+  margin-right: 1.5rem;
+  z-index: 1;
+}
+.actionGroupRegistration .form_check_box .activist_search:hover {
+  background: #000;
+}
+.actionGroupRegistration .form_check_box .activist_search.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.actionGroupRegistration .form_check_box .check_error {
+  position: relative;
+  z-index: 0;
+  color: #E45B5E;
+  flex: 1;
+}
+.actionGroupRegistration .form_check_box button {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  align-self: center;
+  margin-right: 1.5rem;
+}
+.actionGroupRegistration .form_check_box button:hover {
+  background: #000;
+}
+.actionGroupRegistration .form_check_box button.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .actionGroupRegistration .input_fields:has(p.add_file) input {
+    padding: 1.3rem 0.5rem 2rem 0.5rem;
+  }
+}
+.actionGroupRegistration .input_fields:has(p.add_file) .input_file_add {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.actionGroupRegistration .input_fields:has(p.add_file) .input_file_add > .addfile {
+  flex: 1;
+  width: 50%;
+}
+.actionGroupRegistration .input_fields:has(p.add_file) .input_file_add > .file_add {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #0191B6;
+  border: 1px solid #0191B6;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  white-space: nowrap;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.actionGroupRegistration .input_fields:has(p.add_file) .input_file_add > .file_add:hover {
+  opacity: 0.8;
+}
+.actionGroupRegistration .input_fields:has(p.add_file) .input_file_add > .file_add.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.actionGroupRegistration .input_fields:has(p.add_file) .input_file_add > .file_del {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  display: inline-block;
+  margin: 0;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.actionGroupRegistration .input_fields:has(p.add_file) .input_file_add > .file_del:hover {
+  background: #000;
+}
+.actionGroupRegistration .input_fields:has(p.add_file) .input_file_add > .file_del.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.actionGroupRegistration #description {
+  margin-block: 1rem 1.5rem;
+}
+@media screen and (max-width: 1000px) {
+  .actionGroupRegistration #description {
+    margin-block: 1rem 1.5rem;
+  }
+}
+.actionGroupRegistration .action_search input {
+  background: none !important;
+}
+.actionGroupRegistration .submit_btn_box {
+  display: flex;
+  gap: 1.5rem;
+  width: min(100vw - (100vw - 100%) - 2rem, 1400px);
+  margin: 0 auto;
+  box-sizing: border-box;
+  margin-top: 3.75rem;
+  justify-content: center;
+}
+.actionGroupRegistration .submit_btn_box button {
+  display: block;
+  text-align: center;
+  width: 320px;
+  padding: 12px 1rem;
+  font-size: 1rem;
+  background-color: #0191B6;
+  border: 1px solid #0191B6;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  padding-block: 1rem;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+}
+.actionGroupRegistration .submit_btn_box button:hover {
+  opacity: 0.8;
+}
+.actionGroupRegistration .submit_btn_box button.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.actionGroupRegistration .submit_btn_box .save_btn {
+  background: transparent;
+  border: 2px solid #0191B6;
+  color: #0191B6;
+}
+@media screen and (max-width: 767px) {
+  .actionGroupRegistration .submit_btn_box {
+    flex-direction: column-reverse;
+  }
+  .actionGroupRegistration .submit_btn_box button {
+    width: 100%;
+  }
+}
+.actionGroupRegistration .action_modal {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(51, 51, 51, 0.4);
+}
+.actionGroupRegistration .action_modal .modal_inner {
+  width: min(100vw - (100vw - 100%) - 2rem, 900px);
+  margin: 0 auto;
+  box-sizing: border-box;
+  max-height: calc(100vh - 2rem);
+  position: absolute;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3rem;
+  border-radius: 60px;
+  box-shadow: 0px 0px 16px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .actionGroupRegistration .action_modal .modal_inner {
+    padding: 1.5rem;
+    padding-bottom: 2rem;
+    border-radius: 3rem;
+  }
+}
+.actionGroupRegistration .action_modal .height_scroll_box {
+  width: 100%;
+  padding-right: 1rem;
+  max-height: calc(100vh - 2rem - 3rem - 3rem);
+  overflow-y: auto;
+}
+.actionGroupRegistration .action_modal .height_scroll_box::-webkit-scrollbar {
+  width: 16px;
+}
+.actionGroupRegistration .action_modal .height_scroll_box::-webkit-scrollbar-thumb {
+  background: #D9D9D9;
+  border-right: 8px solid transparent;
+}
+.actionGroupRegistration .action_modal .modal_close {
+  float: right;
+  background: #333;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.actionGroupRegistration .action_modal .modal_close img {
+  width: 100%;
+}
+.actionGroupRegistration .action_modal .modal_close:hover {
+  transform: rotate(180deg);
+}
+.actionGroupRegistration .action_modal .action_title {
+  text-align: center;
+  margin-top: 2.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.actionGroupRegistration .action_modal .input_fields {
+  position: relative;
+  margin-top: 5rem;
+}
+.actionGroupRegistration .action_modal .input_fields input {
+  padding-block: 1rem;
+}
+.actionGroupRegistration .action_modal .input_fields .form_check_box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: -moz-max-content;
+  width: max-content;
+  height: 50px;
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+}
+@media screen and (max-width: 1000px) {
+  .actionGroupRegistration .action_modal .input_fields .form_check_box {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    justify-content: center;
+  }
+}
+.actionGroupRegistration .action_modal .search_btn {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  text-indent: 0;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.actionGroupRegistration .action_modal .search_btn:hover {
+  background: #000;
+}
+.actionGroupRegistration .action_modal .search_btn.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .actionGroupRegistration .action_modal .search_btn {
+    transform: translateY(-1.8rem);
+    margin-right: 0rem;
+  }
+}
+.actionGroupRegistration .action_modal .add_member, .actionGroupRegistration .action_modal .add_leader, .actionGroupRegistration .action_modal .add_activity {
+  background: #999;
+  background: transparent;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.actionGroupRegistration .action_modal .add_member > div, .actionGroupRegistration .action_modal .add_leader > div, .actionGroupRegistration .action_modal .add_activity > div {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: inline-block;
+  background: #fff;
+  display: flex;
+  padding: 12px;
+  border-radius: 32px;
+  box-sizing: border-box;
+}
+.actionGroupRegistration .action_modal .add_member > div p, .actionGroupRegistration .action_modal .add_leader > div p, .actionGroupRegistration .action_modal .add_activity > div p {
+  margin-right: 10px;
+  font-weight: bold;
+}
+.actionGroupRegistration .action_modal .add_member > div button, .actionGroupRegistration .action_modal .add_leader > div button, .actionGroupRegistration .action_modal .add_activity > div button {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #333;
+  color: #fff;
+  border-radius: 50%;
+}
+.actionGroupRegistration .action_modal .add_member > div img, .actionGroupRegistration .action_modal .add_leader > div img, .actionGroupRegistration .action_modal .add_activity > div img {
+  width: 120%;
+  transform: translate(-10%, 5%);
+}
+.actionGroupRegistration .action_modal .add_member > div, .actionGroupRegistration .action_modal .add_leader > div, .actionGroupRegistration .action_modal .add_activity > div {
+  background: #EEE;
+  padding-left: 1rem;
+}
+.actionGroupRegistration .action_modal .btn_set_box {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.actionGroupRegistration .action_modal .btn_set_box button {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+.actionGroupRegistration .action_modal .btn_set_box button:hover {
+  background: #000;
+}
+.actionGroupRegistration .action_modal .btn_set_box button.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.actionGroupRegistration .action_modal .sub_title_list > p {
+  display: inline-block;
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.actionGroupRegistration .action_modal .sub_title_list > p::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 50%;
+  background: #D5DE33;
+  z-index: -1;
+}
+.actionGroupRegistration .action_modal .sub_title_list.title_under {
+  position: relative;
+  margin-bottom: 0.88rem;
+}
+.actionGroupRegistration .action_modal .sub_title_list.title_under::after {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #D9D9D9;
+}
+.actionGroupRegistration .action_modal .sub_title_list.title_off > p {
+  color: #D9D9D9;
+}
+.actionGroupRegistration .action_modal .sub_title_list.title_off > p::before {
+  width: 0%;
+}
+.actionGroupRegistration .action_modal .sub_title_list span {
+  font-weight: normal;
+  font-size: 1rem;
+}
+.actionGroupRegistration .action_modal .sub_title_list:not(.list_title) {
+  margin-top: 3rem;
+}
+.actionGroupRegistration .action_modal .member_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: #EEE;
+}
+.actionGroupRegistration .action_modal .member_list > li {
+  width: calc(50% - 1rem);
+  min-width: 200px;
+  white-space: nowrap;
+}
+@media screen and (max-width: 1000px) {
+  .actionGroupRegistration .action_modal .member_list > li {
+    width: 100%;
+    white-space: nowrap;
+  }
+}
+.actionGroupRegistration .action_modal .member_list > li > label:last-of-type {
+  padding-left: 0.5rem;
+}
+.actionGroupRegistration .action_modal .member_list::-webkit-scrollbar {
+  width: 16px;
+}
+.actionGroupRegistration .action_modal .member_list::-webkit-scrollbar-thumb {
+  background: #D9D9D9;
+  border-right: 8px solid #f5f5f5;
+}
+.actionGroupRegistration .action_modal .member_list .member_result {
+  display: block;
+  text-align: center;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  display: inline-block;
+  padding-block: 6px;
+  float: right;
+  cursor: pointer;
+}
+.actionGroupRegistration .action_modal .member_list .member_result:hover {
+  background: #000;
+}
+.actionGroupRegistration .action_modal .member_list .member_result.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.actionGroupRegistration .action_modal .member_list .member_result.member_disabled {
+  background: #D9D9D9;
+  border-color: #D9D9D9;
+}
+.actionGroupRegistration .action_modal .action_result {
+  display: block;
+  text-align: center;
+  width: 320px;
+  padding: 12px 1rem;
+  font-size: 1rem;
+  background-color: #0191B6;
+  border: 1px solid #0191B6;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  padding-block: 1rem;
+  border-radius: 3rem;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+}
+.actionGroupRegistration .action_modal .action_result:hover {
+  opacity: 0.8;
+}
+.actionGroupRegistration .action_modal .action_result.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+.actionGroupRegistration .input_fields:has(button.action_search_btn) input {
+  padding-right: 5.5rem;
+}/*# sourceMappingURL=actionGroupRegistration.css.map */

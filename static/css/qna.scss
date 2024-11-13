@@ -1,0 +1,169 @@
+@charset "utf-8";
+@import "mixin";
+
+section {
+    @include center_1400();
+    position: relative;
+}
+
+.qna_tab {
+    display: flex;
+    justify-content: center;
+    column-gap: $font_24;
+    margin-top: 60px;
+        @include media("mobile"){
+            justify-content: flex-start;
+            overflow-x: scroll;
+            padding: 10px 0;
+            column-gap: $font_14;
+        }
+}
+
+.qna_tab_btn {
+    @include btn_a($color_main_bl, $color_main_bl, $color_font_wh);
+}
+
+.qna_top {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    @media screen and (max-width: 1024px){
+            flex-direction: column-reverse;
+            row-gap: $font_48;
+            margin-top: $font_24;
+        }
+}
+
+.list_search {
+    @include list_search;
+    margin: 0;
+    @media screen and (max-width: 1024px){
+            width: 100%;
+        }
+}
+
+.qna_table {
+    margin-top: 60px;
+}
+
+.board_table {
+    @include board_table;
+    @include table_color(2, $color_main_bl);
+    thead th {
+        font-size: $font_20;
+    }
+    @include media("mobile"){
+        thead {
+            display: none;
+        }
+    }
+    .text_short {
+        width: 55%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: left;
+        cursor: pointer;
+    }
+    /*답변 완료 여부에 따라 on/off*/
+    tbody>tr>td:nth-child(3) {
+        color: $color_sub_g1;
+    }
+    tbody>tr>td:nth-child(4) {
+        font-weight: bold;
+    }
+    td.off {
+        display: none;
+    }
+    @media screen and (max-width: 1024px){
+            width: 100%;
+            tr {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                row-gap: 6px; column-gap: 12px;
+                padding: 12px 0;
+            }
+            th, td {
+                align-content: flex-end;
+                padding: 0;
+            }
+            .text_short {
+                width: 100%;
+                @include text_short(1);
+            }
+            tbody>tr>td {
+                @for $i from 2 through 5 {
+                    &:nth-child(#{$i}) {
+                    border: 0;
+                    }
+                }
+            }
+            tbody>tr>td:nth-child(1), tbody>tr>td:nth-child(6){
+                display: none;
+            }
+            tbody>tr>td:nth-child(3), tbody>tr>td:nth-child(4) {
+                font-size: $font_14;
+            }
+            tbody>tr>td:nth-child(5) {
+                font-weight: bold;
+            }
+            tbody>tr>td:nth-child(7) {
+                width: 100%;
+                color: $color_sub_g1;
+                text-align: end;
+                padding: 0 0 12px 0;
+            }
+        }
+  }
+
+
+.qna_bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    @media screen and (max-width: 1024px){
+            margin-top: $font_24;
+        }
+}
+
+.list_number {
+    margin-top: 60px;
+    justify-content: center;
+    align-items: center;
+    @media screen and (max-width: 1024px){
+        margin-top: $padding_24;
+        justify-content: center;
+            ul>li {
+                @for $i from 6 through 10 {
+                                &:nth-child(#{$i}) {
+                                display: none;
+                                }
+                            }
+            }   
+    }
+    @media screen and (max-width: 320px) {
+        li {
+            padding-inline: 6px !important;
+        }
+    }
+    .prevFirst, .nextLast {
+        margin: 0 $padding_12;
+        @media screen and (max-width: 320px) {
+            margin: 0 6px;
+        }
+    }
+}
+
+.qna_btn_wrap {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+        @include media("mobile"){
+            top: 80px;
+            height: fit-content;
+        }
+}
+
+.qna_make_btn {
+    @include btn_a($color_main_bl, $color_main_bl, $color_font_wh);
+}

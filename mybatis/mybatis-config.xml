@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+    
+    <typeAliases>
+        <typeAlias alias="boolean" type="java.lang.Boolean"/>
+        <typeAlias alias="string" type="java.lang.String"/>
+        <typeAlias alias="int" type="java.lang.Integer"/>
+        <typeAlias alias="long" type="java.lang.Long"/>
+        <typeAlias alias="float" type="java.lang.Float"/>
+        <typeAlias alias="double" type="java.lang.Double"/>
+        <typeAlias alias="list" type="java.util.List"/>
+        <typeAlias alias="map" type="java.util.Map"/>
+        <typeAlias alias="arrays" type="java.util.Arrays"/>
+    </typeAliases>
+    
+    <typeHandlers>
+
+    </typeHandlers>
+    
+</configuration>

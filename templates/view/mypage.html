@@ -1,0 +1,358 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/mypage.css">
+
+    <script src="../../static/js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/common.js"></script>
+    <script src="../../static/js/header.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header th:fragment="header">
+        <div class="header_black"></div>
+        <!-- Header Top -->
+        <div class="header_top">
+            <div class="header_top_inner">
+                <h1><a href="index.html" title="메인으로 바로가기"></a></h1>
+                <a th:href="@{/login}" title="로그인 회원가입 바로가기" class="header_top_pc">로그인/회원가입</a>
+                <a href="#" title="메뉴 더보기" class="header_top_mo header_toggle"><img src="../../static/icon/icon_hamburger.svg" alt="메뉴 더보기 아이콘"></a>
+                <!--로그인 한 경우-->
+                <!--<a th:href="@{/logout}" title="로그아웃 바로가기">로그아웃</a>-->
+            </div>
+        </div>
+        <!-- Header Nav -->
+        <nav class="header_nav">
+            <div class="toggle_close">
+                <a href="#" class="toggle_close" title="토글 닫기"><img src="../../static/icon/icon_x.svg" alt="닫기 아이콘"></a>
+            </div>                
+            <ul class="gnb">
+                <li>
+                    <a href="#" title="커뮤니티"><span>커뮤니티</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="마을 현황"><span>마을 현황</span></a></li>
+                        <li><a href="#" title="액션그룹"><span>액션그룹</span></a></li>
+                        <li><a href="#" title="활동소식"><span>활동소식</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="공동체 마켓"><span>공동체 마켓</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="판매자 신청"><span>판매자 신청</span></a></li>
+                        <li><a href="#" title="마켓"><span>마켓</span></a></li>
+                        <li><a href="#" title="도뇽교류"><span>도뇽교류</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="공동체 플랫폼"><span>공동체 플랫폼</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="사회적 경제 공동체"><span>사회적 경제 공동체</span></a></li>
+                        <li><a href="#" title="체험마을"><span>공동체 소개</span></a></li>
+                        <li><a href="#" title="재능활동가"><span>재능활동가</span></a></li>
+                        <li><a href="#" title="공간예약"><span>공간예약</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="알림마당"><span>알림마당</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="공지사항"><span>공지사항</span></a></li>
+                        <li><a href="#" title="묻고답하기"><span>묻고답하기</span></a></li>
+                        <li><a href="#" title="일정관리"><span>일정관리</span></a></li>
+                        <li><a href="#" title="설문조사"><span>설문조사</span></a></li>
+                        <li><a href="#" title="팝업관리"><span>팝업관리</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="사업안내"><span>사업안내</span></a>
+                    <ul class="lnb">
+                        <li><a href="#" title="신활력플러스사업"><span>신활력플러스사업</span></a></li>
+                        <li><a href="#" title="점프업센터"><span>점프업센터</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sub Title -->
+        <div class="sub_title_bg">
+            <h2>마이페이지</h2>
+            <div class="bread_crumbs">
+                <div class="inner">
+                    <ul>
+                        <li>
+                            <a href="#">알림마당</a>
+                            <div class="crumbs">
+                                <ul>
+                                    <li><a href="#">커뮤니티</a></li>
+                                    <li><a href="#">공동체 마켓</a></li>
+                                    <li><a href="#">알림마당</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <a href="#">공지사항</a>
+                            <div class="crumbs">
+                                <ul>
+                                    <li><a href="#">도농교류</a></li>
+                                    <li><a href="#">사회적 경제 공동체</a></li>
+                                    <li><a href="#">재능활동가</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End of Header -->
+    <!-- ------------------------- -->
+    <!-- Main -->
+    <main>
+        <section layout:fragment="content" class="mypage">
+            <div class="mypage_inner">
+                <ul class="mypage_tab">
+                    <li class="info">내 정보</li>
+                    <li class="password">비밀번호 변경</li>
+                    <li class="qna">나의 문의</li>
+                    <li class="market">마켓 구매내역</li>
+                    <li class="cart">장바구니</li>
+                    <li class="talent">재능활동가 수강신청 현황</li>
+                </ul>
+                <div class="contents con_info">
+                    <div class="sub_title title_under">
+                        <p>내 정보</p>
+                    </div>
+                    <div class="con_inner">
+                        <div class="input_fields">
+                            <label for="user_id">아이디</label>
+                            <input type="text" name="user_id" id="user_id" class="user_id" value="userid" readonly>
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="name">이름</label>
+                            <input type="text" name="name" id="name" class="name" value="홍길동" readonly>
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="birth">생년월일</label>
+                            <input type="text" name="birth" id="birth" class="birth" value="2021-01-01" readonly>
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="tel" class="required">휴대폰번호</label>
+                            <input type="text" name="tel" id="tel" class="tel" maxlength="13" placeholder="휴대폰번호 입력" value="010-1234-5678">
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="tel_certi" class="required">인증번호</label>
+                            <input type="text" name="tel_certi" id="tel_certi" class="tel_certi" placeholder="인증번호 입력">
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="email" class="required">이메일 주소</label>
+                            <input type="email" name="email" id="email" class="email" placeholder="이메일주소 입력" value="email@email.com">
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields address_input_box">
+                            <label for="address" class="required">주소</label>
+                            <input type="text" name="address" id="postcode" class="postcode" placeholder="우편번호" autocomplete="off" readonly value="06302">
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                                <input type="button" value="주소 검색" class="address_search" onclick="execDaumPostcode();">
+                            </div>
+                            <input type="text" name="address" id="address" class="address" placeholder="주소" autocomplete="off" readonly value="서울 강남구 논현로26길 14">
+                            <div class="last_address">
+                                <input type="text" name="address" id="detailAddress" class="detailAddress" placeholder="상세주소" autocomplete="off" value="5층">
+                                <input type="text" name="address" id="extraAddress" class="extraAddress" placeholder="참고항목" autocomplete="off" readonly value="(도곡동)">
+                            </div>
+                        </div>
+                        <button type="button" class="info_btn">회원 정보 수정</button>
+                    </div>
+                </div>
+                <div class="contents con_password">
+                    <div class="sub_title title_under">
+                        <p>비밀번호 변경</p>
+                    </div>
+                    <div class="con_inner">
+                        <div class="input_fields">
+                            <label for="user_id">아이디</label>
+                            <input type="text" name="user_id" id="user_id" class="user_id" value="userid" readonly>
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="tel" class="required">휴대폰번호</label>
+                            <input type="text" name="tel" id="tel" class="tel" maxlength="13" placeholder="휴대폰번호 입력" value="010-1234-5678">
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="tel_certi" class="required">인증번호</label>
+                            <input type="text" name="tel_certi" id="tel_certi" class="tel_certi" placeholder="인증번호 입력">
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="password" class="required">비밀번호</label>
+                            <input type="password" name="password" id="password" class="password" placeholder="비밀번호 입력" autocomplete="off" maxlength="20">
+                            <p class="reference">영문, 숫자, 특수문자(!@#$%^*+=-) 포함 8~20자 이내 입력</p>
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <div class="input_fields">
+                            <label for="password_re" class="required">비밀번호 확인</label>
+                            <input type="password" name="password_re" id="password_re" class="password_re" placeholder="비밀번호 재입력" autocomplete="off" maxlength="20">
+                            <div class="form_check_box">
+                                <p class="check_error"></p>
+                            </div>
+                        </div>
+                        <button type="button" class="info_btn">비밀번호 변경</button>
+                    </div>
+                </div>
+                <div class="contents con_qna">
+                    <div class="sub_title title_under">
+                        <p>나의 문의</p>
+                    </div>
+                    <div class="con_inner">
+                        <table class="board_table">
+                            <caption>나의 문의 목록</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">no.</th>
+                                    <th scope="col">카테고리</th>
+                                    <th scope="col">답변 상태</th>
+                                    <th scope="col">문의 제목</th>
+                                    <th scope="col">작성 날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10</td>
+                                    <td>액션그룹</td>
+                                    <td>답변 대기</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>마켓</td>
+                                    <td>답변 완료</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>재능활동가</td>
+                                    <td>답변 대기</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>시스템</td>
+                                    <td>답변 완료</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>마켓</td>
+                                    <td>답변 대기</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>액션그룹</td>
+                                    <td>답변 대기</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>재능활동가</td>
+                                    <td>답변 완료</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>기타</td>
+                                    <td>답변 완료</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>액션그룹</td>
+                                    <td>답변 대기</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>마켓</td>
+                                    <td>답변 완료</td>
+                                    <td><a href="#" title="문의사항 자세히 보기">문의사항 글제목 문의사항 글제목</a></td>
+                                    <td>2024/01/01 15:39</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="list_number">
+                            <button class="prev pagebtn_off"><img th:src="@{/icon/icon_arrowleft.svg} alt="이전 목록"></button>
+                            <ul>
+                                <li class="pagenum_on"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">6</a></li>
+                                <li><a href="#">7</a></li>
+                                <li><a href="#">8</a></li>
+                                <li><a href="#">9</a></li>
+                                <li><a href="#">10</a></li>
+                            </ul>
+                            <button class="next"><img th:src="@{/icon/icon_arrowright.svg} alt="다음 목록"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="contents con_market">
+                    <div class="sub_title title_under">
+                        <p>마켓 구매내역</p>
+                    </div>
+                </div>
+                <div class="contents con_cart">
+                    <div class="sub_title title_under">
+                        <p>장바구니</p>
+                    </div>
+                </div>
+                <div class="contents con_talent">
+                    <div class="sub_title title_under">
+                        <p>재능활동가 수강신청 현황</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<script src="../../static/js/mypage.js"></script>
+</body>
+</html>

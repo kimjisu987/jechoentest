@@ -1,0 +1,536 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  src: url("../fonts/Pretendard-Bold.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  src: url("../fonts/Pretendard-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  src: url("../fonts/Pretendard-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 300;
+  src: url("../fonts/Pretendard-Light.woff") format("woff");
+}
+/* 카드이미지 호버용 */
+/* 프리텐다드 다운로드 후 이름 정의 */
+/* 로그인, 회원가입 카테고리 */
+/* 카드, 이미지 */
+/* 섹션 박스, 작은 서브 메인 배경 */
+/* 큰 서브 메인 배경 */
+/* CSS 초기화 */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  border: transparent;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul, li {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* change border colour to suit your needs */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input, select, label, img, input, select, textarea, button, a {
+  font-family: "Pretendard", "맑은고딕", arial;
+  vertical-align: middle;
+}
+
+select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration,
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number],
+input[type=text],
+input[type=password],
+input[type=url],
+input[type=email],
+input[type=tel],
+input[type=date],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-border-radius: 0;
+  outline: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+address {
+  font-style: normal;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  font-size: 1rem;
+  line-height: 160%;
+  font-family: "Pretendard", "맑은고딕", arial;
+  color: #333;
+  background: #fff;
+  scroll-behavior: smooth;
+}
+
+body.toggle_fixed {
+  position: fixed;
+  overflow-y: hidden;
+  touch-action: none;
+}
+
+a, button {
+  color: inherit;
+}
+
+table > caption, legend, .txt_hide {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  border: 0;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.clear {
+  clear: both;
+}
+
+.clear:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+h1 {
+  font-size: 1rem;
+}
+
+h2 {
+  font-size: 3rem;
+  line-height: 160%;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 160%;
+}
+
+.login_height {
+  height: 200px !important;
+  min-height: calc(100vh - 380px - 600px) !important;
+}
+@media screen and (max-width: 767px) {
+  .login_height {
+    height: 400px !important;
+    min-height: calc(100vh - 500px - 100px) !important;
+  }
+}
+
+.join_modal {
+  display: none;
+  width: 100vw;
+  height: 100vw;
+  background: rgba(51, 51, 51, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.join_modal_option {
+  display: block;
+  background: #fff;
+  width: 600px;
+  height: 400px;
+  position: fixed;
+  z-index: 99;
+  top: calc(50% - 200px);
+  left: calc(50% - 300px);
+  border-radius: 24px;
+  box-shadow: 0px 0px 16px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .join_modal_option {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    box-shadow: 0;
+    overflow-y: hidden;
+  }
+}
+
+.join_modal_title {
+  padding-bottom: 2.25rem;
+}
+.join_modal_title .join_modal_x {
+  margin: 1.5rem 1.5rem 0.75rem 1.5rem;
+  float: right;
+  background: #333;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.join_modal_title .join_modal_x img {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .join_modal_title .join_modal_x:hover {
+    transform: rotate(180deg);
+  }
+}
+.join_modal_title p {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-top: 0.75rem;
+}
+
+.join_modal_select {
+  padding-bottom: 75px;
+  display: flex;
+  justify-content: center;
+  -moz-column-gap: 3rem;
+       column-gap: 3rem;
+  align-items: center;
+}
+@media screen and (max-width: 767px) {
+  .join_modal_select {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    justify-content: flex-start;
+    flex-direction: column;
+    -moz-column-gap: 0;
+         column-gap: 0;
+    row-gap: 1.5rem;
+    padding-bottom: 200px;
+  }
+}
+.join_modal_select a {
+  width: 180px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  border: 2px solid #D9D9D9;
+  border-radius: 0 24px 0 24px;
+  transition: all 0.2s;
+}
+.join_modal_select a img {
+  width: 3rem;
+  height: 3rem;
+}
+@media screen and (max-width: 767px) {
+  .join_modal_select a img {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+.join_modal_select a span {
+  display: block;
+  font-weight: bold;
+  font-size: 1.25rem;
+  padding: 0.75rem;
+}
+.join_modal_select a.on {
+  border: 2px solid #D5DE33;
+  background: rgba(213, 222, 51, 0.4);
+}
+@media screen and (min-width: 768px) {
+  .join_modal_select a:hover {
+    border: 2px solid #D5DE33;
+    background: rgba(213, 222, 51, 0.4);
+  }
+}
+@media (max-width: 321px) {
+  .join_modal_select a {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.sub_title_bg {
+  height: 460px;
+  text-align: center;
+  border-radius: 0 0 240px 0;
+}
+@media screen and (max-width: 767px) {
+  .sub_title_bg {
+    display: block;
+    height: 100px;
+    border-radius: 0 0 24px 0;
+    background: linear-gradient(-135deg, rgba(1, 146, 183, 0.2) 0%, rgba(213, 222, 51, 0.2) 100%);
+  }
+}
+
+h2 {
+  display: block !important;
+}
+@media screen and (max-width: 767px) {
+  h2 {
+    height: 100px !important;
+  }
+}
+
+.bread_crumbs {
+  display: none;
+}
+
+.content_shadow {
+  width: 496px !important;
+  position: relative;
+  z-index: 12;
+  top: -340px;
+  background-color: #fff;
+  border-radius: 24px !important;
+}
+@media screen and (max-width: 767px) {
+  .content_shadow {
+    width: min(100vw - (100vw - 100%) - 2rem, 1400px) !important;
+    top: 0;
+  }
+}
+
+.input_login_save {
+  margin: 0 0 1.5rem 0;
+}
+
+.login_save2 {
+  position: relative;
+  top: 3px;
+  left: 7px;
+}
+
+.login_btn {
+  display: block;
+  text-align: center;
+  width: 400;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #333;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+}
+.login_btn:hover {
+  background: #000;
+}
+.login_btn.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .login_btn {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 1rem;
+    background-color: #333;
+    border: 1px solid #333;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 24px;
+    box-sizing: border-box;
+    transition: 0.3s;
+  }
+  .login_btn:hover {
+    background: #000;
+  }
+  .login_btn.btn_off {
+    background-color: #fff;
+    border: 1px solid rgba(51, 51, 51, 0.25);
+    color: #333;
+    box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+  }
+}
+
+.join_btn {
+  display: block;
+  text-align: center;
+  width: 400;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #fff;
+  border: 1px solid #333;
+  color: #333;
+  font-weight: bold;
+  border-radius: 24px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+}
+.join_btn:hover {
+  opacity: 0.8;
+}
+.join_btn.btn_off {
+  background-color: #fff;
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  color: #333;
+  box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+}
+@media screen and (max-width: 767px) {
+  .join_btn {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 1rem;
+    background-color: #fff;
+    border: 1px solid #333;
+    color: #333;
+    font-weight: bold;
+    border-radius: 24px;
+    box-sizing: border-box;
+    transition: 0.3s;
+  }
+  .join_btn:hover {
+    opacity: 0.8;
+  }
+  .join_btn.btn_off {
+    background-color: #fff;
+    border: 1px solid rgba(51, 51, 51, 0.25);
+    color: #333;
+    box-shadow: 0px 0px 6px rgba(51, 51, 51, 0.25);
+  }
+}
+
+.login_find {
+  display: flex;
+  justify-content: center;
+  -moz-column-gap: 3rem;
+       column-gap: 3rem;
+}
+.login_find li {
+  position: relative;
+}
+.login_find li a {
+  cursor: pointer;
+  padding: 0.75rem;
+}
+.login_find li:first-child::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 1px;
+  height: 1rem;
+  background: #333;
+  top: 5px;
+  right: -1.5rem;
+}/*# sourceMappingURL=login.css.map */

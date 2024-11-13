@@ -1,0 +1,36 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <meta name="_csrf" th:content="${_csrf.token}" />
+        <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+        <!-- Document Title-->
+        <title th:text="타이틀"></title>
+        <!-- End of Document Title-->
+
+        <!-- Favicon And Styles -->
+        <!-- End of Favicon And Styles -->
+
+        <!-- JavaScripts -->
+        <script th:src="@{/js/jquery/jquery-3.6.0.min.js}"></script>
+        <script th:src="@{/js/common.js}"></script>
+        <!-- End of JavaScripts -->
+    </head>
+    <body>
+        <main>
+            <!-- Header -->
+            <header th:replace="~{fragments/header :: header}"></header>
+            <!-- End of Header -->
+
+            <!-- Main Content -->
+            <th:block layout:fragment="content"></th:block>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer th:replace="~{fragments/footer :: footer}"></footer>
+            <!-- End of Top Footer -->
+        </main>
+    </body>
+</html>
