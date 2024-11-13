@@ -1034,6 +1034,7 @@
 		font-size: $font_16;
 		background: transparent;
 		margin-bottom: 1.5rem;
+		color: $color_font_bk;
 		option {font-size: $font_16;}
 	}
 	@include media("mobile") {
@@ -1059,7 +1060,7 @@
 		font-size: $font_16;
 		font-weight: bold;
 		background: transparent;
-
+		color: $color_font_bk;
 		option {
 			font-size: $font_16;
 			border: none;
