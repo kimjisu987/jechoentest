@@ -922,12 +922,13 @@ header .sub_title_bg {display: none;}
         display: flex; gap: 2rem;
         justify-content: center;
         align-items: center;
-        button {
+        .cal_prev_btn, .cal_next_btn {
             width: $padding_32; height: $padding_32;
             border-radius: 50%;
             border: 1px solid $color_font_bk;
-            img {width: 100%;}
+            background: url(../icon/icon_arrowleft.svg) no-repeat center center / 70%;
         }
+        .cal_next_btn {background-image: url(../icon/icon_arrowright.svg);}
         // 월표시
         .cal_month {font-size: $font_24; font-weight: bold;}
     }

@@ -1435,14 +1435,15 @@ header .sub_title_bg {
   justify-content: center;
   align-items: center;
 }
-.main .cal_navi button {
+.main .cal_navi .cal_prev_btn, .main .cal_navi .cal_next_btn {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
   border: 1px solid #333;
+  background: url(../icon/icon_arrowleft.svg) no-repeat center center/70%;
 }
-.main .cal_navi button img {
-  width: 100%;
+.main .cal_navi .cal_next_btn {
+  background-image: url(../icon/icon_arrowright.svg);
 }
 .main .cal_navi .cal_month {
   font-size: 1.5rem;
