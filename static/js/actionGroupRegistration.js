@@ -76,7 +76,7 @@ $(document).ready(function(){
 		checked_mems.forEach(function(member) {
 			const memberDiv = `<div>
 								<p>${member}</p>
-								<button class="member_del"><img src="../icon/icon_x_w.svg" alt="삭제 아이콘"></button>
+								<button class="member_del"></button>
 							</div>`;
 			$(member_box).append(memberDiv);
 

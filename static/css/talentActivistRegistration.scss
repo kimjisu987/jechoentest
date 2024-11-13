@@ -407,7 +407,8 @@
         position: fixed; top: 0; left: 0; z-index: 100;
         background: $color_tran_bk;
         .modal_inner {
-            @include center_1400(900px);
+            @include center_1400(900px); max-height: 90vh;
+            overflow: auto;
             position: absolute;
             background: $color_font_wh;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -428,7 +429,7 @@
             height: 2.25rem;
             border-radius: 50%;
             transition: 0.5s;
-            img {width: 100%;}
+            background: $color_font_bk url(../icon/icon_x_w.svg) no-repeat center center / 70%;
             &:hover {transform: rotate(180deg);}
         }
         // 제목
@@ -474,6 +475,10 @@
             & > div {
                 background: $color_sub_g3;
                 padding-left: 1rem;
+                button {
+                    width: 1.8rem; height: 1.8rem;
+                    background: $color_font_bk url(../icon/icon_x_w.svg) no-repeat center / 70%;
+                }
             }
         }
         // 검색시 리스트

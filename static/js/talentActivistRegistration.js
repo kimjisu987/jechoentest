@@ -27,7 +27,7 @@ $(document).ready(function(){
 	// 권한자 등록 버튼
 	$(".member_result").click(function() {
 		const member_result = $(this).closest("li").text().trim();
-		const member_del_btn = `<button class="member_del"><img src="../../static/icon/icon_x_w.svg" alt="삭제 아이콘"></button>`;
+		const member_del_btn = `<button class="member_del"></button>`;
 		
 		// 등록된 권한자 추가
 		$(".add_member").find("p").text(member_result).addClass("add_member_result");

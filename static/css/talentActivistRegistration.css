@@ -939,6 +939,8 @@ h3 {
   width: min(100vw - (100vw - 100%) - 2rem, 900px);
   margin: 0 auto;
   box-sizing: border-box;
+  max-height: 90vh;
+  overflow: auto;
   position: absolute;
   background: #fff;
   top: 50%;
@@ -962,9 +964,7 @@ h3 {
   height: 2.25rem;
   border-radius: 50%;
   transition: 0.5s;
-}
-.talentActivistRegistration .authority_modal .modal_close img {
-  width: 100%;
+  background: #333 url(../icon/icon_x_w.svg) no-repeat center center/70%;
 }
 .talentActivistRegistration .authority_modal .modal_close:hover {
   transform: rotate(180deg);
@@ -1064,6 +1064,11 @@ h3 {
 .talentActivistRegistration .authority_modal .add_member > div {
   background: #EEE;
   padding-left: 1rem;
+}
+.talentActivistRegistration .authority_modal .add_member > div button {
+  width: 1.8rem;
+  height: 1.8rem;
+  background: #333 url(../icon/icon_x_w.svg) no-repeat center/70%;
 }
 .talentActivistRegistration .authority_modal .sub_title_list {
   margin-top: 3rem;
