@@ -344,11 +344,12 @@
 		vertical-align: middle;
 	}
 
-	@include media("pc") {}
-
 	@include media("mobile") {
 		.step_text {
 			display: none;
+		}
+		li:not(li:last-child)::after {
+			margin-inline: 1rem;
 		}
 	}
 }

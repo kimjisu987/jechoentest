@@ -505,6 +505,9 @@ h3 {
   .join_step .step_text {
     display: none;
   }
+  .join_step li:not(li:last-child)::after {
+    margin-inline: 1rem;
+  }
 }
 
 .alert_modal {
