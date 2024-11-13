@@ -1,21 +1,24 @@
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/defaultLayout}">
 <head>
-    <link rel="stylesheet" th:href="@{/css/actionGroup.css}">
-    <script th:src="@{/js/jquery/jquery-3.6.0.min.js}"></script>
-    <script th:src="@{/js/actionGroup.js}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/actionGroup.css">
+    <script src="../../static/js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../../static/js/header.js"></script>
+    <script src="../../static/js/actionGroup.js"></script>
 </head>
 <body>
-    <!-- Header -->
     <header th:fragment="header">
         <div class="header_black"></div>
         <!-- Header Top -->
         <div class="header_top">
             <div class="header_top_inner">
-                <h1><a href="index.html" title="메인으로 바로가기"></a></h1>
-                <a href="login.html" title="로그인 회원가입 바로가기" class="header_top_pc">로그인/회원가입</a>
-                <a href="#" title="메뉴 더보기" class="header_top_mo header_toggle"><img src="../../static/icon/icon_hamburger.svg" alt="메뉴 더보기 아이콘"></a>
+                <h1><a th:href="@{/}" title="메인으로 바로가기"></a></h1>
+                <a th:href="@{/login}" title="로그인 회원가입 바로가기" class="header_top_pc">로그인/회원가입</a>
+                <a href="#" title="메뉴 더보기" class="header_top_mo header_toggle">
+                    <img th:src="@{/icon/icon_hamburger.svg}" alt="메뉴 더보기 아이콘">
+                </a>
                 <!--로그인 한 경우-->
                 <!--<a th:href="@{/logout}" title="로그아웃 바로가기">로그아웃</a>-->
             </div>
@@ -23,15 +26,16 @@
         <!-- Header Nav -->
         <nav class="header_nav">
             <div class="toggle_close">
-                <a href="#" class="toggle_close" title="토글 닫기"><img src="../../static/icon/icon_x.svg" alt="닫기 아이콘"></a>
-            </div>                
+                <a href="#" class="toggle_close" title="토글 닫기">
+                    <img th:src="@{/icon/icon_x.svg}" alt="닫기 아이콘"></a>
+            </div>
             <ul class="gnb">
                 <li>
                     <a href="#" title="커뮤니티"><span>커뮤니티</span></a>
                     <ul class="lnb">
-                        <li><a href="village.html" title="마을 현황"><span>마을 현황</span></a></li>
-                        <li><a href="actionGroupRegistration.html" title="액션그룹"><span>액션그룹</span></a></li>
-                        <li><a href="activityNewsRegistration.html" title="활동소식"><span>활동소식</span></a></li>
+                        <li><a href="#" title="마을 현황"><span>마을 현황</span></a></li>
+                        <li><a href="#" title="액션그룹"><span>액션그룹</span></a></li>
+                        <li><a href="#" title="활동소식"><span>활동소식</span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -39,7 +43,7 @@
                     <ul class="lnb">
                         <li><a href="#" title="판매자 신청"><span>판매자 신청</span></a></li>
                         <li><a href="#" title="마켓"><span>마켓</span></a></li>
-                        <li><a href="#" title="도뇽교류"><span>도뇽교류</span></a></li>
+                        <li><a href="#" title="도농교류"><span>도농교류</span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -47,18 +51,18 @@
                     <ul class="lnb">
                         <li><a href="#" title="사회적 경제 공동체"><span>사회적 경제 공동체</span></a></li>
                         <li><a href="#" title="체험마을"><span>공동체 소개</span></a></li>
-                        <li><a href="talentActivistRegistration.html" title="재능활동가"><span>재능활동가</span></a></li>
+                        <li><a href="#" title="재능활동가"><span>재능활동가</span></a></li>
                         <li><a href="#" title="공간예약"><span>공간예약</span></a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#" title="알림마당"><span>알림마당</span></a>
                     <ul class="lnb">
-                        <li><a href="noticeRegistration.html" title="공지사항"><span>공지사항</span></a></li>
-                        <li><a href="qnaRegistration.html" title="묻고답하기"><span>묻고답하기</span></a></li>
+                        <li><a href="#" title="공지사항"><span>공지사항</span></a></li>
+                        <li><a href="#" title="묻고답하기"><span>묻고답하기</span></a></li>
                         <li><a href="#" title="일정관리"><span>일정관리</span></a></li>
                         <li><a href="#" title="설문조사"><span>설문조사</span></a></li>
-                        <li><a href="popup.html" title="팝업관리"><span>팝업관리</span></a></li>
+                        <li><a href="#" title="팝업관리"><span>팝업관리</span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -72,12 +76,12 @@
         </nav>
         <!-- Sub Title -->
         <div class="sub_title_bg">
-            <h2>액션그룹 등록</h2>
+            <h2 th:text="${current}"></h2>
             <div class="bread_crumbs">
                 <div class="inner">
                     <ul>
                         <li>
-                            <a href="#">알림마당</a>
+                            <a href="#">공동체 플랫폼</a>
                             <div class="crumbs">
                                 <ul>
                                     <li><a href="#">커뮤니티</a></li>
@@ -89,7 +93,7 @@
                     </ul>
                     <ul>
                         <li>
-                            <a href="#">공지사항</a>
+                            <a href="#">마켓</a>
                             <div class="crumbs">
                                 <ul>
                                     <li><a href="#">도농교류</a></li>
@@ -103,6 +107,7 @@
             </div>
         </div>
     </header>
+
     <section layout:fragment="content">
 
         <!--분류, 검색-->
@@ -112,47 +117,206 @@
                 <div class="actionGroup_top_major">
                     <button class="select_main">전체</button>
                     <ul class="select_sub">
-                        <li><button>전체</button></li>
-                        <li><button>유형</button></li>
-                        <li><button>단계</button></li>
-                        <li><button>진행</button></li>
+                    <li><button class="option1">전체</button></li>
+                    <li><button class="option2">유형</button></li>
+                    <li><button class="option3">단계</button></li>
+                    <li><button class="option4">진행</button></li>
                     </ul>
                 </div>
 
                 <!--소분류-->
                 <div class="actionGroup_top_minor">
-                    <button class="select_main"></button>
+                    <button class="select_main">세부 분류</button>
                     <ul class="select_sub">
+                    <li><button class="option1">전체</button></li>
+                    <li><button class="option2">생산가공</button></li>
+                    <li><button class="option3">유통소비</button></li>
+                    <li><button class="option4">공동체</button></li>
+                    <li><button class="option5">체험프로그램</button></li>
                     </ul>
                 </div>
 
             </div>
             <!--검색-->
             <div class="list_search">
-                <input id="searchString" type="search" placeholder="검색어를 입력해주세요.">
-                <button onclick="getActionList(0)">검색</button>
+                <input type="search" placeholder="검색어를 입력해주세요.">
+                <button>검색</button>
             </div>
         </div>
 
         <!--리스트 4*3 모바일에선 4개만-->
         <div class="actionGroup_mid">
+            <ul class="item_list">
+                <li>
+                  <a href="#">
+                    <div class="item_photo">
+                      <img src="" onerror="this.onerror=null; this.src='../../static/images/dummy1.png';">
+                      <div class="item_imgtag">
+                        <span class="tag_black">완료</span>
+                        <span class="tag_blue">공동체</span>
+                        <!-- <span class="tag_green">진행</span> -->
+                      </div>
+                    </div>
+                    <div class="item_text">
+                      <ul>
+                        <li class="item_hash">스타트업</li>
+                        <li class="item_hash">1기</li>
+                      </ul>
+                      <p class="list_title text_short">액션그룹명</p>
+                        <div>
+                            <p class="list_userId">(userId)</p>
+                            <p class="list_name text_short2">박하늘별님구름햇님보다사랑스러우리</p>
+                        </div>
+                    </div>
+                    <button>더보기</button>
+                  </a>
+                </li>
+                <li>
+                    <a href="#">
+                      <div class="item_photo">
+                        <img src="../../static/images/dummy1.png" alt="">
+                        <div class="item_imgtag">
+                          <span class="tag_green">진행</span>
+                          <span class="tag_blue">유통소비</span>
+                          <!-- <span class="tag_black">완료</span> -->
+                        </div>
+                      </div>
+                      <div class="item_text">
+                        <ul>
+                          <li class="item_hash">스타트업</li>
+                          <li class="item_hash">1기</li>
+                        </ul>
+                        <p class="list_title text_short">액션그룹명</p>
+                        <div>
+                          <p class="list_userId">(userId)</p>
+                          <p class="list_name text_short2">홍길동</p>
+                        </div>
+                      </div>
+                      <button>더보기</button>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                      <div class="item_photo">
+                        <img src="../../static/images/dummy1.png" alt="">
+                        <div class="item_imgtag">
+                          <span class="tag_green">진행</span>
+                          <span class="tag_blue">체험프로그램</span>
+                          <!-- <span class="tag_black">완료</span> -->
+                        </div>
+                      </div>
+                      <div class="item_text">
+                        <ul>
+                          <li class="item_hash">스타트업</li>
+                          <li class="item_hash">1기</li>
+                        </ul>
+                        <p class="list_title text_short">액션그룹 액션그룹 아주아주 긴 액션그룹이름 액션그룹 액션그룹 아주아주 긴 액션그룹이름</p>
+                        <div>
+                          <p class="list_userId">(userId)</p>
+                          <p class="list_name text_short2">홍길동</p>
+                        </div>
+                      </div>
+                      <button>더보기</button>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                      <div class="item_photo">
+                        <img src="../../static/images/dummy1.png" alt="">
+                        <div class="item_imgtag">
+                          <span class="tag_black">완료</span>
+                          <span class="tag_blue">생산가공</span>
+                          <!-- <span class="tag_green">진행</span> -->
+                        </div>
+                      </div>
+                      <div class="item_text">
+                        <ul>
+                          <li class="item_hash">스타트업</li>
+                          <li class="item_hash">1기</li>
+                        </ul>
+                        <p class="list_title text_short">액션그룹명</p>
+                        <div>
+                          <p class="list_userId">(userId)</p>
+                          <p class="list_name text_short2">홍길동</p>
+                        </div>
+                      </div>
+                      <button>더보기</button>
+                    </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="item_photo">
+                      <img src="../../static/images/dummy1.png" alt="">
+                      <div class="item_imgtag">
+                        <span class="tag_black">완료</span>
+                        <span class="tag_blue">공동체</span>
+                        <!-- <span class="tag_green">진행</span> -->
+                      </div>
+                    </div>
+                    <div class="item_text">
+                      <ul>
+                        <li class="item_hash">스타트업</li>
+                        <li class="item_hash">1기</li>
+                      </ul>
+                      <p class="list_title text_short">액션그룹명</p>
+                        <div>
+                            <p class="list_userId">(userId)</p>
+                            <p class="list_name text_short2">박하늘별님구름햇님보다사랑스러우리</p>
+                        </div>
+                    </div>
+                    <button>더보기</button>
+                  </a>
+                </li>
+                <li>
+                    <a href="#">
+                      <div class="item_photo">
+                        <img src="../../static/images/dummy1.png" alt="">
+                        <div class="item_imgtag">
+                          <span class="tag_green">진행</span>
+                          <span class="tag_blue">유통소비</span>
+                          <!-- <span class="tag_black">완료</span> -->
+                        </div>
+                      </div>
+                      <div class="item_text">
+                        <ul>
+                          <li class="item_hash">스타트업</li>
+                          <li class="item_hash">1기</li>
+                        </ul>
+                        <p class="list_title text_short">액션그룹명</p>
+                        <div>
+                          <p class="list_userId">(userId)</p>
+                          <p class="list_name text_short2">홍길동</p>
+                        </div>
+                      </div>
+                      <button>더보기</button>
+                    </a>
+                </li>
+            </ul>
         </div>
 
-        <!--페이지내이션, 추가버튼-->
+            <!--페이지내이션, 추가버튼-->
         <div class="actionGroup_bttm">
             <div class="list_number">
-                <button class="prevFirst" onclick="nextPage('first')"></button>
-                <button class="prev" onclick="nextPage('prev')"></button>
-                <ul id="pageable">
+                <button class="prev pagebtn_off"></button>
+                <ul>
+                  <li class="pagenum_on"><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">6</a></li>
+                  <li><a href="#">7</a></li>
+                  <li><a href="#">8</a></li>
+                  <li><a href="#">9</a></li>
+                  <li><a href="#">10</a></li>
                 </ul>
-                <button class="next" onclick="nextPage('next')"></button>
-                <button class="nextLast" onclick="nextPage('last')"></button>
-            </div>
+                <button class="next"></button>
+              </div>
 
-            <!--선택 시 액션그룹 등록 페이지로 이동, 추진단만 확인 가능-->
-            <div class="actionGroup_btn_wrap">
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/action/registration}" class="actionGroup_btn" title="액션그룹 추가">액션그룹 추가</a>
-            </div>
+              <!--선택 시 액션그룹 등록 페이지로 이동, 추진단만 확인 가능-->
+              <div class="actionGroup_btn_wrap">
+                <a href="#" class="actionGroup_btn" title="액션그룹 추가">액션그룹 추가</a>
+              </div>
         </div>
     </section>
 </body>

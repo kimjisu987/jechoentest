@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	// -------------------------------------------------------------------------------------
 	// 활동기간 - endtime 오류
-	$(".start_time, .end_time").on("change", function() {
+	$(".start_time, .end_time").on("blur", function() {
 		const start_time = $(".start_time").val();
 		const end_time = $(".end_time").val();
 

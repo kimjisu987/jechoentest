@@ -430,7 +430,7 @@ $(document).ready(function(){
 	});
 	// -------------------------------------------------------------------------------------
 	// 활동경력사항, 자격증 - endtime 오류
-	$(".career_from, .career_to, .valid_from, .valid_to").on("change", function() {
+	$(".career_from, .career_to, .valid_from, .valid_to").on("blur", function() {
 		const career_from = $(".career_from").val();
 		const career_to = $(".career_to").val();
 		const valid_from = $(".valid_from").val();

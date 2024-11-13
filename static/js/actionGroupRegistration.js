@@ -18,7 +18,7 @@ $(document).ready(function(){
     });
 	// -------------------------------------------------------------------------------------
 	// 수행기간 - endtime 오류
-	$(".start_date, .end_date").on("change", function() {
+	$(".start_date, .end_date").on("blur", function() {
 		const start_date = $(".start_date").val();
 		const end_date = $(".end_date").val();
 
