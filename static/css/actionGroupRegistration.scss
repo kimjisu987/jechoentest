@@ -107,6 +107,9 @@
         justify-content: space-between;
         button {
             width: $padding_32; height: $padding_32;
+            border-radius: 50%;
+            background: $color_font_bk url(../icon/icon_minus_w.svg) no-repeat center center / 70%;
+            &.plus {background-image: url(../icon/icon_plus_w.svg);}
         }
     }
     // required 서식
