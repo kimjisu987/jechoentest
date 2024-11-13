@@ -335,11 +335,8 @@
 	li:not(li:last-child)::after {
 		content: "";
 		display: inline-block;
-		width: $font_20;
-		height: 100%;
-		background-image: url("../icon/icon_arrowright.svg");
-		background-repeat: no-repeat;
-		background-position: center;
+		width: $font_20; height: $font_20;
+		background: url("../icon/icon_arrowright.svg") no-repeat center / 100%;
 		margin-inline: $padding_32;
 		vertical-align: middle;
 	}
