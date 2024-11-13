@@ -721,7 +721,6 @@
 	}
 
 	input[type="date"], input[type="time"], input[type="datetime-local"] {
-		display: block;
 		font-family: $font_family;
 		&::-webkit-date-and-time-value {
 			text-align: left;
@@ -733,6 +732,9 @@
 	}
 
 	input[type="date"], input[type="file"], input[type="time"], input[type="datetime-local"] {
+		display: block;
+		text-align: left;
+		text-align: -webkit-left;
 		border-bottom: 1px solid $color_font_bk;
 	}
 

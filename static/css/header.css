@@ -927,6 +927,7 @@ h3 {
   text-indent: 2px;
   border-radius: 0;
   -webkit-appearance: none;
+  text-align: left;
 }
 .input_fields input[type=date]:focus-visible, .input_fields input[type=date]:focus, .input_fields input[type=email]:focus-visible, .input_fields input[type=email]:focus, .input_fields input[type=file]:focus-visible, .input_fields input[type=file]:focus, .input_fields input[type=number]:focus-visible, .input_fields input[type=number]:focus, .input_fields input[type=password]:focus-visible, .input_fields input[type=password]:focus, .input_fields input[type=search]:focus-visible, .input_fields input[type=search]:focus, .input_fields input[type=tel]:focus-visible, .input_fields input[type=tel]:focus, .input_fields input[type=text]:focus-visible, .input_fields input[type=text]:focus, .input_fields input[type=time]:focus-visible, .input_fields input[type=time]:focus, .input_fields input[type=reset]:focus-visible, .input_fields input[type=reset]:focus, .input_fields input[type=submit]:focus-visible, .input_fields input[type=submit]:focus, .input_fields input[type=datetime-local]:focus-visible, .input_fields input[type=datetime-local]:focus {
   border-bottom: 1px solid #0191B6;
@@ -945,10 +946,16 @@ h3 {
 .input_fields input[type=date], .input_fields input[type=time], .input_fields input[type=datetime-local] {
   font-family: "Pretendard", "맑은고딕", arial;
 }
+.input_fields input[type=date]::-webkit-date-and-time-value, .input_fields input[type=time]::-webkit-date-and-time-value, .input_fields input[type=datetime-local]::-webkit-date-and-time-value {
+  text-align: left;
+}
 .input_fields input[type=date], .input_fields input[type=datetime-local] {
   text-indent: 0;
 }
 .input_fields input[type=date], .input_fields input[type=file], .input_fields input[type=time], .input_fields input[type=datetime-local] {
+  display: block;
+  text-align: left;
+  text-align: -webkit-left;
   border-bottom: 1px solid #333;
 }
 .input_fields label {
