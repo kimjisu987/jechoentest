@@ -112,11 +112,13 @@
         justify-content: space-between;
         button {
             width: $padding_32; height: $padding_32;
-            background: $color_sub_g2;
+            border-radius: 50%;
+            background: $color_font_bk url(../icon/icon_minus_w.svg) no-repeat center center / 70%;
+            &.plus {background-image: url(../icon/icon_plus_w.svg);}
         }
     }
     // 기수 input 뒤 disabled 아이콘 숨기기
-    .input_number input {background: none !important;}
+    .input_number input {background: none !important; width: 2rem;}
     // required 서식
     p.required {
         display: inline; width: fit-content;

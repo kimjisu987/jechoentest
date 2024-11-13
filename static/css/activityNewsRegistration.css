@@ -368,10 +368,15 @@ h3 {
 .activityNewsRegistration .input_number button {
   width: 2rem;
   height: 2rem;
-  background: #D9D9D9;
+  border-radius: 50%;
+  background: #333 url(../icon/icon_minus_w.svg) no-repeat center center/70%;
+}
+.activityNewsRegistration .input_number button.plus {
+  background-image: url(../icon/icon_plus_w.svg);
 }
 .activityNewsRegistration .input_number input {
   background: none !important;
+  width: 2rem;
 }
 .activityNewsRegistration p.required {
   display: inline;
