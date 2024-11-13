@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jecheon.platform.repository.ActionRepository">
+
+    <select id="getAuthUserList" parameterType="string" resultType="actionUserList">
+        SELECT
+            no as userNo,
+            user_id as userId,
+            name as userName
+        FROM tb_user
+        WHERE
+            user_id like CONCAT('%', #{param}, '%') OR
+            name like CONCAT('%', #{param}, '%')
+    </select>
+
+    <insert id="saveGroup" parameterType="createAction" useGeneratedKeys="true" keyProperty="no" keyColumn="no">
+        INSERT INTO tb_action_group
+        (
+            name,
+            generation,
+            stage,
+            type,
+            subject,
+            start_date,
+            end_date,
+            profile,
+            description,
+            item,
+            background,
+            status,
+            `release`,
+            created_at,
+            updated_at
+        )
+        values
+        (
+            #{name},
+            #{generation},
+            #{stage},
+            #{type},
+            #{subject},
+            #{startDate},
+            #{endDate},
+            #{profile},
+            #{description},
+            #{item},
+            #{background},
+            #{status},
+            #{release},
+            now(),
+            now()
+        )
+    </insert>
+
+    <update id="updateGroup" parameterType="createAction">
+        UPDATE tb_action_group
+        SET
+            name = #{name},
+            generation = #{generation},
+            stage = #{stage},
+            type = #{type},
+            subject = #{subject},
+            start_date = #{startDate},
+            end_date = #{endDate},
+            profile = #{profile},
+            description = #{description},
+            item = #{item},
+            background = #{background},
+            status = #{status},
+            `release` = #{release},
+            updated_at = now()
+        WHERE no = #{no}
+    </update>
+
+    <update id="deleteGroupUsers" parameterType="long">
+        UPDATE tb_action_group_members
+        set
+            status = 'TRASH',
+            updated_at = now()
+        WHERE
+            action_group_no = #{no}
+    </update>
+
+    <insert id="saveGroupUsers" parameterType="createAction">
+        INSERT INTO tb_action_group_members
+        (
+            action_group_no,
+            user_no,
+            member_role,
+            leader,
+            created_at,
+            updated_at,
+            status
+        )
+        values
+        <foreach collection="actionUserList" index="index" item="item" open="(" close=")" separator="),(">
+            #{no},
+            #{item.userNo},
+            #{item.memberRole},
+            #{item.leader},
+            now(),
+            now(),
+            'ACTIVE'
+        </foreach>
+    </insert>
+
+    <select id="getTotalGroupCnt" parameterType="action" resultType="int">
+        SELECT COUNT(*) AS cnt
+        FROM tb_action_group a
+        WHERE
+            1 = 1
+            <if test="name != null and name != ''">
+                AND a.name like CONCAT('%', #{name}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                AND a.status = #{status}
+            </if>
+            <if test="stage != null and stage != ''">
+                AND a.stage = #{stage}
+            </if>
+            <if test="type != null and type != ''">
+                AND a.type = #{type}
+            </if>
+            <if test='release != "N"'>
+                AND a.release = 'Y'
+            </if>
+            AND a.status != 'TRASH'
+    </select>
+
+    <select id="getListGroup" parameterType="pageRequest" resultType="actionList">
+        SELECT
+            a.no,
+            a.name,
+            a.stage,
+            a.generation,
+            a.type,
+            a.status,
+            c.user_id as userId,
+            c.name as userName,
+            a.profile
+        FROM tb_action_group a
+        JOIN tb_action_group_members b on a.no = b.action_group_no and b.leader = 'Y' and b.status = 'ACTIVE'
+        JOIN tb_user c on b.user_no = c.no
+        WHERE
+            1 = 1
+            <if test="data.name != null and data.name != ''">
+                AND a.name like CONCAT('%', #{data.name}, '%')
+            </if>
+            <if test="data.status != null and data.status != ''">
+                AND a.status = #{data.status}
+            </if>
+            <if test="data.stage != null and data.stage != ''">
+                AND a.stage = #{data.stage}
+            </if>
+            <if test="data.type != null and data.type != ''">
+                AND a.type = #{data.type}
+            </if>
+            <if test='data.release != "N"'>
+                AND a.release = 'Y'
+            </if>
+            AND a.status != 'TRASH'
+        LIMIT #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <select id="getActionDetail" parameterType="long" resultMap="ActionGroupDetailMap">
+        SELECT
+            a.`no`,
+            a.`name`,
+            a.generation,
+            a.stage,
+            a.type,
+            a.subject,
+            a.start_date,
+            a.end_date,
+            a.profile,
+            a.description,
+            a.item,
+            a.background,
+            a.status,
+            a.`release`,
+            b.user_no,
+            c.user_id,
+            c.name as userName,
+            b.leader,
+            b.member_role
+        FROM tb_action_group a
+        JOIN tb_action_group_members b
+            ON a.no = b.action_group_no and b.status = 'ACTIVE'
+        JOIN tb_user c
+            ON b.user_no = c.no
+        WHERE
+            a.no = #{no} and a.status != 'TRASH'
+    </select>
+
+    <resultMap id="ActionGroupDetailMap" type="com.jecheon.platform.dto.response.ActionRes">
+        <id property="no" column="no"/>
+        <result property="name" column="name"/>
+        <result property="generation" column="generation"/>
+        <result property="stage" column="stage"/>
+        <result property="type" column="type"/>
+        <result property="subject" column="subject"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+        <result property="profile" column="profile"/>
+        <result property="description" column="description"/>
+        <result property="item" column="item"/>
+        <result property="background" column="background"/>
+        <result property="status" column="status"/>
+        <result property="release" column="release"/>
+
+        <!-- 구성원 목록 -->
+        <collection property="memberList" ofType="com.jecheon.platform.dto.response.ActionUserRes">
+            <result property="userNo" column="user_no"/>
+            <result property="userId" column="user_id"/>
+            <result property="userName" column="userName"/>
+            <result property="leader" column="leader"/>
+            <result property="memberRole" column="member_role"/>
+        </collection>
+    </resultMap>
+
+    <update id="deleteAction" parameterType="long">
+        update tb_action_group
+        set
+            status = 'TRASH',
+            updated_at = now()
+        where
+            no = #{no}
+    </update>
+
+    <insert id="saveActivity" parameterType="createActivity" useGeneratedKeys="true" keyProperty="activityNo" keyColumn="no">
+        INSERT INTO tb_action_activity
+        (
+            action_no,
+            title,
+            start_date,
+            end_date,
+            profile,
+            description,
+            status,
+            created_at,
+            updated_at,
+            `release`
+        )
+        VALUES
+        (
+            #{actionNo},
+            #{title},
+            #{startDate},
+            #{endDate},
+            #{profile},
+            #{description},
+            'ACTIVE',
+            now(),
+            now(),
+            #{release}
+        )
+    </insert>
+    
+    <select id="getActivityDetail" parameterType="long" resultType="activityDetail">
+        SELECT
+            a.no,
+            a.title,
+            a.start_date,
+            a.end_date,
+            a.description,
+            a.release,
+            a.profile,
+            b.no as actionNo,
+            b.name as actionName,
+            b.generation,
+            b.stage,
+            b.type,
+            b.subject,
+            b.release as actionRelease,
+            b.status as actionStatus,
+            d.name as leaderName
+        FROM tb_action_activity a
+        JOIN tb_action_group b on a.action_no = b.no
+        JOIN tb_action_group_members c on b.no = c.action_group_no and c.status = 'ACTIVE' and c.leader = 'Y'
+        JOIN tb_user d on c.user_no = d.no
+        WHERE
+            a.no = #{no} and
+            a.status != 'TRASH'
+    </select>
+
+    <select id="getTotalActivityCnt" resultType="int" parameterType="map">
+        SELECT COUNT(*) AS cnt
+        FROM tb_action_activity a
+        WHERE
+            a.status != 'TRASH' AND
+            a.action_no = #{actionNo}
+            <if test='release != "N"'>
+                AND a.release = 'Y'
+            </if>
+    </select>
+
+    <select id="getListActivity" parameterType="pageRequest" resultType="activityDetail">
+        SELECT
+            a.no,
+            a.title,
+            a.start_date,
+            a.end_date,
+            a.description,
+            a.release,
+            a.profile,
+            b.no as actionNo,
+            b.name as actionName,
+            b.generation,
+            b.stage,
+            b.type,
+            b.subject,
+            b.release as actionRelease,
+            b.status as actionStatus,
+            d.name as leaderName
+        FROM tb_action_activity a
+        JOIN tb_action_group b on a.action_no = b.no
+        JOIN tb_action_group_members c on b.no = c.action_group_no and c.status = 'ACTIVE' and c.leader = 'Y'
+        JOIN tb_user d on c.user_no = d.no
+        WHERE
+            1 = 1 AND
+            a.status != 'TRASH' AND
+            a.action_no = #{data.actionNo}
+            <if test='data.release != "N"'>
+                AND a.release = 'Y'
+            </if>
+        LIMIT #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <update id="updateActivity" parameterType="createActivity">
+        UPDATE tb_action_activity
+        SET
+            title = #{title},
+            start_date = #{startDate},
+            end_date = #{endDate},
+            profile = #{profile},
+            description = #{description},
+            updated_at = now(),
+            `release` = #{release}
+        WHERE
+            action_no = #{actionNo} and
+            no = #{activityNo}
+    </update>
+
+    <update id="deleteActivity" parameterType="long">
+        update tb_action_activity
+        set
+            status = 'TRASH',
+            updated_at = now()
+        where
+            no = #{no}
+    </update>
+</mapper>

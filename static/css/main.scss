@@ -465,6 +465,11 @@ header .sub_title_bg {display: none;}
         .swiper-button-prev {
             left: -80px;
         }
+        @include media("mobile") {
+            &>.swiper-button-next, .swiper-button-prev  {
+                display: none;
+            }
+        }
     }
     // 재능활동가 탭 영역 컨텐츠
     .section_tab {
@@ -1044,17 +1049,21 @@ header .sub_title_bg {display: none;}
         // display: none;
         position: fixed; z-index: 100;
         top: 0; left: 0;
-        width: 100vw; height: 100vh;
+        width: 100%; height: 100%;
         background: $color_tran_bk;
     }
     .preview_modal_inner {
         position: absolute;
-        top: 50%; left: 50%;
+        top: 40%; left: 50%;
         transform: translate(-50%, -50%);
         width: 500px; height: 500px;
-        max-width: 80vw; max-height: 80vw;
+        max-width: calc(100vw - 1rem); max-height: calc(100vw - 1rem);
         margin-left: auto;
         margin-right: auto;
+        @include media("mobile") {
+            top: 1rem; left: 50%;
+            transform: translate(-50%, 0);
+        }
         .swiper {position: relative;}
         .swiper-slide {
             text-align: center;

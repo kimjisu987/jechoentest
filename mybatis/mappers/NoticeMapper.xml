@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jecheon.platform.repository.NoticeRepository">
+    <select id="getNoticeCount" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_notice
+        WHERE
+            (#{category} = '' OR category = #{category})
+            AND (title LIKE CONCAT('%', #{keyword}, '%') OR content LIKE CONCAT('%', #{keyword}, '%'))
+            AND status = 'ACTIVE'
+    </select>
+
+    <select id="getNoticeList" parameterType="pageRequest" resultType="NoticeRes">
+        SELECT
+            no AS noticeNo, category, title, created_at AS createdAt
+        FROM tb_notice
+        WHERE
+            (#{data.category} = '' OR category = #{data.category})
+            AND (title LIKE CONCAT('%', #{data.keyword}, '%') OR content LIKE CONCAT('%', #{data.keyword}, '%'))
+            AND status = 'ACTIVE'
+        ORDER BY no DESC
+        LIMIT #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <resultMap id="NoticeResMap" type="NoticeRes">
+        <id property="noticeNo" column="noticeNo"/>
+        <result property="category" column="category"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="createdAt"/>
+        <collection property="addfileList" notNullColumn="no" javaType="list" ofType="AddfileRes">
+            <id property="no" column="no"/>
+            <result property="addfile" column="addfile"/>
+        </collection>
+    </resultMap>
+
+    <select id="getNotice" parameterType="long" resultMap="NoticeResMap">
+        SELECT
+            tn.no AS noticeNo, tn.category, tn.title, tn.content, tn.created_at AS createdAt,
+            ta.no AS no, ta.addfile
+        FROM
+            tb_notice tn
+        LEFT JOIN
+            tb_addfile ta
+        ON
+            ta.parent_no = tn.no
+            AND ta.addfile_type = 'notice'
+            AND ta.status = 'ACTIVE'
+        WHERE
+            tn.no = #{noticeNo}
+            AND tn.status = 'ACTIVE'
+    </select>
+
+    <insert id="saveNotice" parameterType="NoticeReq" useGeneratedKeys="true" keyProperty="no">
+        INSERT INTO
+            tb_notice (category, title, content, created_at, updated_at, status)
+        VALUES
+            (#{category}, #{title}, #{content}, NOW(), NOW(), 'ACTIVE')
+    </insert>
+
+    <update id="updateNotice" parameterType="NoticeReq" useGeneratedKeys="true" keyProperty="no">
+        UPDATE tb_notice
+        SET
+            category = #{category},
+            title = #{title},
+            content = #{content},
+            updated_at = NOW()
+        WHERE
+            no = #{no}
+            AND status = 'ACTIVE'
+    </update>
+
+    <update id="deleteNotice" parameterType="long">
+        UPDATE
+            tb_notice tn
+            LEFT JOIN tb_addfile ta ON ta.parent_no = tn.no AND ta.addfile_type = 'notice' AND ta.status = 'ACTIVE'
+        SET
+            tn.updated_at = NOW(),
+            tn.status = 'TRASH',
+            ta.updated_at = NOW(),
+            ta.status = 'TRASH'
+        WHERE
+            tn.no = #{noticeNo}
+            AND tn.status = 'ACTIVE'
+    </update>
+</mapper>

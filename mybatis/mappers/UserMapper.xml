@@ -3,6 +3,36 @@
 
 <mapper namespace="com.jecheon.platform.repository.UserRepository">
 
+    <select id="findByUserNo" resultType="com.jecheon.platform.dto.response.UserRes">
+        SELECT
+            no,
+            name,
+            user_id as userId,
+            birth,
+            tel,
+            address,
+            email,
+            zip_code as zipCode
+        FROM
+            tb_user
+        WHERE
+            no = #{no}
+    </select>
+
+    <update id="updateUserInfo" parameterType="com.jecheon.platform.dto.request.UpdateUserReq">
+        UPDATE tb_user
+        SET
+            user_id = #{userId},
+            name = #{name},
+            birth = #{birth},
+            tel = #{tel},
+            email = #{email},
+            zip_code = #{zipCode},
+            address = #{address}
+        WHERE
+            no = #{no}
+    </update>
+
     <select id="findByUserId" resultType="com.jecheon.platform.domain.User">
         /* 사용자 정보 조회 */
         SELECT
@@ -11,7 +41,9 @@
             PASSWORD,
             NAME,
             ROLE,
-            TYPE
+            TYPE,
+            TEL,
+            EMAIL
         FROM
             tb_user
         WHERE
@@ -24,6 +56,110 @@
             tb_user
         SET
             LAST_LOGIN_AT = now()
+        WHERE
+            NO = #{userNo}
+    </update>
+
+    <insert id="saveUser" parameterType="joinUser" useGeneratedKeys="true" keyColumn="no" keyProperty="no">
+        Insert INTO tb_user
+        (
+            user_id,
+            password,
+            name,
+            birth,
+            tel,
+            email,
+            address,
+            zip_code,
+            role,
+            status,
+            type,
+            created_at,
+            updated_at
+        )
+        values
+        (
+            #{userId},
+            #{passwordAuth},
+            #{name},
+            #{birth},
+            #{tel},
+            #{email},
+            #{address},
+            #{zipCode},
+            'ROLE_USER',
+            'ACTIVE',
+            #{type},
+            now(),
+            now()
+        )
+    </insert>
+
+    <insert id="saveOrganization" parameterType="joinOrganization">
+        Insert Into tb_organization_info
+        (
+            user_no,
+            license_name,
+            license_number,
+            ceo_name,
+            license_tel,
+            license_fax,
+            website,
+            description,
+            main_item,
+            created_at,
+            updated_at
+        )
+        values
+        (
+            #{no},
+            #{licenseName},
+            #{licenseNumber},
+            #{ceoName},
+            #{licenseTel},
+            #{licenseFax},
+            #{webSite},
+            #{description},
+            #{mainItem},
+            now(),
+            now()
+        )
+    </insert>
+
+    <select id="searchUserList" resultType="com.jecheon.platform.dto.response.UserRes">
+        SELECT
+            NO,
+            USER_ID,
+            NAME,
+            BIRTH,
+            TEL,
+            ADDRESS,
+            EMAIL,
+            ZIP_CODE
+        FROM
+            tb_user
+        WHERE 1=1
+        <if test="search != null and search != ''">
+            AND USER_ID LIKE CONCAT('%', #{search}, '%')
+            OR NAME LIKE CONCAT('%', #{search}, '%')
+        </if>
+            AND STATUS = 'ACTIVE'
+    </select>
+
+    <update id="updateUserTel" parameterType="map">
+        UPDATE
+            tb_user
+        SET
+            TEL = #{tel}
+        WHERE
+            NO = #{userNo}
+    </update>
+
+    <update id="updateUserEmail" parameterType="map">
+        UPDATE
+            tb_user
+        SET
+            EMAIL = #{email}
         WHERE
             NO = #{userNo}
     </update>

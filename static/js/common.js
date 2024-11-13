@@ -44,7 +44,9 @@ let ajaxWrapper = {
      * 필수) CALLBACK - 콜백함수 (Function)
      * 필수) TYPE - 전송 방식 (POST, GET, PUT, DELETE)
      * 선택) DATA_TYPE - 응답받을 데이터 타입 (String)
+     * 선택) ENC_TYPE - 데이터 인코딩 방식 (application/x-www-form-urlencoded, multipart/form-data)
      * 선택) CONTENT_TYPE - 전송할 데이터 타입 (String)
+     * 선택) PROCESS_DATA - 데이터 전송 형태 (Boolean)
      * 선택) ASYNC - 비동기 여부 (boolean : 미지정시 true)
      * 선택) ERROR_CALLBACK - 전송 실패 시 콜백 함수 (Function)
      * 선택) ERRORMSG - 전송 실패시 메시지 (String)
@@ -65,19 +67,35 @@ let ajaxWrapper = {
                 headers: options.HEADERS,
                 async: options.ASYNC,
                 dataType: options.DATA_TYPE,
+                enctype: options.ENC_TYPE,
                 contentType: options.CONTENT_TYPE,
+                processData: options.PROCESS_DATA,
                 success: function (result) {
                     options.CALLBACK(result, options.RETURN_INCLUDE || {});
+                    setTimeout(function(){
+                        $(".loading_spin_wrap").remove();
+                    }, 100);
                 },
-                error: function (request, status, error) {
-                    if (options.ERROR_CALLBACK != undefined) {
-                        options.ERROR_CALLBACK(request, status, error);
-                    } else {
-                        console.log(request);
-                        console.log(status);
-                        console.log(error);
-                        alert("서버에 요청중 문제가 발생했습니다.\n관리자에게 문의하여 주십시오.");
+                beforeSend : function (){
+                    loadSpin();
+                },
+                error: function (req, status, error) {
+                    console.log(req);
+                    console.log(status);
+                    console.log(error);
+                    if(req.responseJSON != undefined){
+                        alert_modal('modal_error', req.responseJSON.status, req.responseJSON.message);
                     }
+                    else if(req.status == 401 && req.responseText == 'Unauthorized'){
+                        location.href = '/login';
+                    }
+                    else{
+                        alert_modal('modal_error', 'INTERNAL_SERVER_ERROR', '서버에 요청중 문제가 발생했습니다.');
+                    }
+
+                    setTimeout(function(){
+                        $(".loading_spin_wrap").remove();
+                    }, 100);
                 }
             });
         } else {
@@ -99,16 +117,12 @@ let ajaxOptions = {
             alert(response);
         }
     },
-    ERROR_CALLBACK: function (request, status, error) {
-        console.log(request);
-        console.log(status);
-        console.log(error);
-        console.log("code : " + status + "\n" + "message : " + request.responseText + "\n" + "error : " + error);
-    },
     ASYNC: null, // 기본값 true, false 시 중복 요청 X
     TYPE: null, // 설정해줘야 함 (POST, GET, PUT, DELETE)
     DATA_TYPE: "json",
-    CONTENT_TYPE: "application/json; charset=utf-8;"
+    ENC_TYPE: "application/x-www-form-urlencoded",
+    CONTENT_TYPE: "application/json; charset=utf-8;",
+    PROCESS_DATA: "true"
 }
 
 // csrf 보안을 위한 ajax 헤더 생성용 함수
@@ -139,7 +153,8 @@ Date.prototype.yyyy = function() {
 }
 
 // 커스텀 얼럿 모달
-function alert_modal(alert_style, alert_title, alert_msg) {
+// modal_confirm / modal_ok / modal_error
+function alert_modal(alert_style, alert_title, alert_msg, callback) {
     let btnArr = ['확인', '확인'];
     if(alert_style === 'modal_confirm'){
         btnArr[0] = '취소';
@@ -166,7 +181,7 @@ function alert_modal(alert_style, alert_title, alert_msg) {
 
     // 버튼 클릭 시 모달 확인
     modal.find('.modal_btn:last-of-type').on('click', function() {
-        alert_close();
+        alert_close(callback);
     });
 
     // 버튼 클릭 시 모달 취소 - 컨펌창에서만 사용
@@ -177,6 +192,45 @@ function alert_modal(alert_style, alert_title, alert_msg) {
 }
 
 // 경고창 모달 제거
-function alert_close() {
-    $('.alert_modal').removeClass('on').fadeOut(200, function() { $(this).remove(); });
+// function alert_close() {
+//     $('.alert_modal').removeClass('on').fadeOut(200, function() { $(this).remove(); });
+// }
+function alert_close(callback) {
+    $('.alert_modal').removeClass('on').fadeOut(200, function() {
+        $(this).remove();
+        if (typeof callback === "function") {
+            callback();
+        }
+    });
 }
+
+// 파일 업로드
+function uploadFile(filePath, formData) {
+    let fileNames = [];
+
+    let option = deepExtend({}, ajaxOptions);
+    option.URL = "/api/v1/file/upload/" + filePath;
+    option.TYPE = "POST";
+    option.ASYNC = false;
+    option.HEADERS = getCsrfHeader();
+    option.PARAM = formData;
+    option.CONTENT_TYPE = false;
+    option.PROCESS_DATA = false;
+    option.ENC_TYPE = "multipart/form-data";
+    option.CALLBACK = function(response) {
+        fileNames = response.data;
+    }
+    ajaxWrapper.callAjax(option);
+
+    return fileNames;
+}
+
+//로딩 스피너
+function loadSpin(){
+        let spin =
+        `<div class="loading_spin_wrap">
+            <div class="loading_spin_inner"></div>
+        </div>`;
+        $("body").append(spin);
+    }
+

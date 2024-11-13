@@ -18,8 +18,53 @@
         <typeAlias alias="list" type="java.util.List"/>
         <typeAlias alias="map" type="java.util.Map"/>
         <typeAlias alias="arrays" type="java.util.Arrays"/>
+
+        <typeAlias alias="TalentActivityReq" type="com.jecheon.platform.dto.request.TalentActivityReq"/>
+        <typeAlias alias="ActivityApplyReq" type="com.jecheon.platform.dto.request.ActivityApplyReq"/>
+        <typeAlias alias="ApplyListRes" type="com.jecheon.platform.dto.response.ApplyListRes"/>
+        <typeAlias alias="TalentActivityRes" type="com.jecheon.platform.dto.response.TalentActivityRes"/>
+        <typeAlias alias="ActivityScheduleRes" type="com.jecheon.platform.dto.response.ActivityScheduleRes"/>
+        <typeAlias alias="CareerRes" type="com.jecheon.platform.dto.response.CareerRes"/>
+        <typeAlias alias="QualificationRes" type="com.jecheon.platform.dto.response.QualificationRes"/>
+        <typeAlias alias="pageRequest" type="com.jecheon.platform.dto.request.PageRequest"/>
+        <typeAlias alias="TalentListRes" type="com.jecheon.platform.dto.response.TalentListRes"/>
+        <typeAlias alias="ApplyDetailRes" type="com.jecheon.platform.dto.response.ApplyDetailRes"/>
+
+
+        <typeAlias alias="joinUser" type="com.jecheon.platform.dto.request.JoinUserReq"/>
+        <typeAlias alias="joinOrganization" type="com.jecheon.platform.dto.request.JoinOrganizationReq"/>
+
+        <typeAlias alias="villageRes" type="com.jecheon.platform.dto.response.VillageRes"/>
+        <typeAlias alias="createAction" type="com.jecheon.platform.dto.request.CreateActionReq"/>
+        <typeAlias alias="pageRequest" type="com.jecheon.platform.dto.request.PageRequest"/>
+        <typeAlias alias="action" type="com.jecheon.platform.dto.request.ActionListReq"/>
+        <typeAlias alias="actionList" type="com.jecheon.platform.dto.response.ActionListRes"/>
+        <typeAlias alias="actionUserList" type="com.jecheon.platform.dto.response.ActionAuthUser"/>
+        <typeAlias alias="createActivity" type="com.jecheon.platform.dto.request.CreateActivityReq"/>
+        <typeAlias alias="activityDetail" type="com.jecheon.platform.dto.response.ActivityRes"/>
+
+        <!-- 공지사항 -->
+        <typeAlias alias="NoticeReq" type="com.jecheon.platform.dto.request.NoticeReq"/>
+        <typeAlias alias="NoticeRes" type="com.jecheon.platform.dto.response.NoticeRes"/>
+
+        <!-- QnA -->
+        <typeAlias alias="QnaReq" type="com.jecheon.platform.dto.request.QnaReq"/>
+        <typeAlias alias="QnaReplyReq" type="com.jecheon.platform.dto.request.QnaReplyReq"/>
+        <typeAlias alias="QnaRes" type="com.jecheon.platform.dto.response.QnaRes"/>
+
+        <!-- 일정관리 -->
+        <typeAlias alias="scheduleReq" type="com.jecheon.platform.dto.request.CreateScheduleReq"/>
+        <typeAlias alias="scheduleRes" type="com.jecheon.platform.dto.response.ScheduleRes"/>
+
+        <!-- 첨부파일 -->
+        <typeAlias alias="AddfileReq" type="com.jecheon.platform.dto.request.AddfileReq"/>
+        <typeAlias alias="AddfileRes" type="com.jecheon.platform.dto.response.AddfileRes"/>
+
+        <!-- 팝업 -->
+        <typeAlias alias="PopupReq" type="com.jecheon.platform.dto.request.PopupReq"/>
+        <typeAlias alias="PopupRes" type="com.jecheon.platform.dto.response.PopupRes"/>
     </typeAliases>
-    
+
     <typeHandlers>
 
     </typeHandlers>

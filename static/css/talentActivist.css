@@ -414,6 +414,7 @@ section {
 }
 @media screen and (max-width: 767px) {
   .talent_mid .item_list > li {
+    height: 40vw;
     border-radius: 0 24px 0 24px;
   }
 }
@@ -432,10 +433,10 @@ section {
 @media screen and (max-width: 767px) {
   .talent_mid .item_photo {
     border-radius: 0 24px 0 24px;
+    height: 40vw;
   }
   .talent_mid .item_photo img {
     border-radius: 0 24px 0 24px;
-    width: 100%;
     height: 100%;
   }
 }
@@ -517,6 +518,27 @@ section {
   .talent_bttm .list_number li {
     padding-inline: 6px !important;
   }
+}
+.talent_bttm .list_number button::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.talent_bttm .list_number button.pagebtn_off::after {
+  opacity: 0.4;
+}
+.talent_bttm .list_number .prevFirst::after {
+  background: url("../icon/icon_arrowleftmore.svg") no-repeat right center;
+}
+.talent_bttm .list_number .prev::after {
+  background: url("../icon/icon_arrowleft.svg") no-repeat right center;
+}
+.talent_bttm .list_number .nextLast::after {
+  background: url("../icon/icon_arrowrightmore.svg") no-repeat right center;
+}
+.talent_bttm .list_number .next::after {
+  background: url("../icon/icon_arrowright.svg") no-repeat right center;
 }
 .talent_bttm .list_number .prevFirst, .talent_bttm .list_number .nextLast {
   margin: 0 0.75rem;

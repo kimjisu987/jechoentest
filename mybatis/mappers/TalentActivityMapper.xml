@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jecheon.platform.repository.TalentActivityRepository">
+    <insert id="insertTalentActivity" parameterType="TalentActivityReq" useGeneratedKeys="true" keyProperty="no" keyColumn="no">
+        INSERT INTO tb_talent_activist
+            ( user_no
+            , title
+            , activity_field
+            , detail
+            , motive
+            , activity_type
+            , target
+            , profile
+            , location
+            , price
+            , start_date
+            , end_date
+            , created_at
+            , status)
+        VALUES
+            ( #{userNo}
+            , #{title}
+            , #{activityField}
+            , #{detail}
+            , #{motive}
+            , #{activityType}
+            , #{target}
+            , #{profile}
+            , #{location}
+            , #{price}
+            , #{startDate}
+            , #{endDate}
+            , now()
+            , "ACTIVE")
+    </insert>
+
+    <insert id="insertCareer" parameterType="TalentActivityReq">
+        INSERT INTO tb_career
+            ( activist_no
+            , career_field
+            , content
+            , career_from
+            , career_to
+            , created_at
+            , status)
+        VALUES
+        <foreach collection="careerList" index="index" item="item" open="(" close=")" separator="),(">
+              #{no}
+            , #{item.careerField}
+            , #{item.content}
+            , #{item.careerFrom}
+            , #{item.careerTo}
+            , now()
+            , "ACTIVE"
+        </foreach>
+    </insert>
+
+    <insert id="insertSchedule" parameterType="TalentActivityReq">
+        INSERT INTO tb_activity_schedule
+            ( activist_no
+            , day
+            , start_time
+            , end_time
+            , created_at
+            , status)
+        VALUES
+        <foreach collection="scheduleList" index="index" item="item" open="(" close=")" separator="),(">
+              #{no}
+            , #{item.day}
+            , #{item.startTime}
+            , #{item.endTime}
+            , now()
+            , "ACTIVE"
+        </foreach>
+    </insert>
+
+    <insert id="insertQualification" parameterType="TalentActivityReq">
+        INSERT INTO tb_qualification
+        ( activist_no
+        , name
+        , qualification_field
+        , valid_from
+        , valid_to
+        , created_at
+        , status)
+        VALUES
+        <foreach collection="qualificationList" index="index" item="item" open="(" close=")" separator="),(">
+              #{no}
+            , #{item.name}
+            , #{item.qualificationField}
+            , #{item.validFrom}
+            , #{item.validTo}
+            , now()
+            , "ACTIVE"
+        </foreach>
+    </insert>
+
+    <sql id="selectActivityFromJoin">
+        SELECT
+            a.`no`
+             ,a.user_no
+             ,e.name
+             ,e.tel
+             ,a.title
+             ,a.activity_field
+             ,a.detail
+             ,a.motive
+             ,a.activity_type
+             ,a.target
+             ,a.profile
+             ,a.location
+             ,a.price
+             ,a.start_date
+             ,a.end_date
+             ,b.`no` AS schedule_no
+             ,b.`day`
+             ,b.start_time
+             ,b.end_time
+             ,b.status AS schedule_status
+             ,c.`no` AS career_no
+             ,c.career_field
+             ,c.content AS career_content
+             ,c.career_from
+             ,c.career_to
+             ,c.status AS career_status
+             ,d.`no` AS qualification_no
+             ,d.name AS qualification_name
+             ,d.qualification_field
+             ,d.valid_from
+             ,d.valid_to
+             ,d.status AS qualification_status
+        FROM tb_talent_activist a
+        LEFT JOIN tb_activity_schedule b ON a.no = b.activist_no
+        LEFT JOIN tb_career c ON a.no = c.activist_no
+        LEFT JOIN tb_qualification d ON a.no = d.activist_no
+        LEFT JOIN tb_user e ON a.user_no = e.`no`
+    </sql>
+
+    <select id="findTalentActivityById" parameterType="TalentActivityRes" resultMap="TalentActivityResultMap">
+        <include refid="selectActivityFromJoin"/>
+        WHERE 1=1
+            AND a.no = #{no}
+            AND b.status = 'ACTIVE'
+    </select>
+
+    <resultMap id="TalentActivityResultMap" type="TalentActivityRes">
+        <!-- 재능활동 -->
+        <id property="no" column="no"/>
+        <result property="userNo" column="user_no"/>
+        <result property="name" column="name"/>
+        <result property="tel" column="tel"/>
+        <result property="title" column="title"/>
+        <result property="activityField" column="activity_field"/>
+        <result property="detail" column="detail"/>
+        <result property="motive" column="motive"/>
+        <result property="target" column="target"/>
+        <result property="profile" column="profile"/>
+        <result property="activityType" column="activity_type"/>
+        <result property="location" column="location"/>
+        <result property="price" column="price"/>
+        <result property="startDate" column="start_date"/>
+        <result property="endDate" column="end_date"/>
+
+        <!-- 스케줄 리스트 -->
+        <collection property="scheduleList" ofType="ActivityScheduleRes">
+            <id property="no" column="schedule_no"/>
+            <result property="day" column="day"/>
+            <result property="startTime" column="start_time"/>
+            <result property="endTime" column="end_time"/>
+            <result property="status" column="schedule_status"/>
+        </collection>
+
+        <!-- 경력 리스트 -->
+        <collection property="careerList" ofType="CareerRes">
+            <id property="no" column="career_no"/>
+            <result property="careerField" column="career_field"/>
+            <result property="content" column="career_content"/>
+            <result property="careerFrom" column="career_from"/>
+            <result property="careerTo" column="career_to"/>
+            <result property="status" column="career_status"/>
+        </collection>
+
+        <!-- 자격증 리스트 -->
+        <collection property="qualificationList" ofType="QualificationRes">
+            <id property="no" column="qualification_no"/>
+            <result property="name" column="qualification_name"/>
+            <result property="qualificationField" column="qualification_field"/>
+            <result property="validFrom" column="valid_from"/>
+            <result property="validTo" column="valid_to"/>
+            <result property="status" column="qualification_status"/>
+        </collection>
+    </resultMap>
+
+    <update id="updateTalentActivity" parameterType="TalentActivityReq">
+        UPDATE tb_talent_activist
+        SET
+            user_no = #{userNo}
+          , title = #{title}
+          , activity_field = #{activityField}
+          , detail = #{detail}
+          , motive = #{motive}
+          , activity_type = #{activityType}
+          , target = #{target}
+          , profile = #{profile}
+          , location = #{location}
+          , price = #{price}
+          , start_date = #{startDate}
+          , end_date = #{endDate}
+          , updated_at = NOW()
+        WHERE
+            1=1
+            AND `no` = #{no}
+    </update>
+
+    <update id="updateSchedule" parameterType="map">
+        UPDATE tb_activity_schedule
+        SET
+            start_time = #{newSchedule.startTime}
+          , end_time = #{newSchedule.endTime}
+          , updated_at = NOW()
+          , status = "ACTIVE"
+        WHERE
+            1 = 1
+            AND activist_no = #{talentActivityReq.no}
+            AND `day` = #{newSchedule.day}
+    </update>
+
+    <update id="updateCareer" parameterType="map">
+        UPDATE tb_career
+        SET
+            career_field = #{careerField}
+          , content = #{content}
+          , career_from = #{careerFrom}
+          , career_to = #{careerTo}
+          , updated_at = NOW()
+        WHERE
+            1 = 1
+            AND no = #{no}
+    </update>
+
+    <update id="updateQualification" parameterType="map">
+        UPDATE tb_qualification
+        SET
+            name = #{name}
+          , qualification_field = #{qualificationField}
+          , valid_from = #{validFrom}
+          , valid_to = #{validTo}
+          , updated_at = NOW()
+        WHERE
+            1 = 1
+          AND no = #{no}
+    </update>
+
+    <update id="deleteTalentActivity">
+        UPDATE tb_talent_activist
+        SET status = 'TRASH', updated_at = now()
+        WHERE no = #{no}
+    </update>
+
+    <update id="deleteSchedule">
+        UPDATE tb_activity_schedule
+        SET status = 'TRASH', updated_at = now()
+        WHERE no = #{no}
+    </update>
+
+    <update id="deleteCareer">
+        UPDATE tb_career
+        SET status = 'TRASH', updated_at = now()
+        WHERE no = #{no}
+    </update>
+
+    <update id="deleteQualification">
+        UPDATE tb_qualification
+        SET status = 'TRASH', updated_at = now()
+        WHERE no = #{no}
+    </update>
+
+    <select id="getTotalTalentCnt" resultType="int" parameterType="map">
+        SELECT COUNT(*)
+        FROM(
+            SELECT
+            a.`no`,
+            d.name,
+            a.title,
+            a.activity_field,
+            a.target,
+            a.price,
+            a.start_date,
+            GROUP_CONCAT(b.`day` ORDER BY b.`day` DESC SEPARATOR ', ') AS days
+            FROM tb_talent_activist a
+            LEFT JOIN tb_activity_schedule b ON a.no = b.activist_no
+            JOIN tb_user d ON a.user_no = d.no
+            WHERE 1 = 1
+            AND a.status != "TRASH"
+            AND b.status = "ACTIVE"
+            GROUP BY a.no) c
+        WHERE 1 = 1
+        <if test="target != null and target != ''">
+            AND c.target LIKE CONCAT('%', #{target}, '%')
+        </if>
+        <if test="activityType != null and activityType != '' and activityType != '기타'">
+            AND c.activity_field = #{activityType}
+        </if>
+        <if test="activityType == '기타' ">
+            AND c.activity_field  NOT IN ('목공', '공예', '커피', '원예', '음악', '댄스', '푸드', '사진')
+        </if>
+        <if test="day != null and day != ''">
+            AND c.days LIKE CONCAT('%', #{day}, '%')
+        </if>
+        <if test="title != null and title != ''">
+            AND c.title LIKE CONCAT('%', #{title}, '%')
+        </if>
+    </select>
+
+    <select id="getTalentList" parameterType="PageRequest" resultType="TalentListRes">
+        SELECT *
+        FROM(
+            SELECT
+                a.`no`,
+                d.name,
+                a.title,
+                a.activity_field,
+                a.target,
+                a.price,
+                a.profile,
+                a.start_date,
+                GROUP_CONCAT(b.`day` ORDER BY b.`day` DESC SEPARATOR ', ') AS days
+            FROM tb_talent_activist a
+            LEFT JOIN tb_activity_schedule b ON a.no = b.activist_no
+            LEFT JOIN tb_user d ON a.user_no = d.no
+            WHERE 1 = 1
+            AND a.status != "TRASH"
+            AND b.status = "ACTIVE"
+            GROUP BY a.no) c
+        WHERE 1 = 1
+        <if test="data.target != null and data.target != ''">
+            AND c.target LIKE CONCAT('%', #{data.target}, '%')
+        </if>
+        <if test="data.activityType != null and data.activityType != '' and data.activityType != '기타'">
+            AND c.activity_field = #{data.activityType}
+        </if>
+        <if test="data.activityType == '기타' ">
+            AND c.activity_field  NOT IN ('목공', '공예', '커피', '원예', '음악', '댄스', '푸드', '사진')
+        </if>
+        <if test="data.day != null and data.day != ''">
+            AND c.days LIKE CONCAT('%', #{data.day}, '%')
+        </if>
+        <if test="data.title != null and data.title != ''">
+            AND c.title LIKE CONCAT('%', #{data.title}, '%')
+        </if>
+        LIMIT #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <insert id="applyTalentActivity" parameterType="activityApplyReq" >
+        INSERT INTO tb_activity_apply
+        ( activist_no
+        , user_no
+        , created_at
+        , status)
+        VALUES
+        ( #{activistNo}
+        , #{userNo}
+        , now()
+        , "PENDING")
+    </insert>
+
+    <update id="updateActivityApply" parameterType="map">
+        UPDATE tb_activity_apply
+        SET
+        <if test="reason != null and reason != ''">
+            reason = #{reason},
+        </if>
+            status = #{status}
+          , updated_at = NOW()
+        WHERE
+            1 = 1
+          AND no = #{no}
+    </update>
+
+    <update id="updateActivistStatus" parameterType="map">
+        UPDATE tb_talent_activist
+        SET
+        <if test="progressStatus != null and progressStatus != ''">
+            status = #{progressStatus},
+        </if>
+         updated_at = NOW()
+        WHERE
+        1 = 1
+        AND no = #{activistNo}
+    </update>
+
+    <select id="getApplyList" parameterType="PageRequest" resultType="ApplyListRes">
+        SELECT
+            a.`no` ,
+            a.reason,
+            b.`no` AS activity_no,
+            b.title AS activity_title,
+            b.profile,
+            b.price,
+            c.`no` AS userNo,
+            c.name ,
+            c.tel ,
+            c.email,
+            a.created_at ,
+            a.status ,
+            b.status AS activity_status
+        FROM tb_activity_apply a
+        JOIN tb_talent_activist b ON a.activist_no = b.`no`
+        JOIN tb_user c ON a.user_no = c.`no`
+        WHERE 1 = 1
+        <if test="data.search != null and data.search != ''">
+            AND (b.title LIKE CONCAT('%', #{data.search}, '%') OR c.name LIKE CONCAT('%', #{data.search}, '%'))
+        </if>
+        <if test="data.no != null and data.no != ''">
+            AND a.activist_no = #{data.no}
+        </if>
+        <if test="data.userNo != null">
+            AND a.user_no = #{data.userNo}
+        </if>
+            AND b.status != 'TRASH'
+        ORDER BY a.created_at DESC
+        LIMIT #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <select id="getTotalApplyCnt" resultType="int" parameterType="map">
+        SELECT COUNT(*)
+        FROM tb_activity_apply a
+        JOIN tb_talent_activist b ON a.activist_no = b.`no`
+        JOIN tb_user c ON a.user_no = c.`no`
+        WHERE 1 = 1
+            AND b.status != 'TRASH'
+        <if test="search != null and search != ''">
+            AND (b.title LIKE CONCAT('%', #{search}, '%') OR c.name LIKE CONCAT('%', #{search}, '%'))
+        </if>
+        <if test="no != null and no != ''">
+            AND a.activist_no = #{no}
+        </if>
+        <if test="userNo != null">
+            AND a.user_no = #{userNo}
+        </if>
+    </select>
+
+    <select id="getApplyDetail" parameterType="Long" resultType="ApplyDetailRes">
+        SELECT
+            a.title
+           ,a.activity_field
+           ,a.start_date
+           ,a.end_date
+           ,a.price
+           ,a.profile
+           ,GROUP_CONCAT(b.`day` ORDER BY b.`day` ASC SEPARATOR ', ') AS days
+           ,c.name
+        FROM tb_talent_activist a
+        JOIN tb_activity_schedule b ON a.`no` = b.activist_no
+        JOIN tb_user c ON a.user_no = c.`no`
+        WHERE 1 = 1
+            AND a.`no` = #{no}
+            AND b.status = 'ACTIVE'
+    </select>
+</mapper>

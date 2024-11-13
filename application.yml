@@ -21,7 +21,7 @@ spring:
       password: jc11
       connection-timeout: 30000
       maximum-pool-size: 60
-      minimum-idle: 50
+      minimum-idle: 10
       idle-timeout: 600000
 
   data:
@@ -33,9 +33,11 @@ spring:
   session:
     redis:
       repository-type: indexed
-    timeout: 60s
+    timeout: 1800s
 
 server:
+  compression:
+    enabled: true
   port: 9000
   shutdown: graceful
   servlet:
@@ -45,7 +47,7 @@ server:
         secure: false          # HTTPS에서만 쿠키 전송
         http-only: true       # JavaScript로 쿠키 접근 금지
         same-site: Strict     # 동일 사이트에서만 쿠키 전송
-      timeout: 60s
+      timeout: 1800s
 
 ---
 #dev

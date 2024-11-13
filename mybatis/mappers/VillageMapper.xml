@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jecheon.platform.repository.VillageRepository">
+
+    <select id="getVillageInfos" resultMap="VillageResultMap">
+        SELECT
+            a.no
+           ,a.village_name
+           ,a.short_description
+           ,a.description
+           ,a.local_specialty
+           ,a.website
+           ,b.contents AS character_contents
+           ,b.no AS character_no
+           ,c.no AS institution_no
+           ,c.name AS institution_name
+           ,c.contents AS institution_contents
+           ,d.no AS addfile_no
+           ,d.addfile
+        FROM tb_village_info a
+        LEFT JOIN tb_village_character b ON a.no = b.village_no
+        LEFT JOIN tb_major_institutions c ON a.no = c.village_no
+        LEFT JOIN tb_addfile d ON a.no = d.parent_no
+        WHERE
+            1 = 1
+            and a.village_name = #{villageName}
+            and d.addfile_type = "village"
+            and d.status = "ACTIVE";
+    </select>
+
+    <resultMap id="VillageResultMap" type="villageRes">
+        <!-- 마을 정보 -->
+        <id property="no" column="no" />
+        <result property="villageName" column="village_name"/>
+        <result property="shortDescription" column="short_description"/>
+        <result property="description" column="description"/>
+        <result property="localSpecialty" column="local_specialty"/>
+        <result property="website" column="website"/>
+
+        <!-- 마을 특징 리스트 -->
+        <collection property="villageCharacter" ofType="com.jecheon.platform.dto.response.VillageCharacterRes">
+            <result property="no" column="character_no"/>
+            <result property="contents" column="character_contents"/>
+        </collection>
+
+        <!-- 주요 기관 리스트 -->
+        <collection property="institutions" ofType="com.jecheon.platform.dto.response.InstitutionsRes">
+            <result property="no" column="institution_no"/>
+            <result property="name" column="institution_name"/>
+            <result property="contents" column="institution_contents"/>
+        </collection>
+
+        <!-- 첨부 파일(이미지) -->
+        <collection property="addfiles" ofType="com.jecheon.platform.dto.response.AddfileRes">
+            <result property="no" column="addfile_no"/>
+            <result property="addfile" column="addfile"/>
+        </collection>
+    </resultMap>
+
+
+</mapper>

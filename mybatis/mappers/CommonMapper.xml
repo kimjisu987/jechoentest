@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jecheon.platform.repository.CommonRepository">
+    <select id="getAddfileList" parameterType="AddfileReq" resultType="string">
+        SELECT addfile
+        FROM tb_addfile
+        WHERE
+            addfile_type = #{addfileType}
+            AND parent_no = #{parentNo}
+            AND status = 'ACTIVE'
+    </select>
+
+    <insert id="saveAddfile" parameterType="AddfileReq">
+        INSERT INTO
+        tb_addfile (addfile, created_at, updated_at, status, addfile_type, parent_no)
+        VALUES
+        <foreach collection="addfiles" item="addFile" separator=",">
+            (#{addFile}, NOW(), NOW(), 'ACTIVE', #{addfileType}, #{parentNo})
+        </foreach>
+    </insert>
+
+    <update id="updateAddfile" parameterType="AddfileReq">
+        UPDATE tb_addfile
+        SET
+            updated_at = NOW()
+        WHERE
+            addfile IN <foreach collection="addfiles" item="addfile" open="(" close=")" separator=",">#{addfile}</foreach>
+            AND addfile_type = #{addfileType}
+            AND parent_no = #{parentNo}
+            AND status = 'ACTIVE'
+    </update>
+
+    <update id="deleteAddfile" parameterType="AddfileReq">
+        UPDATE tb_addfile
+        SET
+            updated_at = NOW(),
+            status = 'TRASH'
+        WHERE
+            addfile IN <foreach collection="addfiles" item="addfile" open="(" close=")" separator=",">#{addfile}</foreach>
+            AND addfile_type = #{addfileType}
+            AND parent_no = #{parentNo}
+            AND status = 'ACTIVE'
+    </update>
+</mapper>

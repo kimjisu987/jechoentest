@@ -105,6 +105,11 @@ input, select, label, img, input, select, textarea, button, a {
   vertical-align: middle;
 }
 
+.toastui-editor-contents, .toastui-editor-defaultUI, .ProseMirror {
+  font-family: "Pretendard", "맑은고딕", arial !important;
+  font-size: 1rem !important;
+}
+
 select {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -249,7 +254,6 @@ h3 {
   font-size: 1rem;
   background: transparent;
   margin-bottom: 1.5rem;
-  color: #333;
 }
 .noticeRegistration .select_con_default select option {
   font-size: 1rem;

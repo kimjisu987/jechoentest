@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jecheon.platform.repository.QnaRepository">
+    <select id="getQnaCount" parameterType="map" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_qna
+        WHERE
+            (#{category} = '' OR category = #{category})
+            AND (#{target} = '' OR user_no = #{target})
+            AND status != 'TRASH'
+    </select>
+
+    <select id="getQnaReplyCount" parameterType="long" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_qna_reply
+        WHERE
+            qna_no = #{qnaNo}
+            AND status != 'TRASH'
+    </select>
+
+    <select id="getQnaUser" parameterType="long" resultType="long">
+        SELECT user_no
+        FROM tb_qna
+        WHERE no = #{qnaNo}
+    </select>
+
+    <select id="getQnaList" parameterType="pageRequest" resultType="QnaRes">
+        SELECT
+            tq.no AS qnaNo, tq.category AS category, tq.title AS title, tq.created_at AS createdAt, tq.status AS status,
+            tu.user_id AS userId, tu.name AS userName, tqr.no AS replyNo
+        FROM tb_qna tq
+        JOIN tb_user tu ON tu.no = tq.user_no
+        LEFT JOIN tb_qna_reply tqr ON tqr.qna_no = tq.no AND tqr.status != 'TRASH'
+        WHERE
+            (#{data.category} = '' OR tq.category = #{data.category})
+            AND (#{data.target} = '' OR tq.user_no = #{data.target})
+            AND tq.status != 'TRASH'
+        ORDER BY tq.no DESC
+        LIMIT #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <select id="getQna" parameterType="long" resultType="QnaRes">
+        SELECT
+            tq.no AS qnaNo, tq.category AS category, tq.title AS title, tq.content AS content, tq.created_at AS createdAt, tq.status AS status,
+            tu.user_id AS userId, tu.name AS userName,
+            tqr.no AS replyNo, tqr.reply_content AS replyContent, tqr.created_at AS replyCreatedAt
+        FROM tb_qna tq
+        JOIN tb_user tu ON tu.no = tq.user_no
+        LEFT JOIN tb_qna_reply tqr ON tqr.qna_no = tq.no AND tqr.status != 'TRASH'
+        WHERE
+            tq.no = #{qnaNo}
+            AND tq.status != 'TRASH'
+    </select>
+
+    <insert id="saveQna" parameterType="QnaReq" useGeneratedKeys="true" keyProperty="no">
+        INSERT INTO
+            tb_qna (user_no, category, title, content, created_at, updated_at, status)
+        VALUES
+            (#{userNo}, #{category}, #{title}, #{content}, NOW(), NOW(), 'ACTIVE')
+    </insert>
+
+    <update id="updateQnaPrivate" parameterType="long">
+        UPDATE
+            tb_qna
+        SET
+            updated_at = NOW(),
+            status = 'PRIVATE'
+        WHERE
+            no = #{qnaNo}
+            AND status != 'TRASH'
+    </update>
+
+    <insert id="saveQnaReply" parameterType="QnaReplyReq">
+        INSERT INTO
+            tb_qna_reply (qna_no, reply_content, created_at, updated_at, status, user_no)
+        VALUES
+            (#{qnaNo}, #{content}, NOW(), NOW(), 'ACTIVE', #{userNo})
+    </insert>
+</mapper>

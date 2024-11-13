@@ -1,10 +1,12 @@
 $(document).ready(function(){
-	// ----------------------------------------------
-	// 초기 세팅
-	let i = 0;  // 섹션 인덱스 저장
-	const section = $(".section_inner"); 
-	const step_num = $(".join_step > li > .step_number");
-	const step_check = $(".join_step > li > .step_check");
+  // ----------------------------------------------
+  // 초기 세팅
+  let i = 0;  // 섹션 인덱스 저장
+  const section = $(".section_inner"); 
+  const step_num = $(".join_step > li > .step_number");
+  const step_check = $(".join_step > li > .step_check");
+  // 아이디 중복확인 변수
+  let idCheck = false;
 
 	section.hide().eq(i).show();  // 모든 섹션 숨기고, 현재 섹션 표시
 	step_update();
@@ -51,11 +53,11 @@ $(document).ready(function(){
 	});
 	// 개별 체크박스 클릭 이벤트
 	$one_agree.on("change", all_checked);
-	
+
 	// 1단계 - 체크 유효성검사 후 다음단계
 	$(".step1_btn").click(function(){
 		let check1Checked = document.querySelector('#terms_agree').checked;
-		let check2Checked = document.querySelector('#personal_agree').checked;  
+		let check2Checked = document.querySelector('#personal_agree').checked;
 		if (!check1Checked || !check2Checked) {
 			alert_modal('modal_error', '약관 동의', '이용약관 동의, 개인정보 수집 및 이용동의에 체크해야 합니다.');
 			return false;
@@ -84,19 +86,19 @@ $(document).ready(function(){
 		$('html, body').animate({scrollTop: 0}, 300);
 		$("#user_id").focus();
 	});
-	
+
 	// ----------------------------------------------
 	// 3단계 - 다음API - 주소
 	function execDaumPostcode() {
 		new daum.Postcode({
 			oncomplete: function(data) {
 				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-				
+
 				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 				var addr = ''; // 주소 변수
 				var extraAddr = ''; // 참고항목 변수
-				
+
 				//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
 				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
 					addr = data.roadAddress;
@@ -120,7 +122,7 @@ $(document).ready(function(){
 						extraAddr = ' (' + extraAddr + ')';
 					}
 					// 조합된 참고항목을 해당 필드에 넣는다.
-					document.getElementById("extraAddress").value = extraAddr;            
+					document.getElementById("extraAddress").value = extraAddr;
 				} else {
 					document.getElementById("extraAddress").value = '';
 				}
@@ -144,7 +146,7 @@ $(document).ready(function(){
 			let prefix = val.substring(0, 3); // 010
 			let firstPart = val.substring(3, 7); // 4자리
 			let secondPart = val.substring(7, 11); // 4자리
-			
+
 			if (val.length < 7) {
 				$(this).val(prefix + '-' + firstPart);
 			} else {
@@ -154,7 +156,7 @@ $(document).ready(function(){
 			$(this).val(val); // 3자리 이하일 경우 그대로 표시
 		}
 	});
-	// 3단계 - 생년월일 슬래쉬(/) 추가
+	// 3단계 - 생년월일 슬래쉬(-) 추가
 	$("#birth").keyup(function() {
 		let val = $(this).val().replace(/[^0-9]/g, ''); // 숫자만 남김
 		if (val.length > 4) {
@@ -162,30 +164,71 @@ $(document).ready(function(){
 			let year = val.substring(0, 4); // 4자리 연도
 			let month = val.substring(4, 6); // 2자리 월
 			let day = val.substring(6, 8); // 2자리 일
-			
+
 			if (val.length < 6) {
-				$(this).val(year + '/' + month);
+				$(this).val(year + '-' + month);
 			} else {
-				$(this).val(year + '/' + month + (day ? '/' + day : ''));
+				$(this).val(year + '-' + month + (day ? '-' + day : ''));
 			}
 		} else {
 			$(this).val(val); // 4자리 이하일 경우 그대로 표시
 		}
 	});
-	// 3단계 - submit
+
+	// 3단계 - 아이디 중복 체크
+    $(".id_check").click(function(){
+        let userId = $("#user_id").val();
+        let option = deepExtend({}, ajaxOptions);
+        option.URL = "/api/v1/user/confirm?userId=" + userId;
+        option.TYPE = "GET";
+        option.CALLBACK = function(response) {
+            if(response.data){
+                idCheck = true;
+                alert_modal('modal_ok', '아이디 중복 체크', '사용 가능한 아이디 입니다.');
+            }
+        }
+        ajaxWrapper.callAjax(option);
+    });
+
+	// 3단계 - 회원가입 api 호출
 	$(".step3_btn").click(function(e) {
-		e.preventDefault(); // 기본 제출 방지  
+		e.preventDefault(); // 기본 제출 방지
 		if (joinUser_check()) {
-			// ★ 나중에 주석 수정
-			// $(this).closest("form").submit(); // 유효성 검사 후 폼제출
-			if (i < section.length - 1) { // next 버튼
-				i++;  // 1씩 증가
-			} else if (i > 0) { // prev 버튼
-				i--;  // 1씩 감소
-			}
-			section.hide().eq(i).fadeIn();  // 현재 섹션 표시
-			step_update();  // 스텝 업데이트      
-			$('html, body').animate({scrollTop: 0}, 300);
+			if(!idCheck){
+                alert_modal('modal_error', '아이디 중복 체크', '아이디 중복체크를 먼저 진행해주세요.');
+                return;
+            }
+
+            let param = {
+                "userId" : $("#user_id").val(),
+                "password" : $("#password").val(),
+                "passwordCheck" : $("#password_re").val(),
+                "name" : $("#name").val(),
+                "birth" : $("#birth").val(),
+                "tel" : $("#tel").val(),
+                "email" : $("#email").val(),
+                "zipCode" : $("#postcode").val(),
+                "address" : $("#address").val() + ',' + $("#detailAddress").val() + ',' + $("#extraAddress").val(),
+                "type" : "USER"
+            }
+
+            let option = deepExtend({}, ajaxOptions);
+            option.URL = "/api/v1/user";
+            option.TYPE = "POST";
+            option.HEADERS = getCsrfHeader();
+            option.PARAM = JSON.stringify(param);
+            option.CALLBACK = function(response) {
+                $("#createUserName").text(response.data.name);
+                if (i < section.length - 1) { // next 버튼
+                    i++;  // 1씩 증가
+                } else if (i > 0) { // prev 버튼
+                    i--;  // 1씩 감소
+                }
+                section.hide().eq(i).fadeIn();  // 현재 섹션 표시
+                step_update();  // 스텝 업데이트
+                $('html, body').animate({scrollTop: 0}, 300);
+            }
+            ajaxWrapper.callAjax(option);
 		} else {
 			// 유효성 검사 실패 시 경고 메시지 표시
 			$('html, body').animate({scrollTop: 0}, 300);
@@ -198,13 +241,13 @@ $(document).ready(function(){
 				{ input: $('#password'), pattern: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/, errorMsg: "올바르지 않은 형식" },
 				{ input: $('#password_re'), pass1: $('#password'), errorMsg: "동일하지 않은 비밀번호" },
 				{ input: $('#name'), pattern: /^[가-힣a-zA-Z]{1,20}$/, errorMsg: "올바르지 않은 형식" },
-				{ input: $('#birth'), pattern: /^\d{4}\/\d{2}\/\d{2}$/, errorMsg: "숫자만 입력" },
+				{ input: $('#birth'), pattern: /^\d{4}-\d{2}-\d{2}$/, errorMsg: "숫자만 입력" },
 				{ input: $('#tel'), pattern: /^\d{3}-\d{4}-\d{4}$/, errorMsg: "숫자만 입력" },
 				{ input: $('#email'), pattern: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, errorMsg: "올바르지 않은 형식" },
 				{ input: $('#postcode'), errorMsg: "주소 검색을 통해 입력" }
 			];
 			let input_return = true;
-			
+
 			// 유효성 검사
 			inputs.forEach(({ input, pattern, pass1, errorMsg }) => {
 				if (input.val().length < 1) {
@@ -219,7 +262,7 @@ $(document).ready(function(){
 				} else {
 					hideError(input);
 				}
-			});			
+			});
 			return input_return;
 		}
 

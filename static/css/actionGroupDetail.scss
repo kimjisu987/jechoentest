@@ -243,6 +243,7 @@ section {
             }
             &>li {
                 @include media("mobile"){
+                    height: 40vw;
                     border-radius: 0 $radius_s 0 $radius_s;
                 }
             }
@@ -257,9 +258,9 @@ section {
                 }
                 @include media("mobile"){
                     border-radius: 0 $radius_s 0 $radius_s;
+                    height: 40vw;
                     img{
                         border-radius: 0 $radius_s 0 $radius_s;
-                        width: 100%;
                         height: 100%;
                     }   
                 }
@@ -334,6 +335,30 @@ section {
                 padding-inline: 6px !important;
             }
         }
+        
+        button {
+            &::after {
+                content: "";
+                display: block;
+                width: 100%; height: 100%;
+            }
+            &.pagebtn_off::after {
+                opacity: 0.4;
+            }
+        }
+        .prevFirst::after {
+            background: url("../icon/icon_arrowleftmore.svg") no-repeat right center;
+        }
+        .prev::after {
+            background: url("../icon/icon_arrowleft.svg") no-repeat right center;
+        }
+        .nextLast::after {
+            background: url("../icon/icon_arrowrightmore.svg") no-repeat right center;
+        }
+        .next::after {
+            background: url("../icon/icon_arrowright.svg") no-repeat right center;
+        }
+
         .prevFirst, .nextLast {
             margin: 0 $padding_12;
             @media screen and (max-width: 320px) {

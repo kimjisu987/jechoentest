@@ -67,7 +67,8 @@ $(document).ready(function() {
       });
 
       // 모바일 버전 - GNB 클릭 시 LNB 슬라이드
-      $(".gnb > li > a").off("click").click(function() {
+      $(".gnb > li > a").off("click").click(function(e) {
+        e.preventDefault();
         let $lnb = $(this).next();
 
         // 모든 서브메뉴를 접고 클래스 제거
@@ -86,8 +87,7 @@ $(document).ready(function() {
       });
 
       // 서브타이틀 영역
-      $(".inner > ul > li").off("click").click(function(e) {
-        e.preventDefault();
+      $(".inner > ul > li").off("click").click(function() {
         if ($(this).find(".crumbs").hasClass("crumbs_act")) {
           $(".inner > ul > li").css({
                 "border": "1px solid transparent",

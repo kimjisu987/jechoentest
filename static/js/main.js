@@ -17,8 +17,8 @@ $(document).ready(function(){
             clickable: true,
         },
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".visual_button_next",
+            prevEl: ".visual_button_prev",
         },
     });    
     // 액션그룹, 재능활동가, 공동체마켓 스와이퍼
@@ -27,8 +27,8 @@ $(document).ready(function(){
         spaceBetween: 16,
         loop: true,
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".tab_button_next",
+            prevEl: ".tab_button_prev",
         },
         breakpoints: {
             // 428 이상에만 적용
@@ -41,17 +41,17 @@ $(document).ready(function(){
             }
         }
     });
-    // 미리보기 모달 스와이퍼    
+    // 미리보기 모달 스와이퍼
     var swiper = new Swiper(".preview_swiper", {
         slidesPerView: 1,
         loop: true,
         pagination: {
-            el: ".swiper-pagination",
+            el: ".preview_pagination",
             clickable: true,
         },
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".preview_button_next",
+            prevEl: ".preview_button_prev",
         },
     });
     $(".preview_close").click(function(){

@@ -5,6 +5,8 @@ $(document).ready(function(){
 	const section = $(".section_inner"); 
 	const step_num = $(".join_step > li > .step_number");
 	const step_check = $(".join_step > li > .step_check");
+	// 아이디 중복확인 변수
+	let idCheck = false;
 
 	section.hide().eq(i).show();  // 모든 섹션 숨기고, 현재 섹션 표시
 	step_update();
@@ -201,20 +203,31 @@ $(document).ready(function(){
 			$(this).val(val); // 4자리 이하일 경우 그대로 표시
 		}
 	});
+
+	// 3단계 - 아이디 중복 체크
+	$(".id_check").click(function(){
+		let userId = $("#user_id").val();
+		let option = deepExtend({}, ajaxOptions);
+		option.URL = "/api/v1/user/confirm?userId=" + userId;
+		option.TYPE = "GET";
+		option.CALLBACK = function(response) {
+			if(response.data){
+				idCheck = true;
+				alert_modal('modal_ok', '아이디 중복 체크', '사용 가능한 아이디 입니다.');
+			}
+		}
+		ajaxWrapper.callAjax(option);
+	});
+
 	// 3단계 - submit
 	$(".step3_btn").click(function(e) {
 		e.preventDefault(); // 기본 제출 방지  
 		if (joinUser_check()) {
-			// ★ 나중에 주석 수정
-			// $(this).closest("form").submit(); // 유효성 검사 후 폼제출
-			if (i < section.length - 1) { // next 버튼
-				i++;  // 1씩 증가
-			} else if (i > 0) { // prev 버튼
-				i--;  // 1씩 감소
+			if(!idCheck){
+				alert_modal('modal_error', '아이디 중복 체크', '아이디 중복체크를 먼저 진행해주세요.');
+				return;
 			}
-			section.hide().eq(i).fadeIn();  // 현재 섹션 표시
-			step_update();  // 스텝 업데이트      
-			$('html, body').animate({scrollTop: 0}, 300);
+			saveAddfile();
 		} else {
 			// 유효성 검사 실패 시 경고 메시지 표시
 			$('html, body').animate({scrollTop: 0}, 300);
@@ -278,6 +291,62 @@ $(document).ready(function(){
 			return input_return;
 		}
 
+		// 첨부파일 저장
+		function saveAddfile() {
+			let formData = new FormData();
+			$("input[name=addfile]").each(function(idx, item) {
+				if ($(item)[0].files.length !== 0) {
+					formData.append("file", $(item)[0].files[0]);
+				}
+			});
+
+			let addfiles = uploadFile("joinFile", formData);
+			saveUser(addfiles);
+		}
+
+		// 가입정보 저장
+		function saveUser(addfiles) {
+			let param = {
+				"userId" : $("#user_id").val(),
+				"password" : $("#password").val(),
+				"passwordCheck" : $("#password_re").val(),
+				"name" : $("#name").val(),
+				"birth" : $("#birth").val(),
+				"tel" : $("#tel").val(),
+				"email" : $("#email").val(),
+				"zipCode" : $("#postcode").val(),
+				"address" : $("#address").val() + ' ' + $("#detailAddress").val() + ' ' + $("#extraAddress").val(),
+				"type" : "ORGANIZATION",
+				"licenseName" : $("#license_name").val(),
+				"licenseNumber" : $("#license_no").val(),
+				"ceoName" : $("#ceo_name").val(),
+				"licenseTel" : $("#organ_tel").val(),
+				"licenseFax" : $("#fax").val(),
+				"webSite" : $("#website").val(),
+				"description" : $("#description").val(),
+				"mainItem" : $("#main_item").val(),
+				"addfiles": addfiles
+			}
+
+			let option = deepExtend({}, ajaxOptions);
+			option.URL = "/api/v1/organization";
+			option.TYPE = "POST";
+			option.HEADERS = getCsrfHeader();
+			option.PARAM = JSON.stringify(param);
+			option.CALLBACK = function(response) {
+				$("#createUserName").text(response.data.name);
+				if (i < section.length - 1) { // next 버튼
+					i++;  // 1씩 증가
+				} else if (i > 0) { // prev 버튼
+					i--;  // 1씩 감소
+				}
+				section.hide().eq(i).fadeIn();  // 현재 섹션 표시
+				step_update();  // 스텝 업데이트
+				$('html, body').animate({scrollTop: 0}, 300);
+			}
+			ajaxWrapper.callAjax(option);
+		}
+
 		// 공통 오류 메시지 표시
 		function showError(input, msg) {
 			let error_msg = input.siblings(".form_check_box").find(".check_error");
@@ -311,7 +380,7 @@ $(document).ready(function(){
 	$(".file_add").click(function(){
 		let fileHtml = ``;
 		fileHtml += `<div class="input_file_add">`
-		fileHtml += `    <input type="file" name="addfile" class="addfile" maxlength="13">`
+		fileHtml += `    <input type="file" accept="image/jpeg, image/png, application/pdf" name="addfile" class="addfile" maxlength="13">`
 		fileHtml += `    <button type="button" class="file_del">삭제</button>`
 		fileHtml += `</div>`
 		const fileAdd = $(fileHtml);

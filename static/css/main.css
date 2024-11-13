@@ -791,6 +791,11 @@ header .sub_title_bg {
 .main .swiper_container .swiper-button-prev {
   left: -80px;
 }
+@media screen and (max-width: 767px) {
+  .main .swiper_container > .swiper-button-next, .main .swiper_container .swiper-button-prev {
+    display: none;
+  }
+}
 .main .section_tab {
   position: relative;
   padding-block: 6rem 3rem;
@@ -1571,21 +1576,28 @@ header .sub_title_bg {
   z-index: 100;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: rgba(51, 51, 51, 0.4);
 }
 .main .preview_modal_inner {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 500px;
   height: 500px;
-  max-width: 80vw;
-  max-height: 80vw;
+  max-width: calc(100vw - 1rem);
+  max-height: calc(100vw - 1rem);
   margin-left: auto;
   margin-right: auto;
+}
+@media screen and (max-width: 767px) {
+  .main .preview_modal_inner {
+    top: 1rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
 }
 .main .preview_modal_inner .swiper {
   position: relative;
