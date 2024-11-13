@@ -46,11 +46,14 @@ header .sub_title_bg {display: none;}
         }
         @include media("mobile") {
             flex-direction: column;
-            height: calc(100vh);
+            height: 100vh;
             padding-bottom: 6rem;
             box-sizing: border-box;
             border-radius: 0;
         }
+        @media screen and (max-width: 320px) {
+            height: 150vh;
+		}
         // 비주얼 스와이퍼
         .visual_swiper {
             width: 100%;
@@ -1034,6 +1037,70 @@ header .sub_title_bg {display: none;}
         }
         @include media("bigtablet") {
             padding-right: 1rem;
+        }
+    }
+    // 팝업 모달 서식 - 스와이퍼 모달 서식
+    .preview_modal {
+        position: fixed; z-index: 100;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: $color_tran_bk;
+    }
+    .preview_modal_inner {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%; height: 100%;
+        max-width: 500px; height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        .swiper {position: relative;}
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        // 페이지네이션 리스트
+        .swiper-pagination {
+            position: static;
+            background: $color_font_bk;
+            height: 3rem;
+            align-content: center;
+        }
+        .swiper-pagination-bullet {
+            width: $font_14; height: $font_14;
+            border-radius: $font_16;
+            background: $color_font_wh;
+            opacity: 1;
+            transition: 0.3s;
+            box-shadow: $shadow_box_s;
+        }
+        // 페이지네이션 액티브
+        .swiper-pagination-bullet-active {
+            width: $padding_36;
+        }
+        .swiper_btn {
+            display: flex;
+            background: $color_font_bk;
+            button {
+                flex: 1;
+                background: $color_font_wh;
+                line-height: 300%;
+                font-size: 1.1rem;
+                font-weight: bold;
+                &:first-of-type {
+                    border-right: 1px solid $color_font_bk;
+                }
+            }
         }
     }
 }

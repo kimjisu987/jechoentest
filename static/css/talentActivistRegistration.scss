@@ -211,7 +211,8 @@
         .activity_field_box {
             display: flex; gap: 1rem;
             width: 100%;
-            & > * {width: 100%; flex: 1;}
+            & > div:nth-child(1) {width: calc(50% - 0.5rem);}
+            & > div:nth-child(2) {width: calc(50% - 0.5rem);}
         }
         // 신청분야 셀렉트
         .select_con_default {
@@ -299,14 +300,12 @@
             @include media("mobile") {
                 flex-wrap: wrap;
                 justify-content: space-between;
-                background: $color_font_wh;
-                border-radius: 0 1.5rem 0 1.5rem;
-                padding: 1rem;
-                &:not(:last-of-type) {
-                    border-bottom: 1rem solid $color_font_wh;
-                    margin-bottom: 1.5rem;
+                padding-bottom: 1.5rem; margin-bottom: 1.5rem;
+                border-bottom: 5px dotted $color_sub_g1;
+                &:last-of-type {
+                    border-bottom: none;
                 }                
-                .select_con_default {width: 65%; order: 1;}
+                .select_con_default {width: 60%; order: 1;}
                 select {padding-block: 0.83rem; margin-bottom: 0rem;}
                 input {flex: 1; order: 3; margin-bottom: 0.5rem;}
                 .day_line {

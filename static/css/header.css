@@ -1051,9 +1051,6 @@ h3 {
   width: 100%;
   height: 100%;
 }
-.input_fields input[type=date]:valid::before, .input_fields input[type=datetime-local]:valid::before {
-  display: none;
-}
 .input_fields input[type=time] {
   position: relative;
   background: url("../icon/icon_time.svg") no-repeat right 4px center/1.25rem auto;
