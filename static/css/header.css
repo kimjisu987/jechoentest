@@ -928,6 +928,7 @@ h3 {
   border-radius: 0;
   -webkit-appearance: none;
   text-align: left;
+  color: #333;
 }
 .input_fields input[type=date]:focus-visible, .input_fields input[type=date]:focus, .input_fields input[type=email]:focus-visible, .input_fields input[type=email]:focus, .input_fields input[type=file]:focus-visible, .input_fields input[type=file]:focus, .input_fields input[type=number]:focus-visible, .input_fields input[type=number]:focus, .input_fields input[type=password]:focus-visible, .input_fields input[type=password]:focus, .input_fields input[type=search]:focus-visible, .input_fields input[type=search]:focus, .input_fields input[type=tel]:focus-visible, .input_fields input[type=tel]:focus, .input_fields input[type=text]:focus-visible, .input_fields input[type=text]:focus, .input_fields input[type=time]:focus-visible, .input_fields input[type=time]:focus, .input_fields input[type=reset]:focus-visible, .input_fields input[type=reset]:focus, .input_fields input[type=submit]:focus-visible, .input_fields input[type=submit]:focus, .input_fields input[type=datetime-local]:focus-visible, .input_fields input[type=datetime-local]:focus {
   border-bottom: 1px solid #0191B6;

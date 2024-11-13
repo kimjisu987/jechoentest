@@ -706,7 +706,7 @@
 		border-radius: 0;
 		-webkit-appearance: none;
 		text-align: left;
-
+		color: $color_font_bk;
 		&:focus-visible, &:focus {
 			border-bottom: 1px solid $color_main_bl;
 		}
