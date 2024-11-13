@@ -599,7 +599,6 @@ h3 {
   width: min(100vw - (100vw - 100%) - 2rem, 900px);
   margin: 0 auto;
   box-sizing: border-box;
-  max-height: 90vh;
   position: absolute;
   background: #fff;
   top: 50%;
@@ -619,7 +618,7 @@ h3 {
 .actionGroupRegistration .action_modal .height_scroll_box {
   width: 100%;
   padding-right: 1rem;
-  max-height: calc(100vh - 2rem - 3rem - 3rem);
+  max-height: 80vh;
   overflow-y: auto;
 }
 .actionGroupRegistration .action_modal .height_scroll_box::-webkit-scrollbar {

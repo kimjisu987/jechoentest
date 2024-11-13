@@ -939,7 +939,7 @@ h3 {
   width: min(100vw - (100vw - 100%) - 2rem, 900px);
   margin: 0 auto;
   box-sizing: border-box;
-  max-height: 90vh;
+  max-height: 80vh;
   overflow: auto;
   position: absolute;
   background: #fff;

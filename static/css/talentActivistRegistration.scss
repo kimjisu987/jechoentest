@@ -407,7 +407,7 @@
         position: fixed; top: 0; left: 0; z-index: 100;
         background: $color_tran_bk;
         .modal_inner {
-            @include center_1400(900px); max-height: 90vh;
+            @include center_1400(900px); max-height: 80vh;
             overflow: auto;
             position: absolute;
             background: $color_font_wh;

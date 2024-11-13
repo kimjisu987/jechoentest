@@ -218,7 +218,6 @@
         background: $color_tran_bk;
         .modal_inner {
             @include center_1400(900px);
-            max-height: 90vh;
             position: absolute;
             background: $color_font_wh;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -235,7 +234,7 @@
         .height_scroll_box {
             width: calc(100%);
             padding-right: 1rem;
-            max-height: calc(100vh - 2rem - $font_48 - $font_48);
+            max-height: 80vh;
             overflow-y: auto;
             &::-webkit-scrollbar {width: 16px;}
             &::-webkit-scrollbar-thumb {
