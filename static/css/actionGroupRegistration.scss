@@ -112,6 +112,8 @@
             &.plus {background-image: url(../icon/icon_plus_w.svg);}
         }
     }
+    // 기수 넘버
+    .input_number input {width: 2rem;}
     // required 서식
     p.required {
         display: inline; width: fit-content;
@@ -372,4 +374,5 @@
     .input_fields:has(button.action_search_btn) input {
         padding-right: 5.5rem;
     }
+    #start_date, #end_date {width: 100%;}
 }

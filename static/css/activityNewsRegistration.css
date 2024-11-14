@@ -493,4 +493,7 @@ h3 {
   .activityNewsRegistration .submit_btn_box button {
     width: 100%;
   }
+}
+.activityNewsRegistration #start_time, .activityNewsRegistration #end_time {
+  width: 100%;
 }/*# sourceMappingURL=activityNewsRegistration.css.map */

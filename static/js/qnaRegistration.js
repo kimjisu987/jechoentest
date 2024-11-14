@@ -3,15 +3,16 @@ $(document).ready(function(){
 	// 문의 등록 js
 	$(".qna_submit_btn").click(function(e) {
 		e.preventDefault(); // 기본 제출 방지  
-		if (registration_check()) {
-			saveQna();
+		if (joinUser_check()) {
+			// ★ 나중에 주석 수정
+			// $(this).closest("form").submit(); // 유효성 검사 후 폼제출
 		} else {
 			// 유효성 검사 실패 시 경고 메시지 표시
 			$('html, body').animate({scrollTop: 0}, 300);
 			alert_modal('modal_error', '작성하신 내용을 확인해주세요.', '카테고리, 제목, 내용은 필수 입력사항입니다.');
 		}
 
-		function registration_check() {
+		function joinUser_check() {
 			let inputs = [
 				{ input: $('#title'), errorMsg: "제목을 입력하세요" }
 			];
@@ -61,7 +62,7 @@ $(document).ready(function(){
 
 		// 포커스 해제 시 유효성 검사
 		$('#title, #content').on('blur', function() {
-			registration_check();
+			joinUser_check();
 		});
 		// 셀렉트 클릭시 에러메세지 삭제
 		$('#category_no').on('click', function() {
@@ -69,30 +70,3 @@ $(document).ready(function(){
 		});
 	});
 });
-
-function saveQna() {
-	$(".qna_submit_btn").attr("disabled", true);
-
-	let param = {
-		"category": $("#category_no").val(),
-		"title": $("#title").val(),
-		"content": $("#content").val()
-	}
-
-	let option = deepExtend({}, ajaxOptions);
-	option.URL = "/api/v1/qna";
-	option.TYPE = "POST";
-	option.HEADERS = getCsrfHeader();
-	option.PARAM = JSON.stringify(param);
-	option.CALLBACK = function(response) {
-		$('html, body').animate({scrollTop: 0}, 300);
-		if (response.code === 1) {
-			alert_modal('modal_ok', '문의 저장 성공', '');
-			$(".modal_ok .modal_btn").attr("onclick", `location.replace('/qna/detail?no=${response.data}')`);
-		} else {
-			alert_modal('modal_error', '문의 저장 실패', '');
-			$(".qna_submit_btn").attr("disabled", false);
-		}
-	}
-	ajaxWrapper.callAjax(option);
-}

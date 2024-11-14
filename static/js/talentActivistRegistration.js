@@ -1,54 +1,4 @@
 $(document).ready(function(){
-	// 에디터 생성
-	contentEditor = new toastui.Editor.factory({
-		el: document.querySelector("#detail"),
-		height: '300px',
-		previewStyle: 'vertical',
-		initialEditType: 'wysiwyg',
-		hideModeSwitch: true,
-		usageStatistics: false,
-		language: 'ko',
-		toolbarItems: [
-			['heading', 'bold', 'italic', 'strike'],
-			['hr', 'quote'],
-			['ul', 'ol', 'task', 'indent', 'outdent'],
-			['table', 'image', 'link']
-		],
-		hooks: {
-			async addImageBlobHook(blob, callback) {
-				try {
-					let formData = new FormData();
-					formData.append("file", blob);
-
-					let fileNames = uploadFile("editorFile", formData);
-					callback(fileNames[0], "image alt attribute");
-				} catch(error) {
-					console.error('업로드 실패 : ' + error);
-				}
-			}
-		}
-	});
-	$("#profile").on("change", function(e){
-		profileName = null;
-		let file = e.target.files[0];
-
-		let reader = new FileReader();
-		reader.onload = function(ev) {
-			$(".main_photo").css("background-image", 'url(' + ev.target.result + ')');
-		}
-		reader.readAsDataURL(file);
-	});
-
-	const urlParams = new URLSearchParams(window.location.search);
-	const activistNo = urlParams.get('no');
-
-	if(activistNo != null){
-		$(".talent_comple_btn").text("수정");
-	}
-
-	// 재능활동가 권한자 리스트 가져오는 함수(activisNo 가 있을경우 해당 재능활동가 선택되어 있음)
-	getUserList(activistNo);
-
     // 재능활동가 등록 js
 	// -------------------------------------------------------------------------------------
 	// 섹션 별 닫기 토글
@@ -74,6 +24,19 @@ $(document).ready(function(){
 		$("body").css("overflow", "hidden");
 	});
 
+	// 권한자 등록 버튼
+	$(".member_result").click(function() {
+		const member_result = $(this).closest("li").text().trim();
+		const member_del_btn = `<button class="member_del"></button>`;
+		
+		// 등록된 권한자 추가
+		$(".add_member").find("p").text(member_result).addClass("add_member_result");
+		$(".add_member").find("div").append(member_del_btn);
+
+		// 등록 버튼 비활성화
+		$(".member_list").find("input").addClass("member_disabled").attr("disabled", true);
+	});
+
 	// 삭제 버튼 클릭 시 동작
 	$(".add_member").on("click", ".member_del", function() {
 		$(".add_member").find("p").text("권한자를 등록해주세요.").removeClass("add_member_result");
@@ -87,35 +50,7 @@ $(document).ready(function(){
 			$(".authority_modal").fadeOut();
 			$("body").css("overflow", "auto");
 			$(".search_result").css("display","flex");
-			let userList = userListJson.filter(x => x.no == userId);
-
-			// 유저리스트에서 주소를 가져와서 formmat대로 자르는 코드
-			const addressPattern = /^(.*?)\s\((.*?)\)$/;
-			const match = userList[0].address.match(addressPattern);
-
-			let address1 = '';
-			let address2 = '';
-			let address3 = '';
-
-			if (match) {
-				const addressParts = match[1].split(/\s(?=\d)/);
-				address1 = addressParts.slice(0, -1).join(" ").trim();
-				address2 = addressParts[addressParts.length - 1];
-				address3 = `(${match[2]})`;
-			} else {
-				console.log("주소 형식이 일치하지 않습니다.");
-			}
-
-			//재능활동가 선택 시 해당 유저의 상세 정보
-			$("#user_id").val(userList[0].userId);
-			$("#name").val(userList[0].name);
-			$("#birth").val(userList[0].birth);
-			$("#tel").val(userList[0].tel);
-			$("#postcode").val(userList[0].zipCode);
-			$("#address").val(address1);
-			$("#detailAddress").val(address2);
-			$("#extraAddress").val(address3);
-			$("#email").val(userList[0].email);
+			// $("#title_search").val($(".add_member_result").text());
 			setTimeout(function() {
 				$("#title_search").val($(".add_member_result").text()).addClass("search_compl");
 			}, 0);
@@ -142,11 +77,11 @@ $(document).ready(function(){
 	// -------------------------------------------------------------------------------------
 	// 수강 요금 천단위 표시
 	$("#price").keyup(function() {
-		let val = $(this).val().replace(/[^0-9]/g, ""); // 숫자만 남김
+		let val = $(this).val().replace(/[^0-9]/g, ""); // 숫자만 남김	
 		// 콤마 추가 함수
 		function add_comma(num) {
 			return num.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
+		}	
 		if (val.length > 0) {
 			// 콤마를 추가한 값을 설정
 			$(this).val(add_comma(val));
@@ -185,7 +120,7 @@ $(document).ready(function(){
 	// 초기 박스 추가
 	function add_yoil_box() {
 		const yoil_html = `
-			<div class="input_day_add" data-index="${yoilCount}">
+			<div class="input_day_add">
 				<div class="select_con_default">
 					<select name="activity_field" class="date_yoil" id="date_yoil${yoilCount}">
 						<option value="">요일 선택</option>
@@ -225,7 +160,7 @@ $(document).ready(function(){
 			alert_modal("modal_error", "활동 요일 입력 확인", "활동 시작 시간을 입력해주세요.");
 		} else if (end_time.length == 0) {
 			alert_modal("modal_error", "활동 요일 입력 확인", "활동 종료 시간을 입력해주세요.");
-		} else {
+		} else {            
 			yoil_result($yoil_box);
 		}
 	});
@@ -250,7 +185,23 @@ $(document).ready(function(){
 	});
 
 	// 현재 선택된 모든 date_yoil 클래스를 가진 select 요소의 값을 배열로 다시 생성
+	function yoil_disabled() {
+		const select_values = $(".date_yoil").map(function() {
+			return $(this).val();
+		}).get();
 
+		$(".date_yoil").each(function() {
+			const $select = $(this);
+			const select_value = $select.val();
+
+			// 모든 date_yoil 셀렉트 요소 순회
+			$select.find("option").each(function() {
+				const $option = $(this);
+				// 현재 옵션의 disabled 속성 설정
+				$option.prop("disabled", select_values.includes($option.val()) && $option.val() !== select_value);
+			});
+		});
+	}
 
 	// 활동요일 삭제버튼 클릭시
 	$yoil_box.on("click", ".day_del", function() {
@@ -277,7 +228,7 @@ $(document).ready(function(){
 
 	function add_career_box() {
 		const career_html = `
-			<div class="career_box" data-index="${careerCount}">
+			<div class="career_box">
 				<div class="career_inner">
 					<div class="input_fields">
 						<label for="career_field${careerCount}">활동 분야</label>
@@ -312,7 +263,7 @@ $(document).ready(function(){
 				<div class="alltime_box">
 					<input type="checkbox" name="career_alltime" class="career_alltime" id="career_alltime${careerCount}">
 					<label for="career_alltime${careerCount}">
-						<img src="../icon/icon_check.svg" alt="체크 아이콘">
+						<img src="../../static/icon/icon_check.svg" alt="체크 아이콘">
 					</label>
 					<label for="career_alltime${careerCount}">활동 진행중</label>
 				</div>
@@ -381,7 +332,7 @@ $(document).ready(function(){
 
 	function add_valid_box() {
 		const valid_html = `
-			<div class="valid_box" data-index="${validCount}">
+			<div class="valid_box">
 				<div class="valid_inner">
 					<div class="input_fields">
 						<label for="valid_field${validCount}">자격증 분야</label>
@@ -415,7 +366,7 @@ $(document).ready(function(){
 				</div>
 				<div class="alltime_box">
 					<input type="checkbox" name="valid_alltime" class="valid_alltime" id="valid_alltime${validCount}">
-					<label for="valid_alltime${validCount}"><img src="../icon/icon_check.svg" alt="체크 아이콘"></label>
+					<label for="valid_alltime${validCount}"><img src="../../static/icon/icon_check.svg" alt="체크 아이콘"></label>
 					<label for="valid_alltime${validCount}">만료일 없음</label>
 				</div>
 			</div>
@@ -501,9 +452,9 @@ $(document).ready(function(){
 	// -------------------------------------------------------------------------------------
 	// 전체 유효성검사
 	$(".talent_comple_btn").click(function(e) {
-		e.preventDefault(); // 기본 제출 방지
+		e.preventDefault(); // 기본 제출 방지  
 		if (talentActivist_check()) {
-			registration(activistNo);
+			
 		} else {
 			// 유효성 검사 실패 시 경고 메시지 표시
 			$('html, body').animate({scrollTop: 0}, 300);
@@ -520,10 +471,10 @@ $(document).ready(function(){
 				{ input: $('#start_date'), errorMsg: "활동 시작일을 선택하세요" },
 				{ input: $('#end_date'), errorMsg: "활동 종료일을 선택하세요" },
 				{ input: $('#activity_field'), errorMsg: "신청분야를 선택하세요" },
-				// { input: $('#detail'), errorMsg: "내용을 입력하세요" }
+				{ input: $('#detail'), errorMsg: "내용을 입력하세요" }
 			];
 			let input_return = true;
-
+			
 			// 유효성 검사
 			inputs.forEach(({ input, errorMsg }) => {
 				if (input.val().length < 1) {
@@ -554,20 +505,13 @@ $(document).ready(function(){
 				showError($(".activity_select"), "활동 형식을 선택하세요");
 				input_return = false;
 			}
-			// // textarea 유효성 검사
-			if (contentEditor.getHTML() === '<p><br></p>') {
-				showError($("#content"), "내용을 입력하세요");
+			// 대표사진등록 유효성 검사
+			if ($("#profile").val().length < 1) {
+				fileshowError($("#profile"), "대표사진을 등록하세요");
 				input_return = false;
 			} else {
-				hideError($("#content"));
+				filehideError($("#profile"));
 			}
-			// // 대표사진등록 유효성 검사
-			// if ($("#profile").val().length < 1) {
-			// 	fileshowError($("#profile"), "대표사진을 등록하세요");
-			// 	input_return = false;
-			// } else {
-			// 	filehideError($("#profile"));
-			// }
 			return input_return;
 		}
 
@@ -608,422 +552,3 @@ $(document).ready(function(){
 		});
 	});
 });
-
-function yoil_disabled() {
-	const select_values = $(".date_yoil").map(function() {
-		return $(this).val();
-	}).get();
-
-	$(".date_yoil").each(function() {
-		const $select = $(this);
-		const select_value = $select.val();
-
-		// 모든 date_yoil 셀렉트 요소 순회
-		$select.find("option").each(function() {
-			const $option = $(this);
-			// 현재 옵션의 disabled 속성 설정
-			$option.prop("disabled", select_values.includes($option.val()) && $option.val() !== select_value);
-		});
-	});
-}
-
-let userListJson = {};
-let userId = 0;
-let contentEditor = null;
-let profileName = null;
-
-// 재능활동가 권한자 리스트 가져오는 함수
-function getUserList(activistNo){
-
-	let search = $("#authority_search").val();
-
-	let option = deepExtend({}, ajaxOptions);
-	option.URL = "/api/v1/user/list?search=" + search;
-	option.TYPE = "GET";
-	option.ASYNC = true;
-	option.HEADERS = getCsrfHeader();
-	option.CALLBACK = function(res) {
-		userListJson = res.data;
-
-		let html = ``;
-		for(let i = 0; i < userListJson.length; i++){
-			html += `<li id="${userListJson[i].no}">${userListJson[i].name}(${userListJson[i].userId})<input type="button" class="member_result" value="등록"></li>`
-		}
-		$(".member_list").empty().append(html);
-
-		if ($(".add_member_result").text() !== '') {
-			$(".member_list").find("input").addClass("member_disabled").attr("disabled", true);
-		}
-
-		// 권한자 등록 버튼
-		$(".member_result").click(function() {
-			const member_result = $(this).closest("li").text().trim();
-			userId = $(this).closest("li").attr('id');
-			const member_del_btn = `<button class="member_del"></button>`;
-
-			// 등록된 권한자 추가
-			$(".add_member").find("p").text(member_result).addClass("add_member_result");
-			$(".add_member").find("div").append(member_del_btn);
-
-			// 등록 버튼 비활성화
-			$(".member_list").find("input").addClass("member_disabled").attr("disabled", true);
-		});
-		if(activistNo != null){
-			getDetail(activistNo);
-		}
-	}
-	ajaxWrapper.callAjax(option);
-}
-
-// 재능활동가 등록/수정 함수
-function registration(activistNo){
-	// 대표사진 저장
-	if(profileName == null){
-		let formData = new FormData();
-		formData.append("file", $("#profile")[0].files[0]);
-		profileName = uploadFile("talentFile", formData)[0];
-	}
-
-	let title = $("#title").val();
-	let activity_field = $("#activity_field").val() == "기타" ? $("#activity_field_text").val() : $("#activity_field").val();
-	// let detail = $("#detail").val();
-	let detail = contentEditor.getHTML()
-	let motive = $("#background").val();
-	let activityType = $(".activity_type:checked").map((index, checkbox) => checkbox.value).get().join(", ");
-	let target = $(".target:checked").map((index, checkbox) => checkbox.value).get().join(", ");
-	let location = $("#location").val();
-	let price = $("#price").val().replace(/,/g, '');
-	let startDate = $("#start_date").val();
-	let endDate = $("#end_date").val();
-	let scheduleList = [];
-	let careerList = [];
-	let qualificationList = [];
-
-	$(".input_day_add").each(function() {
-		let i = $(this).data("index");
-		if($(`#date_yoil${i}`).val() != '') {
-			scheduleList.push({
-				day: $(`#date_yoil${i}`).val(),
-				startTime: $(`#start_time${i}`).val(),
-				endTime: $(`#end_time${i}`).val()
-			});
-		}
-	});
-
-	$(".career_box").each(function(){
-		let i = $(this).data("index");
-		if($(`#career_field${i}`).val() != '') {
-			careerList.push({
-				careerField: $(`#career_field${i}`).val(),
-				content: $(`#career_content${i}`).val(),
-				careerFrom: $(`#career_from${i}`).val(),
-				careerTo: $(`#career_to${i}`).val()
-			});
-		}
-	});
-
-	$(".valid_box").each(function(){
-		let i = $(this).data("index");
-		if($(`#valid_field${i}`).val() != '') {
-			qualificationList.push({
-				name: $(`#valid_field${i}`).val(),
-				qualificationField: $(`#valid_content${i}`).val(),
-				validFrom: $(`#valid_from${i}`).val(),
-				validTo: $(`#valid_to${i}`).val()
-			});
-		}
-	});
-
-	let param = {
-		"no" : activistNo,
-		"userNo" : userId,
-		"title" : title,
-		"activityField" : activity_field,
-		"detail" : detail,
-		"motive" : motive,
-		"activityType" : activityType,
-		"target" : target,
-		"location" : location,
-		"price" : price,
-		"startDate" : startDate,
-		"endDate" : endDate,
-		"scheduleList" : scheduleList,
-		"careerList" : careerList,
-		"profile" : profileName,
-		"qualificationList" : qualificationList
-	}
-
-	let option = deepExtend({}, ajaxOptions);
-	option.URL = "/api/v1/talent/registration";
-	option.TYPE = activistNo === null ?"POST":"PUT";
-	option.PARAM = JSON.stringify(param);
-	option.ASYNC = true;
-	option.HEADERS = getCsrfHeader();
-	option.CALLBACK = function(res) {
-		if(res.code == 49) {
-			alert_modal("modal_ok", "재능활동가 등록되었습니다.", "재능활동 목록 페이지로 이동합니다.", function() {
-				window.location.replace("/talent");
-			});
-		}
-	}
-	ajaxWrapper.callAjax(option);
-}
-
-let detailJSON = [];
-
-// 재능활동 수정 시 해당 재능활동의 상세 정보
-function getDetail(activityNo){
-
-	let option = deepExtend({}, ajaxOptions);
-	option.URL = "/api/v1/talent/detail/"+ activityNo;
-	option.TYPE = "GET";
-	option.ASYNC = false;
-	option.HEADERS = getCsrfHeader();
-	option.CALLBACK = function(res) {
-		detailJSON = res.data;
-		console.log(detailJSON[0].scheduleList[0].no);
-
-		const member_del_btn = `<button class="member_del"></button>`;
-
-		// 등록된 권한자 추가
-		$(".add_member").find("p").text($(`#${detailJSON[0].userNo}`).text()).addClass("add_member_result");
-		$(".add_member").find("div").append(member_del_btn);
-
-		// 등록 버튼 비활성화
-		$(".member_list").find("input").addClass("member_disabled").attr("disabled", true);
-
-		$("body").css("overflow", "auto");
-		$(".search_result").css("display","flex");
-		let userList = userListJson.filter(x => x.no == detailJSON[0].userNo);
-		userId = userList[0].no;
-
-		const addressPattern = /^(.*?)\s\((.*?)\)$/;
-		const match = userList[0].address.match(addressPattern);
-
-		let address1 = '';
-		let address2 = '';
-		let address3 = '';
-
-		if (match) {
-			const addressParts = match[1].split(/\s(?=\d)/);
-			address1 = addressParts.slice(0, -1).join(" ").trim();
-			address2 = addressParts[addressParts.length - 1];
-			address3 = `(${match[2]})`;
-		} else {
-			console.log("주소 형식이 일치하지 않습니다.");
-		}
-
-		$("#user_id").val(userList[0].userId);
-		$("#name").val(userList[0].name);
-		$("#birth").val(userList[0].birth);
-		$("#tel").val(userList[0].tel);
-		$("#postcode").val(userList[0].zipCode);
-		$("#address").val(address1);
-		$("#detailAddress").val(address2);
-		$("#extraAddress").val(address3);
-		$("#email").val(userList[0].email);
-		setTimeout(function() {
-			$("#title_search").val($(".add_member_result").text()).addClass("search_compl");
-		}, 0);
-
-		$("#title").val(detailJSON[0].title);
-		let options = Array.from(document.querySelectorAll('#activity_field option')).map(option => option.value);
-
-		if (options.includes(detailJSON[0].activityField)) {
-			$('#activity_field').val(detailJSON[0].activityField);
-			$('#activity_field_text').prop('disabled', true).val('');
-		} else {
-			$('#activity_field').val('기타');
-			$('#activity_field_text').prop('disabled', false).val(detailJSON[0].activityField);
-		}
-		contentEditor.setHTML(detailJSON[0].detail);
-		$("#background").val(detailJSON[0].motive);
-		detailJSON[0].activityType.split(", ").forEach(x => {
-			$(`input[type="checkbox"][value="${x}"]`).prop("checked", true);
-		})
-		detailJSON[0].target.split(", ").forEach(x => {
-			$(`input[type="checkbox"][value="${x}"]`).prop("checked", true);
-		});
-		$("#location").val(detailJSON[0].location);
-		$("#price").val(detailJSON[0].price)
-		$("#start_date").val(detailJSON[0].startDate);
-		$("#end_date").val(detailJSON[0].endDate);
-		let yoilCount = 1; // 박스 카운터 초기화
-
-		let yoil_html = ``;
-		for(let i = 0 ; i < detailJSON[0].scheduleList.length; i++){
-			yoil_html += `<div class="input_day_add" data-index="${i+9}">`;
-			yoil_html += `  <input type="text" name="activity_field" class="date_yoil" id="date_yoil${i+9}" value="${detailJSON[0].scheduleList[i].day}" readonly>`;
-			yoil_html += `	<input type="time" name="start_time" class="start_time" id="start_time${i+9}"value="${detailJSON[0].scheduleList[i].startTime}" readonly>`;
-			yoil_html += `	<p class="day_line">~</p>`;
-			yoil_html += `	<input type="time" name="end_time" class="end_time" id="end_time${i+9}" value="${detailJSON[0].scheduleList[i].endTime}" readonly>`;
-			yoil_html += `	<button type="button" class="day_del" onclick="deleteSchedule(${detailJSON[0].scheduleList[i].no})">삭제</button>`;
-			yoil_html += `</div>`;
-
-		}
-		yoil_html += `<div class="input_day_add" data-index="${yoilCount}">
-				<div class="select_con_default">
-					<select name="activity_field" class="date_yoil" id="date_yoil${yoilCount}">
-						<option value="">요일 선택</option>
-						<option value="월">월</option>
-						<option value="화">화</option>
-						<option value="수">수</option>
-						<option value="목">목</option>
-						<option value="금">금</option>
-						<option value="토">토</option>
-						<option value="일">일</option>
-					</select>
-				</div>
-				<input type="time" name="start_time" class="start_time" id="start_time${yoilCount}">
-				<p class="day_line">~</p>
-				<input type="time" name="end_time" class="end_time" id="end_time${yoilCount}">
-				<button type="button" class="day_result">등록</button>
-			</div>`;
-		$(".input_day_box").empty().append(yoil_html);
-		let careerCount = 1; // 박스 카운터 초기화
-
-		let career_html = ``;
-		for(let i = 0; i < detailJSON[0].careerList.length; i++){
-			career_html += `<div class="career_box" data-index="${i+9}">`;
-			career_html += `    <div class="career_inner">`;
-			career_html += `        <div class="input_fields">`;
-			career_html += `            <label for="career_field${i+9}">활동 분야</label>`;
-			career_html += `            <input type="text" name="career_field" class="career_field" id="career_field${i+9}" value="${detailJSON[0].careerList[i].careerField}" placeholder="활동 분야 입력" readonly>`;
-			career_html += `            <div class="form_check_box">`;
-			career_html += `                <p class="check_error"></p>`;
-			career_html += `            </div>`;
-			career_html += `        </div>`;
-			career_html += `        <div class="input_fields">`;
-			career_html += `            <label for="career_content${i+9}">활동 내용</label>`;
-			career_html += `            <input type="text" name="career_content" class="career_content" id="career_content${i+9}" value="${detailJSON[0].careerList[i].content}" placeholder="활동 내용 입력" readonly>`;
-			career_html += `            <div class="form_check_box">`;
-			career_html += `                <p class="check_error"></p>`;
-			career_html += `            </div>`;
-			career_html += `        </div>`;
-			career_html += `        <div class="input_fields">`;
-			career_html += `            <label for="career_from${i+9}">활동경력 시작일</label>`;
-			career_html += `            <input type="date" name="career_from" class="career_from" id="career_from${i+9}" value="${detailJSON[0].careerList[i].careerFrom}" readonly>`;
-			career_html += `            <div class="form_check_box">`;
-			career_html += `                <p class="check_error"></p>`;
-			career_html += `            </div>`;
-			career_html += `        </div>`;
-			career_html += `        <div class="input_fields">`;
-			career_html += `            <label for="career_to${i+9}">활동경력 종료일</label>`;
-			career_html += `            <input type="date" name="career_to" class="career_to" id="career_to${i+9}" value="${detailJSON[0].careerList[i].careerTo}" readonly>`;
-			career_html += `            <div class="form_check_box">`;
-			career_html += `                <p class="check_error"></p>`;
-			career_html += `            </div>`;
-			career_html += `        </div>`;
-			career_html += `        <button type="button" class="career_del" onclick="deleteCareer(${detailJSON[0].careerList[i].no})">삭제</button>`;
-			career_html += `    </div>`;
-			career_html += `    <div class="alltime_box">`;
-			career_html += `        <input type="checkbox" name="career_alltime" class="career_alltime" id="career_alltime${i+9}" disabled>`;
-			career_html += `        <label for="career_alltime${i+9}">`;
-			career_html += `            <img src="../icon/icon_check.svg" alt="체크 아이콘">`;
-			career_html += `        </label>`;
-			career_html += `        <label for="career_alltime${i+9}">활동 진행중</label>`;
-			career_html += `    </div>`;
-			career_html += `</div>`;
-		}
-		$(".career_add_box").prepend(career_html);
-
-		let valid_html = ``;
-		for(let i = 0; i < detailJSON[0].qualificationList.length; i++){
-			valid_html += `<div class="valid_box" data-index="${i+9}">`;
-			valid_html += `    <div class="valid_inner">`;
-			valid_html += `        <div class="input_fields">`;
-			valid_html += `            <label for="valid_field${i+9}">자격증 분야</label>`;
-			valid_html += `            <input type="text" name="valid_field" class="valid_field" id="valid_field${i+9}" value="${detailJSON[0].qualificationList[i].qualificationField}" placeholder="자격증 분야 입력" readonly>`;
-			valid_html += `            <div class="form_check_box">`;
-			valid_html += `                <p class="check_error"></p>`;
-			valid_html += `            </div>`;
-			valid_html += `        </div>`;
-			valid_html += `        <div class="input_fields">`;
-			valid_html += `            <label for="valid_content${i+9}">자격증 내용</label>`;
-			valid_html += `            <input type="text" name="valid_content" class="valid_content" id="valid_content${i+9}" value="${detailJSON[0].qualificationList[i].name}"  placeholder="자격증 내용 입력" readonly>`;
-			valid_html += `            <div class="form_check_box">`;
-			valid_html += `                <p class="check_error"></p>`;
-			valid_html += `            </div>`;
-			valid_html += `        </div>`;
-			valid_html += `        <div class="input_fields">`;
-			valid_html += `            <label for="valid_from${i+9}">자격증 취득일</label>`;
-			valid_html += `            <input type="date" name="valid_from" class="valid_from" id="valid_from${i+9}" value="${detailJSON[0].qualificationList[i].validFrom}" readonly>`;
-			valid_html += `            <div class="form_check_box">`;
-			valid_html += `                <p class="check_error"></p>`;
-			valid_html += `            </div>`;
-			valid_html += `        </div>`;
-			valid_html += `        <div class="input_fields">`;
-			valid_html += `            <label for="valid_to${i+9}">자격증 만료일</label>`;
-			valid_html += `            <input type="date" name="valid_to" class="valid_to" id="valid_to${i+9}" value="${detailJSON[0].qualificationList[i].validTo}" readonly>`;
-			valid_html += `            <div class="form_check_box">`;
-			valid_html += `                <p class="check_error"></p>`;
-			valid_html += `            </div>`;
-			valid_html += `        </div>`;
-			valid_html += `        <button type="button" class="valid_del" onclick="deleteQualification(${detailJSON[0].qualificationList[0].no})">삭제</button>`;
-			valid_html += `    </div>`;
-			valid_html += `    <div class="alltime_box">`;
-			if(detailJSON[0].qualificationList[i].validTo == '' || detailJSON[0].qualificationList[i].validTo == null){
-				valid_html += `        <input type="checkbox" name="valid_alltime" class="valid_alltime" id="valid_alltime${i+9}" checked disabled>`;
-			}
-			else {
-				valid_html += `        <input type="checkbox" name="valid_alltime" class="valid_alltime" id="valid_alltime${i+9}" disabled>`;
-			}
-			valid_html += `        <label for="valid_alltime${i+9}"><img src="../icon/icon_check.svg" alt="체크 아이콘"></label>`;
-			valid_html += `        <label for="valid_alltime${i+9}">만료일 없음</label>`;
-			valid_html += `    </div>`;
-			valid_html += `</div>`;
-		}
-		$(".valid_add_box").prepend(valid_html);
-	}
-	ajaxWrapper.callAjax(option);
-	yoil_disabled();
-
-	$("input[name='career_alltime']").off("change").on("change", function() {
-		if ($(this).is(":checked")) {
-			$(this).closest(".alltime_box").siblings(".career_inner").find(".career_to").val("").attr("disabled", true);
-		} else {
-			$(this).closest(".alltime_box").siblings(".career_inner").find(".career_to").attr("disabled", false);
-		}
-	});
-
-}
-
-// 스케쥴 삭제
-function deleteSchedule(no){
-	let option = deepExtend({}, ajaxOptions);
-	option.URL = "/api/v1/talent/schedule/"+ no;
-	option.TYPE = "PUT";
-	option.ASYNC = false;
-	option.HEADERS = getCsrfHeader();
-	option.CALLBACK = function(res) {
-		console.log(res);
-	}
-	ajaxWrapper.callAjax(option);
-}
-
-// 경력 삭제
-function deleteCareer(no){
-	let option = deepExtend({}, ajaxOptions);
-	option.URL = "/api/v1/talent/career/"+ no;
-	option.TYPE = "PUT";
-	option.ASYNC = false;
-	option.HEADERS = getCsrfHeader();
-	option.CALLBACK = function(res) {
-		console.log(res);
-	}
-	ajaxWrapper.callAjax(option);
-}
-
-// 자격증 삭제
-function deleteQualification(no){
-	let option = deepExtend({}, ajaxOptions);
-	option.URL = "/api/v1/talent/qualification/"+ no;
-	option.TYPE = "PUT";
-	option.ASYNC = false;
-	option.HEADERS = getCsrfHeader();
-	option.CALLBACK = function(res) {
-		console.log(res);
-	}
-	ajaxWrapper.callAjax(option);
-}
-

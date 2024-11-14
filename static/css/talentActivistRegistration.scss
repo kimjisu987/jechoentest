@@ -305,14 +305,15 @@
                 &:last-of-type {
                     border-bottom: none;
                 }                
-                .select_con_default {width: 60%; order: 1;}
+                .select_con_default {flex: 1 1 60%; order: 1;}
                 select {padding-block: 0.83rem; margin-bottom: 0rem;}
-                input {flex: 1; order: 3; margin-bottom: 0.5rem;}
+                input {flex: 1 1 calc(40%); order: 3; margin-bottom: 0.5rem;}
                 .day_line {
                     order: 3;
-                    width: max-content;
+                    width: calc(10% - 0.5rem);
                     height: 35%;
                     align-content: center;
+                    text-align: center;
                 }
                 .day_result, .day_del {order: 2;}
             }
@@ -362,7 +363,7 @@
                 }
                 .input_fields:has(input.career_from), .input_fields:has(input.career_to),
                 .input_fields:has(input.valid_from), .input_fields:has(input.valid_to) {
-                    width: 40%;
+                    flex: 1 1 45%;
                 }
                 .career_result, .valid_result, .career_del, .valid_del {
                     margin: 0 auto;
@@ -528,6 +529,7 @@
             font-size: $font_24;
             margin: 0 auto;
             margin-top: $font_48;
+            max-width: 100%;
         }
     }
     // required 서식
@@ -546,4 +548,5 @@
             border-radius: 50%;
         }
 	}
+    #start_date, #end_date {width: 100%;}
 }

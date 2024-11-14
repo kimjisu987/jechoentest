@@ -721,7 +721,7 @@ h3 {
     border-bottom: none;
   }
   .talentActivistRegistration .input_write .input_day_add .select_con_default {
-    width: 60%;
+    flex: 1 1 60%;
     order: 1;
   }
   .talentActivistRegistration .input_write .input_day_add select {
@@ -729,16 +729,16 @@ h3 {
     margin-bottom: 0rem;
   }
   .talentActivistRegistration .input_write .input_day_add input {
-    flex: 1;
+    flex: 1 1 40%;
     order: 3;
     margin-bottom: 0.5rem;
   }
   .talentActivistRegistration .input_write .input_day_add .day_line {
     order: 3;
-    width: -moz-max-content;
-    width: max-content;
+    width: calc(10% - 0.5rem);
     height: 35%;
     align-content: center;
+    text-align: center;
   }
   .talentActivistRegistration .input_write .input_day_add .day_result, .talentActivistRegistration .input_write .input_day_add .day_del {
     order: 2;
@@ -845,7 +845,7 @@ h3 {
   .talentActivistRegistration .career_box .valid_inner .input_fields:has(input.valid_from), .talentActivistRegistration .career_box .valid_inner .input_fields:has(input.valid_to), .talentActivistRegistration .valid_box .career_inner .input_fields:has(input.career_from), .talentActivistRegistration .valid_box .career_inner .input_fields:has(input.career_to),
   .talentActivistRegistration .valid_box .career_inner .input_fields:has(input.valid_from), .talentActivistRegistration .valid_box .career_inner .input_fields:has(input.valid_to), .talentActivistRegistration .valid_box .valid_inner .input_fields:has(input.career_from), .talentActivistRegistration .valid_box .valid_inner .input_fields:has(input.career_to),
   .talentActivistRegistration .valid_box .valid_inner .input_fields:has(input.valid_from), .talentActivistRegistration .valid_box .valid_inner .input_fields:has(input.valid_to) {
-    width: 40%;
+    flex: 1 1 45%;
   }
   .talentActivistRegistration .career_box .career_inner .career_result, .talentActivistRegistration .career_box .career_inner .valid_result, .talentActivistRegistration .career_box .career_inner .career_del, .talentActivistRegistration .career_box .career_inner .valid_del, .talentActivistRegistration .career_box .valid_inner .career_result, .talentActivistRegistration .career_box .valid_inner .valid_result, .talentActivistRegistration .career_box .valid_inner .career_del, .talentActivistRegistration .career_box .valid_inner .valid_del, .talentActivistRegistration .valid_box .career_inner .career_result, .talentActivistRegistration .valid_box .career_inner .valid_result, .talentActivistRegistration .valid_box .career_inner .career_del, .talentActivistRegistration .valid_box .career_inner .valid_del, .talentActivistRegistration .valid_box .valid_inner .career_result, .talentActivistRegistration .valid_box .valid_inner .valid_result, .talentActivistRegistration .valid_box .valid_inner .career_del, .talentActivistRegistration .valid_box .valid_inner .valid_del {
     margin: 0 auto;
@@ -1187,6 +1187,7 @@ h3 {
   font-size: 1.5rem;
   margin: 0 auto;
   margin-top: 3rem;
+  max-width: 100%;
 }
 .talentActivistRegistration .authority_modal .authority_result:hover {
   opacity: 0.8;
@@ -1213,4 +1214,7 @@ h3 {
   height: 5px;
   background: #0191B6;
   border-radius: 50%;
+}
+.talentActivistRegistration #start_date, .talentActivistRegistration #end_date {
+  width: 100%;
 }/*# sourceMappingURL=talentActivistRegistration.css.map */

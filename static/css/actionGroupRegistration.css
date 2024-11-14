@@ -371,6 +371,9 @@ h3 {
 .actionGroupRegistration .input_number button.plus {
   background-image: url(../icon/icon_plus_w.svg);
 }
+.actionGroupRegistration .input_number input {
+  width: 2rem;
+}
 .actionGroupRegistration p.required {
   display: inline;
   width: -moz-fit-content;
@@ -911,4 +914,7 @@ h3 {
 }
 .actionGroupRegistration .input_fields:has(button.action_search_btn) input {
   padding-right: 5.5rem;
+}
+.actionGroupRegistration #start_date, .actionGroupRegistration #end_date {
+  width: 100%;
 }/*# sourceMappingURL=actionGroupRegistration.css.map */
